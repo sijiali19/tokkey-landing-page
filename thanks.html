@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>You’re in line — Tokkey</title><meta name="robots" content="noindex">
+<script src="config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Commit Mono';src:url('fonts/CommitMono-400-Regular.otf') format('opentype');font-weight:400;font-display:swap}
+:root{--g:#4ABE18;--mono:'Commit Mono','Courier New',monospace}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#000;color:#f2f2f2;font-family:Inter,system-ui,sans-serif;overflow:hidden}
+body:before{content:"";position:fixed;inset:0;background:radial-gradient(60% 50% at 50% 42%,rgba(120,160,255,.22),rgba(120,160,255,.06) 55%,transparent 75%)}
+#cf{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+main{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:0}
+.logo{height:32px;width:auto;color:#fff;margin-bottom:64px;opacity:.9}
+.eye{display:inline-flex;align-items:center;gap:8px;font:400 12px/16px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#b0b0ac;margin-bottom:24px}
+.eye u{width:8px;height:8px;border-radius:50%;background:var(--g)}
+h1{margin:0;max-width:14ch;font:700 clamp(40px,7.2vw,96px)/1.08 Inter;letter-spacing:-.025em;background:linear-gradient(95deg,#f3f7ff 0%,#bcd7ff 26%,#8fbfff 42%,#f6f9ff 62%,#fff 78%,#cfe2ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(16px) scale(.98);animation:in .9s .1s cubic-bezier(.2,.7,.2,1) forwards}
+h1 b{-webkit-text-fill-color:var(--g);color:var(--g)}
+p{margin:24px 0 0;font:400 clamp(16px,1.6vw,24px)/1.4 Inter;color:#a1a1a6;max-width:32ch;opacity:0;animation:in .9s .35s cubic-bezier(.2,.7,.2,1) forwards}
+.bk{margin-top:48px;width:min(240px,60vw);opacity:0;animation:in .6s .6s forwards}.bk i{display:block;height:2px;border-radius:1px;background:rgba(255,255,255,.14);overflow:hidden}.bk i:after{content:"";display:block;height:100%;width:0;background:#fff;animation:bar var(--t,2600ms) .1s linear forwards}
+.bk a{display:inline-block;margin-top:16px;font:400 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#8e8e93;text-decoration:none;border-bottom:1px solid #2e2e2b}.bk a:hover{color:#fff}
+.demo{position:fixed;left:0;right:0;bottom:16px;text-align:center;font:400 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#5c5c58;z-index:3}
+@keyframes in{to{opacity:1;transform:none}}@keyframes bar{to{width:100%}}
+body.out main{transition:opacity .3s;opacity:0}
+@media(prefers-reduced-motion:reduce){h1,p,.bk{animation-duration:.01s}}
+</style></head><body>
+<canvas id="cf" aria-hidden="true"></canvas>
+<main>
+<svg class="logo" viewBox="0 0 586 111" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tokkey"><rect width="110.032" height="110.032" rx="18.0521" fill="black" stroke="#2E2E2B"/><rect x="44.1279" y="81.9507" width="32.0926" height="32.0926" rx="4.58466" transform="rotate(-180 44.1279 81.9507)" fill="white"/><rect x="86.5356" y="92.2662" width="32.0926" height="32.0926" rx="16.0463" transform="rotate(-180 86.5356 92.2662)" fill="white"/><rect x="97.9976" y="49.8582" width="55.0159" height="32.0926" rx="4.58466" transform="rotate(-180 97.9976 49.8582)" fill="white"/><path d="M47.5317 49.873C45.6249 50.0358 44.1276 51.634 44.1274 53.5829C44.1274 53.7107 44.1334 53.8374 44.146 53.9619L42.9614 55.0156L38.9702 50.4316L39.48 49.8505C41.4332 49.735 42.9819 48.115 42.9819 46.1328C42.9819 46.0481 42.9777 45.9641 42.9722 45.8808L43.0024 45.8466L47.5317 49.873Z" fill="white"/><path d="M510.351 16.0464H529.373L547.69 50.6405H548.475L566.792 16.0464H585.814L556.515 67.9768V96.3737H539.65V67.9768L510.351 16.0464Z" fill="currentColor"/><path d="M439.889 96.3737V16.0464H494.016V30.0488H456.872V49.1893H491.231V63.1916H456.872V82.3714H494.173V96.3737H439.889Z" fill="currentColor"/><path d="M303.783 55.016C303.783 63.7757 302.123 71.2279 298.802 77.3727C295.507 83.5176 291.01 88.2112 285.309 91.4536C279.635 94.6698 273.255 96.2779 266.169 96.2779C259.03 96.2779 252.624 94.6567 246.95 91.4143C241.276 88.172 236.791 83.4783 233.497 77.3335C230.202 71.1887 228.555 63.7495 228.555 55.016C228.555 46.2563 230.202 38.8041 233.497 32.6593C236.791 26.5144 241.276 21.8339 246.95 18.6177C252.624 15.3753 259.03 13.7541 266.169 13.7541C273.255 13.7541 279.635 15.3753 285.309 18.6177C291.01 21.8339 295.507 26.5144 298.802 32.6593C302.123 38.8041 303.783 46.2563 303.783 55.016ZM286.565 55.016C286.565 49.3418 285.715 44.5567 284.015 40.6606C282.342 36.7645 279.975 33.8098 276.916 31.7964C273.856 29.783 270.274 28.7763 266.169 28.7763C262.064 28.7763 258.481 29.783 255.422 31.7964C252.363 33.8098 249.983 36.7645 248.284 40.6606C246.61 44.5567 245.773 49.3418 245.773 55.016C245.773 60.6902 246.61 65.4753 248.284 69.3714C249.983 73.2675 252.363 76.2222 255.422 78.2356C258.481 80.249 262.064 81.2557 266.169 81.2557C270.274 81.2557 273.856 80.249 276.916 78.2356C279.975 76.2222 282.342 73.2675 284.015 69.3714C285.715 65.4753 286.565 60.6902 286.565 55.016Z" fill="currentColor"/><path d="M150.979 30.0488V16.0464H216.95V30.0488H192.358V96.3737H175.571V30.0488H150.979Z" fill="currentColor"/><rect x="371.673" y="96.8224" width="18.4848" height="18.4848" rx="9.24238" transform="rotate(-180 371.673 96.8224)" fill="currentColor"/><path d="M372.267 68.7234L377.867 77.7806L378.434 78.7826L390.302 95.0697C390.868 95.8475 391.773 96.3076 392.735 96.3076H405.618C408.077 96.3076 409.499 93.5194 408.055 91.5286L391.964 69.3382C391.157 68.2254 391.206 66.7074 392.083 65.649L416.313 36.4132C417.94 34.4504 416.544 31.4805 413.995 31.4805H401.474C400.57 31.4805 399.713 31.887 399.141 32.5877L372.495 65.2358C371.683 66.2307 371.591 67.6311 372.267 68.7234Z" fill="currentColor"/><path d="M325.068 16.0468V96.3741H342.051V75.0902L351.248 64.8074L362.564 52.0136L392.373 16.0468H372.017L343.11 51.4645H342.051V16.0468H325.068Z" fill="currentColor"/></svg>
+<div class="eye"><u></u>Deposit received</div>
+<h1>Congrats on unlocking local AI power<b>.</b></h1>
+<p>You’re in line for Tokkey. Taking you back to the site.</p>
+<div class="bk"><i></i><a id="skip" href="index.html?reserved=1">Go now</a></div>
+</main>
+<div class="demo" id="demo" hidden>Preview · set STRIPE_URL in config.js</div>
+<script>
+(()=>{const C=window.TOKKEY_CONFIG||{},HOME=(C.HOME_URL||'index.html')+'?reserved=1',BURST=C.CONFETTI_MS||1600,HOLD=C.HOLD_MS??1000;
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches,total=rm?1500:BURST+HOLD;
+document.documentElement.style.setProperty('--t',total+'ms');document.getElementById('skip').href=HOME;
+if(new URLSearchParams(location.search).get('demo')==='1')document.getElementById('demo').hidden=false;
+const go=()=>{document.body.classList.add('out');setTimeout(()=>location.replace(HOME),300)};setTimeout(go,total);
+if(rm)return;
+const cv=document.getElementById('cf'),x=cv.getContext('2d');let W,H,dpr=Math.min(2,devicePixelRatio||1);
+const rs=()=>{W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)};rs();addEventListener('resize',rs);
+/* brand palette: whites + ice blues, ~6% accent green */
+const COL=['#ffffff','#f3f7ff','#bcd7ff','#8fbfff','#cfe2ff','#dadad6'],P=[];
+const pick=()=>Math.random()<.06?'#4ABE18':COL[Math.random()*COL.length|0];
+function burst(px,py,n,ang,spread,pow){for(let i=0;i<n;i++){const a=ang+(Math.random()-.5)*spread,v=pow*(.45+Math.random()*.7);P.push({x:px,y:py,vx:Math.cos(a)*v,vy:Math.sin(a)*v,r:Math.random()*6.28,vr:(Math.random()-.5)*.4,w:7+Math.random()*9,h:4+Math.random()*7,c:pick(),dot:Math.random()<.25,t:0,life:BURST/1000*(.8+Math.random()*.5)})}}
+const m=W<600?.7:1;
+burst(0,H,170*m,-Math.PI/3,.9,H*1.4);burst(W,H,170*m,-Math.PI*2/3,.9,H*1.4);
+setTimeout(()=>{burst(W*.5,H*1.02,130*m,-Math.PI/2,1.1,H*1.6)},220);
+setTimeout(()=>{for(let i=0;i<110*m;i++)P.push({x:Math.random()*W,y:-20-Math.random()*H*.2,vx:(Math.random()-.5)*80,vy:H*.15+Math.random()*H*.2,r:Math.random()*6.28,vr:(Math.random()-.5)*.3,w:5+Math.random()*6,h:3+Math.random()*4,c:pick(),dot:Math.random()<.25,t:0,life:BURST/1000*.9})},380);
+let last=performance.now(),t0=last;
+(function f(n){const dt=Math.min(.033,(n-last)/1000);last=n;x.clearRect(0,0,W,H);const el=(n-t0)/1000;
+for(let i=P.length-1;i>=0;i--){const p=P[i];p.t+=dt;p.vy+=H*2*dt;p.vx*=.99;p.vy*=.99;p.x+=p.vx*dt;p.y+=p.vy*dt;p.r+=p.vr;
+ const a=Math.max(0,Math.min(1,(p.life-p.t)/.5));if(a<=0||p.y>H+40){P.splice(i,1);continue}
+ x.save();x.globalAlpha=a;x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;if(p.dot){x.beginPath();x.arc(0,0,p.h*.6,0,6.3);x.fill()}else x.fillRect(-p.w/2,-p.h/2*Math.abs(Math.cos(p.r*2)),p.w,p.h*Math.abs(Math.cos(p.r*2))+1);x.restore()}
+if(el<BURST/1000+1.2&&(P.length||el<.6))requestAnimationFrame(f)})(last);
+})();
+</script></body></html>

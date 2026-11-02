@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><script src="config.js"></script><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tokkey — Own your intelligence</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -565,117 +565,166 @@ html{background:none}
 #faq .fqw{max-width:none;width:100%}#faq .fq p{max-width:none}
 #lid3 .scr{background:rgba(7,11,16,.5)!important}
 
-/* ===== MOBILE (<=767px) · v3 · 390px design basis, 16px margins, 8px grid ===== */
+
+
+/* ===== MOBILE (<=767px) · static layout from Figma "Mobile · 390x844" =====
+   Scroll-driven scenes (#sx #s3 #sr #s4 #s6-#s11) are NOT used on phones: the page shows #mob,
+   then FAQ, CTA and footer. The big script is skipped on phones, so no frame sequences load. */
+#mob,#mobcta,.mnb,#mmenu{display:none}
+.toast{display:none;position:fixed;left:50%;top:76px;transform:translate(-50%,-80px);z-index:200;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:99px;background:rgba(20,20,22,.92);border:1px solid rgba(255,255,255,.18);color:#f2f2f2;font:500 14px Inter,sans-serif;backdrop-filter:blur(16px);transition:transform .5s cubic-bezier(.2,.7,.2,1);white-space:nowrap}
+.toast.on{display:flex;transform:translate(-50%,0)}.toast u{width:8px;height:8px;border-radius:50%;background:#4ABE18}
 @media(max-width:767px){
-html,body{overflow-x:clip;max-width:100%}
-nav{height:64px;padding:0 16px}
-nav .logo{height:24px}
-nav .btn{height:40px;padding:0 16px;font-size:14px}
-
-/* --- stacked sections that were 1920x1080 stages --- */
-.fz{width:auto!important;height:auto!important;zoom:1!important;margin:0;padding:96px 16px 64px;display:flex;flex-direction:column;align-items:stretch}
-.fz>*{position:static!important;left:auto!important;top:auto!important;width:auto!important;margin:0}
-#s7,#s9,#s11{padding:0}
-#s11{background:#000;color:#f5f5f7;position:relative;overflow:hidden}
-.mono,.c7l,.pl7,.e3l{font:400 12px/16px var(--mono,'Commit Mono',monospace)!important;letter-spacing:.08em!important;text-transform:uppercase;color:#b0b0ac}
-
-/* 06 / User comments */
-.c7l{text-align:left!important;margin-bottom:16px!important}
-#s7 .c7t{font:700 40px/48px Inter!important;letter-spacing:-.8px!important;text-align:left!important;margin-bottom:16px!important}
-.c7s{font:400 16px/24px Inter!important;letter-spacing:0!important;text-align:left!important;margin-bottom:32px!important}
-.c7s br{display:none}
-.c7amb{display:none}
-.c7w{display:flex!important;flex-direction:column;gap:16px;height:auto!important}
-.c7c{display:contents}
-.zgc{width:100%!important;height:auto!important;min-height:0;padding:24px;gap:24px;border-radius:24px;filter:none;order:3}
-.zgc.zft{order:1;padding:24px}
-.zgp,.zgq{width:auto!important}
-.zgq{font:400 20px/28px Inter!important;letter-spacing:-.2px!important;white-space:normal!important}
-.zgc.zft .zgq{font:500 24px/32px Inter!important;letter-spacing:-.48px!important}
-.zgq br{display:none}
-/* keep the 3 cards from the design: Developer, Researcher, Creative technologist */
-.c7w .c7c:nth-child(2) .zgc:not(.zft),.c7w .c7c:nth-child(3){display:none}
-.c7w .c7c:nth-child(1) .zgc:nth-child(1){order:2}.c7w .c7c:nth-child(1) .zgc:nth-child(2){order:3}
-.c7n{font:400 12px/16px Inter!important;text-align:left!important;margin-top:24px!important;color:#8e8e93}
-
-/* 02 / Personal intelligence */
-#s9 .fz{padding:96px 16px 64px}
-#s9 .zpp{order:4;width:100%!important;height:auto!important;aspect-ratio:4/3;border-radius:16px;margin:32px 0 16px!important}
-#s9 .pl7{order:1;margin-bottom:16px!important}
-#s9 .pt7{order:2;font:700 40px/48px Inter!important;letter-spacing:-.8px!important;margin-bottom:16px!important}
-#s9 .pd7{order:3;font:400 16px/24px Inter!important;letter-spacing:0!important}
-#s9 .pd7 br{display:none}
-#s9 .lc7{display:none}
-#s9 .pc7{order:5;font:500 20px/28px Inter!important;letter-spacing:-.2px!important;margin-top:16px!important}
-#s9 .pn7{order:6;font:400 12px/16px Inter!important;margin-top:8px!important}
-#s9 .pn7 br{display:none}
-#s9 .pcap{order:5;font:400 12px/16px Inter!important;color:#8e8e93}
-#s9 .pcap{order:4;margin:0 0 0!important}
-
-/* 03 / Local + cloud */
-#s11 .fz{padding:96px 16px 64px}
-#s11 .e3l:first-child{margin-bottom:16px!important}
-#s11 .e3t{font:600 40px/48px Inter!important;letter-spacing:-.8px!important;margin-bottom:16px!important}
-#s11 .e3v{font:400 16px/24px Inter!important;letter-spacing:0!important;margin-bottom:32px!important}
-#s11 .e3v br{display:none}
-#s11 .e3d,#s11 .e3i,#s11 .e3r,#s11 .e3l:not(:first-child),#s11 .rvv[style*="352px"]{display:none!important}
-#s11 .e3p{display:block;position:relative!important;width:100%!important;height:auto!important;padding:24px;filter:none;margin-bottom:32px!important}
-#s11 .e3p>*{position:static!important}
-#s11 .e3p h3{font:600 32px/40px Inter!important;margin:8px 0!important}
-#s11 .e3p .c{width:auto!important;margin:0 0 24px!important}
-#s11 .e3p .b1,#s11 .e3p .b2{display:inline-block;width:calc(50% - 4px)!important;height:48px;line-height:46px;font-size:16px}
-#s11 .e3p .b2{margin-left:8px}
-#s11 .e3n{width:auto!important;padding:24px 0;border-top:1px solid rgba(255,255,255,.14);margin:0!important}
-#s11 .e3n:last-of-type{border-bottom:1px solid rgba(255,255,255,.14)}
-
-/* FAQ */
-#faq{padding:96px 16px 64px}
-#faq h2{font-size:40px;line-height:48px;margin-bottom:32px}
-.fq summary{padding:20px 0;font-size:16px;line-height:24px;gap:16px;font-weight:600}
-.fq p{padding:0 0 20px;font-size:14px;line-height:22px}
-
-
-.ag{padding:6px 16px 6px 6px!important;gap:8px!important;font-size:14px!important}
-.ag i{width:32px!important;height:32px!important}.ag i svg{width:18px!important;height:18px!important}
-#vc{object-fit:contain!important}
-
-/* 04 / Large models (stacked, not pinned) */
-#s4{height:auto}
-#s4 .st{position:relative!important;height:auto!important;min-height:100vh;overflow:hidden}
-#s4 .g4{position:relative!important;inset:auto!important;display:flex!important;flex-direction:column;align-items:stretch!important;gap:24px!important;padding:96px 16px 64px!important}
-.l4,.t4s{flex:none}
-.t4s{gap:0;justify-content:flex-start}
-.t4i{padding:16px 0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.14)}
-.t4i h3{font-size:24px!important;line-height:32px;letter-spacing:-.48px}
-.t4i.on{background:none;padding-bottom:16px}
-.t4i.on h3{font-size:24px!important;letter-spacing:-.48px}
-.t4i p{font-size:14px;line-height:22px;max-width:none}
-.t4i .n{right:0;top:20px}
-.vis4{height:520px!important;border-radius:24px}
-.vis4.car{overflow:hidden}
-:root{--pk:24px}
-#sc0.sc{right:0}
-.cp{flex:0 0 calc(100% - 24px);border-radius:24px}
-.cp .vc4{left:16px;top:16px}
-.cp .vt4{right:16px;top:14px;max-width:calc(100% - 96px);font-size:14px;line-height:20px}
-.cpb{left:16px;right:16px;top:64px;bottom:16px;gap:12px}
-.mcd{padding:0 16px;border-radius:16px}
-.mcd h5{font-size:20px;margin:4px 0 8px}
-.mcd .cfm{flex-wrap:wrap;gap:0 8px}.mcd .cfm b{font-size:28px}
-.mcd .cfm em{margin-left:0;flex-basis:100%;font-size:11px}
-.cp .sdo{width:calc(100% - 36px)}
-.cp .sdth{flex:0 0 calc((100% - 28px)/3)}
-.dnav{right:16px;bottom:8px}
-.vis4>.vc4{left:16px;top:16px}
-.vis4>.vt4{right:16px;top:14px;max-width:calc(100% - 96px);font-size:14px;line-height:20px}
-/* Footer */
-#ft{min-height:0;padding:96px 16px 32px}
-.ftw{grid-template-columns:1fr 1fr;gap:32px 16px}
-.ftw .ftl p{font-size:16px;line-height:24px}
-.ftb{margin-top:48px;flex-direction:column;gap:8px}
+html,body{overflow-x:clip;max-width:100%;background:#000}
+#sx,#s3,#sr,#s4,#s6,#s7,#s8,#s9,#s10,#s11,#fdots{display:none!important}
+#mob,#mobcta{display:block}
+.toast.on{display:flex}
+/* nav */
+nav{height:64px;padding:0 16px;background:rgba(0,0,0,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
+nav .logo{height:24px}nav ul,nav .btn{display:none}
+.mnb{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;position:fixed;right:16px;top:12px;z-index:90;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);cursor:pointer;padding:0}
+.mnb i{display:block;width:16px;height:1.5px;background:#fff;transition:transform .25s}
+.mnb[aria-expanded=true] i:first-child{transform:translateY(3.75px) rotate(45deg)}.mnb[aria-expanded=true] i:last-child{transform:translateY(-3.75px) rotate(-45deg)}
+#mmenu{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.96);padding:96px 16px 32px;flex-direction:column;gap:0;opacity:0;pointer-events:none;transition:opacity .25s}
+#mmenu.on{display:flex;opacity:1;pointer-events:auto}#mmenu{display:flex;visibility:hidden}#mmenu.on{visibility:visible}
+#mmenu a:not(.mcta){font:600 32px/40px Inter;letter-spacing:-.02em;color:#f2f2f2;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+#mmenu .mcta{margin-top:32px}
+/* shared */
+#mob{font-family:Inter,system-ui,sans-serif;color:#f5f5f7;background:#000}
+#mob *{box-sizing:border-box}
+.k-mg{margin:0;font:700 40px/48px Inter;letter-spacing:-.8px;color:#fff;background:linear-gradient(95deg,#f3f7ff 0%,#bcd7ff 26%,#8fbfff 42%,#f6f9ff 62%,#fff 78%,#cfe2ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.k-mg .gr,.gr{color:#4ABE18;-webkit-text-fill-color:#4ABE18;font-weight:inherit}
+.k-mg span{-webkit-text-fill-color:transparent}
+.k-me{margin:0 0 16px;font:400 12px/16px 'Commit Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#b0b0ac}
+.k-mp{margin:16px 0 0;font:400 16px/24px Inter;color:#a1a1a6}
+.k-mn{margin:32px 0 0;font:500 16px/24px Inter;color:#f2f2f2}
+.k-ms{position:relative;padding:80px 16px 48px;overflow:hidden}
+.k-msoft{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;z-index:0;pointer-events:none}
+.k-ms>*{position:relative;z-index:1}.k-ms>.k-msoft{position:absolute}
+.k-rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.k-rv.on{opacity:1;transform:none}
+.mcta{display:flex;align-items:center;justify-content:center;height:48px;border-radius:99px;background:#fff;color:#000!important;font:600 16px Inter;text-align:center}
+/* 1 hero (no animation) */
+.k-m1{position:relative;min-height:100svh;padding:112px 16px 0;text-align:center;overflow:hidden;display:flex;flex-direction:column;align-items:center}
+.k-m1bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.k-m1>*{position:relative;z-index:1}.k-m1>.k-m1bg{position:absolute}
+.k-m1 .k-mg{font-size:48px;line-height:56px;letter-spacing:-.96px}
+.k-m1s{margin:16px 0 0;font:400 16px/24px Inter;color:#a1a1a6}
+.k-m1k{width:min(300px,78vw);height:auto;margin:32px 0 0}
+.k-m1 .mcta{position:absolute;left:16px;right:16px;bottom:56px}
+.k-mscr{position:absolute;bottom:12px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:4px;font:400 10px/12px 'Commit Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8e8e93}
+.k-mscr i{width:1px;height:12px;background:#8e8e93}
+/* 2 chips */
+.k-chips{margin-top:32px;display:flex;flex-direction:column;gap:16px}.k-chips>div{display:flex;gap:16px}.k-chips .k-o1{padding-left:78px}.k-chips .k-o2{padding-left:48px}
+.k-mch{display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:24px;border:1px solid rgba(242,242,242,.24);background:rgba(255,255,255,.06);font:600 16px Inter;color:#f2f2f2;backdrop-filter:blur(16px)}
+.k-mch i,.k-gp u,.k-at u,.k-rpl u,.k-chp u,.k-lg u,.k-pl u,.k-bt u{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ABE18}
+/* frosted light app cards */
+.k-lc{margin-top:32px;border-radius:24px;padding:16px;color:#111110;background:linear-gradient(180deg,rgba(246,245,241,.9),rgba(246,245,241,.75));box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 24px 48px rgba(0,0,0,.4);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.k-ib{display:inline-block;flex:none;width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid rgba(17,17,16,.1);position:relative}
+.k-ib:after{content:"";position:absolute;left:9px;top:9px;width:6px;height:6px;border-radius:1px;background:#111110;box-shadow:8px 0 0 #111110,0 8px 0 #111110,8px 8px 0 #4ABE18}
+.k-chh{display:flex;align-items:center;gap:8px;margin-bottom:16px}.k-chh .k-ib{width:24px;height:24px;border-radius:6px}.k-chh .k-ib:after{display:none}.k-chh b{flex:1;text-align:center;font:600 14px Inter}
+.k-pl{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:99px;background:rgba(17,17,16,.08);font:500 11px Inter}
+.k-bub{padding:12px 16px;border-radius:16px;font:400 14px/20px Inter}.k-bub.k-u{background:#1a1a18;color:#fff;margin-left:32px}
+.k-rd{margin:12px 0 8px}.k-rchip{display:inline-block;padding:4px 10px;border-radius:99px;background:rgba(17,17,16,.06);font:500 11px/16px Inter;color:#3c3c38}
+.k-ans{margin:0;font:400 14px/22px Inter;color:#111110}
+.k-inp{margin-top:16px;border-radius:16px;background:#fff;padding:12px 16px;box-shadow:0 1px 0 rgba(17,17,16,.06);color:#8e8e93;font:400 14px Inter}.k-inp .k-ir{display:flex;align-items:center;gap:8px;margin-top:20px}
+.k-ic1,.k-ic2{width:16px;height:16px;border:1.5px solid #8e8e93;border-radius:4px}.k-snd{margin-left:auto;width:32px;height:32px;border-radius:50%;background:#111110;display:grid;place-items:center}
+.k-gp{display:flex;align-items:center;gap:8px;height:40px;margin-top:8px;padding:0 16px;border-radius:99px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);font:400 14px Inter;color:#f2f2f2;backdrop-filter:blur(16px)}.k-m3 .k-gp:first-of-type{margin-top:16px}
+.k-lh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.k-lh b{font:600 16px Inter}
+.k-at{display:inline-flex;align-items:center;gap:6px;font:400 10px 'Commit Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#5c5c58}
+.k-mr{display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:16px}.k-mr.on{background:rgba(255,255,255,.7)}.k-mr>div{flex:1;min-width:0}.k-mr b{display:block;font:600 14px/20px Inter}.k-mr small{display:block;font:400 12px/16px Inter;color:#5c5c58}
+.k-bt{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:99px;border:1px solid rgba(17,17,16,.14);background:rgba(255,255,255,.6);font:500 13px Inter}.k-bt.k-run{background:#111110;color:#fff;border-color:#111110}
+.k-ft{margin:8px 0 0;font:400 12px/16px Inter;color:#5c5c58}
+.k-tgl{width:40px;height:24px;border-radius:99px;background:#111110;position:relative}.k-tgl i{position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff}
+.k-rs{margin:0 0 12px;font:400 13px/18px Inter;color:#5c5c58}
+.k-rbx{display:grid;grid-template-columns:1fr 1fr;gap:8px}.k-rbx>div{border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px}.k-rbx .k-sel{background:#fff}.k-rbx .k-dsh{border:1px dashed rgba(17,17,16,.3)}
+.k-rbx em{font:normal 10px 'Commit Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#5c5c58;margin-bottom:8px}.k-rbx .k-ib{margin-bottom:8px}.k-rbx b{font:600 14px/20px Inter}.k-rbx small{font:400 12px/16px Inter;color:#5c5c58}
+.k-rpl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.k-rpl span{display:flex;align-items:center;gap:6px;height:32px;padding:0 10px;border-radius:99px;background:rgba(17,17,16,.06);font:500 11px Inter;white-space:nowrap}.k-rpl .k-g{background:rgba(74,190,24,.14)}.k-rpl span:last-child u{background:#8e8e93}
+/* 5 large models */
+.k-tabs{display:flex;gap:8px;margin:32px -16px 16px;padding:0 16px;overflow-x:auto;scrollbar-width:none}.k-tabs::-webkit-scrollbar{display:none}
+.k-tabs button{flex:none;height:40px;padding:0 16px;border-radius:99px;border:1px solid rgba(242,242,242,.24);background:rgba(255,255,255,.06);color:#f2f2f2;font:600 14px Inter;cursor:pointer}.k-tabs button.on{background:#fff;color:#000;border-color:#fff}
+.k-tabs em{font:600 10px 'Commit Mono',monospace;font-style:normal;margin-left:6px;padding:2px 6px;border-radius:99px;background:linear-gradient(100deg,#FF9A62,#B678FF,#4FE3D4);color:#000}
+.k-pn{display:none}.k-pn.on{display:block}
+.k-gc{margin-bottom:12px;padding:20px;border-radius:24px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(157deg,rgba(255,255,255,.1),rgba(255,255,255,.03))}
+.k-gc small{display:block;font:400 11px/16px 'Commit Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#b0b0ac}.k-gc h3{margin:4px 0 0;font:600 20px/28px Inter;letter-spacing:-.2px;color:#fff}
+.k-gc p{margin:8px 0 0;font:400 14px/22px Inter;color:#a1a1a6}.k-gc em{display:block;margin-top:8px;font:normal 11px 'Commit Mono',monospace;letter-spacing:.04em;color:#8e8e93}
+.k-num{font:600 16px Inter;color:#b0b0ac;margin-top:16px}.k-num b{font:700 56px/56px Inter;letter-spacing:-2px;background:linear-gradient(95deg,#f3f7ff,#8fbfff 50%,#cfe2ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.k-num.k-s{margin:0}.k-num.k-s b{font-size:24px;line-height:32px;letter-spacing:-.5px}
+.k-gc .k-row{display:flex;justify-content:space-between;align-items:flex-start}
+.k-bar{height:4px;border-radius:2px;background:rgba(255,255,255,.14);margin-top:12px;overflow:hidden}.k-bar i{display:block;height:100%;width:22%;border-radius:2px;background:#fff}
+.k-lg{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.06);font:500 14px Inter}.k-lg span{display:flex;align-items:center;gap:8px}.k-lg u.k-w{background:#fff}.k-lg em{margin:0}
+.k-chp{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.k-chp span{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:99px;border:1px solid rgba(255,255,255,.2);font:500 12px Inter}
+.k-mrow{display:flex;justify-content:space-between;margin-top:8px;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.06);font:500 14px Inter}.k-mrow em{margin:0}
+.k-gc h3 b.gr{font-weight:600}
+/* 6 comments */
+.k-m6 .k-mg+.k-mp{margin-bottom:32px}
+.k-qc{margin-bottom:12px;padding:20px;border-radius:24px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(157deg,rgba(255,255,255,.1),rgba(255,255,255,.03))}.k-qc.k-ft{border-color:rgba(255,255,255,.4);background:linear-gradient(154deg,rgba(70,70,82,.9),rgba(24,24,30,.94))}
+.k-qp{display:flex;align-items:center;gap:12px;margin-bottom:16px}.k-qp span{width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.1);display:grid;place-items:center;font:500 13px Inter;color:#e5e5ea}.k-qp b{display:block;font:600 14px/20px Inter;color:#fff}.k-qp small{font:400 12px/16px Inter;color:#a1a1a6}
+.k-qc p{margin:0;font:500 20px/28px Inter;letter-spacing:-.2px;color:#f5f5f7}.k-mnote{margin:24px 0 0;font:400 12px/16px Inter;color:#8e8e93}
+/* FAQ + CTA + footer */
+#faq{padding:80px 16px 48px}#faq h2{font-size:40px;line-height:48px;margin-bottom:32px}
+.fq summary{padding:20px 0;font-size:16px;line-height:24px;gap:16px;font-weight:600}.fq p{padding:0 0 20px;font-size:14px;line-height:22px}
+#mobcta{padding:48px 16px 64px;border-top:1px solid rgba(255,255,255,.1)}#mobcta .mcta{margin-top:24px}
+#ft{min-height:0;padding:48px 16px 32px}#ftc{display:none}
+.ftw{grid-template-columns:1fr 1fr;gap:32px 16px}.ftw .ftl p{font-size:16px;line-height:24px}.ftb{margin-top:48px;flex-direction:column;gap:8px}
 }
 </style></head><body>
-<nav><a href="index.html"><svg class="logo" viewBox="150 0 436 111" xmlns="http://www.w3.org/2000/svg"><path d="M510.351 16.0464H529.373L547.69 50.6405H548.475L566.792 16.0464H585.814L556.515 67.9768V96.3737H539.65V67.9768L510.351 16.0464Z" fill="currentColor"/><path d="M439.889 96.3737V16.0464H494.016V30.0488H456.872V49.1893H491.231V63.1916H456.872V82.3714H494.173V96.3737H439.889Z" fill="currentColor"/><path d="M303.783 55.016C303.783 63.7757 302.123 71.2279 298.802 77.3727C295.507 83.5176 291.01 88.2112 285.309 91.4536C279.635 94.6698 273.255 96.2779 266.169 96.2779C259.03 96.2779 252.624 94.6567 246.95 91.4143C241.276 88.172 236.791 83.4783 233.497 77.3335C230.202 71.1887 228.555 63.7495 228.555 55.016C228.555 46.2563 230.202 38.8041 233.497 32.6593C236.791 26.5144 241.276 21.8339 246.95 18.6177C252.624 15.3753 259.03 13.7541 266.169 13.7541C273.255 13.7541 279.635 15.3753 285.309 18.6177C291.01 21.8339 295.507 26.5144 298.802 32.6593C302.123 38.8041 303.783 46.2563 303.783 55.016ZM286.565 55.016C286.565 49.3418 285.715 44.5567 284.015 40.6606C282.342 36.7645 279.975 33.8098 276.916 31.7964C273.856 29.783 270.274 28.7763 266.169 28.7763C262.064 28.7763 258.481 29.783 255.422 31.7964C252.363 33.8098 249.983 36.7645 248.284 40.6606C246.61 44.5567 245.773 49.3418 245.773 55.016C245.773 60.6902 246.61 65.4753 248.284 69.3714C249.983 73.2675 252.363 76.2222 255.422 78.2356C258.481 80.249 262.064 81.2557 266.169 81.2557C270.274 81.2557 273.856 80.249 276.916 78.2356C279.975 76.2222 282.342 73.2675 284.015 69.3714C285.715 65.4753 286.565 60.6902 286.565 55.016Z" fill="currentColor"/><path d="M150.979 30.0488V16.0464H216.95V30.0488H192.358V96.3737H175.571V30.0488H150.979Z" fill="currentColor"/><rect x="371.673" y="96.8224" width="18.4848" height="18.4848" rx="9.24238" transform="rotate(-180 371.673 96.8224)" fill="currentColor"/><path d="M372.267 68.7234L377.867 77.7806L378.434 78.7826L390.302 95.0697C390.868 95.8475 391.773 96.3076 392.735 96.3076H405.618C408.077 96.3076 409.499 93.5194 408.055 91.5286L391.964 69.3382C391.157 68.2254 391.206 66.7074 392.083 65.649L416.313 36.4132C417.94 34.4504 416.544 31.4805 413.995 31.4805H401.474C400.57 31.4805 399.713 31.887 399.141 32.5877L372.495 65.2358C371.683 66.2307 371.591 67.6311 372.267 68.7234Z" fill="currentColor"/><path d="M325.068 16.0468V96.3741H342.051V75.0902L351.248 64.8074L362.564 52.0136L392.373 16.0468H372.017L343.11 51.4645H342.051V16.0468H325.068Z" fill="currentColor"/></svg></a><ul><li><a href="software.html">Software</a></li><li><a href="models.html">Models</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="devdoc.html">Dev Doc</a></li><li><a href="faq.html">FAQ</a></li></ul><a class="btn" href="software.html#early">Get early access</a></nav>
+<nav><a href="index.html"><svg class="logo" viewBox="150 0 436 111" xmlns="http://www.w3.org/2000/svg"><path d="M510.351 16.0464H529.373L547.69 50.6405H548.475L566.792 16.0464H585.814L556.515 67.9768V96.3737H539.65V67.9768L510.351 16.0464Z" fill="currentColor"/><path d="M439.889 96.3737V16.0464H494.016V30.0488H456.872V49.1893H491.231V63.1916H456.872V82.3714H494.173V96.3737H439.889Z" fill="currentColor"/><path d="M303.783 55.016C303.783 63.7757 302.123 71.2279 298.802 77.3727C295.507 83.5176 291.01 88.2112 285.309 91.4536C279.635 94.6698 273.255 96.2779 266.169 96.2779C259.03 96.2779 252.624 94.6567 246.95 91.4143C241.276 88.172 236.791 83.4783 233.497 77.3335C230.202 71.1887 228.555 63.7495 228.555 55.016C228.555 46.2563 230.202 38.8041 233.497 32.6593C236.791 26.5144 241.276 21.8339 246.95 18.6177C252.624 15.3753 259.03 13.7541 266.169 13.7541C273.255 13.7541 279.635 15.3753 285.309 18.6177C291.01 21.8339 295.507 26.5144 298.802 32.6593C302.123 38.8041 303.783 46.2563 303.783 55.016ZM286.565 55.016C286.565 49.3418 285.715 44.5567 284.015 40.6606C282.342 36.7645 279.975 33.8098 276.916 31.7964C273.856 29.783 270.274 28.7763 266.169 28.7763C262.064 28.7763 258.481 29.783 255.422 31.7964C252.363 33.8098 249.983 36.7645 248.284 40.6606C246.61 44.5567 245.773 49.3418 245.773 55.016C245.773 60.6902 246.61 65.4753 248.284 69.3714C249.983 73.2675 252.363 76.2222 255.422 78.2356C258.481 80.249 262.064 81.2557 266.169 81.2557C270.274 81.2557 273.856 80.249 276.916 78.2356C279.975 76.2222 282.342 73.2675 284.015 69.3714C285.715 65.4753 286.565 60.6902 286.565 55.016Z" fill="currentColor"/><path d="M150.979 30.0488V16.0464H216.95V30.0488H192.358V96.3737H175.571V30.0488H150.979Z" fill="currentColor"/><rect x="371.673" y="96.8224" width="18.4848" height="18.4848" rx="9.24238" transform="rotate(-180 371.673 96.8224)" fill="currentColor"/><path d="M372.267 68.7234L377.867 77.7806L378.434 78.7826L390.302 95.0697C390.868 95.8475 391.773 96.3076 392.735 96.3076H405.618C408.077 96.3076 409.499 93.5194 408.055 91.5286L391.964 69.3382C391.157 68.2254 391.206 66.7074 392.083 65.649L416.313 36.4132C417.94 34.4504 416.544 31.4805 413.995 31.4805H401.474C400.57 31.4805 399.713 31.887 399.141 32.5877L372.495 65.2358C371.683 66.2307 371.591 67.6311 372.267 68.7234Z" fill="currentColor"/><path d="M325.068 16.0468V96.3741H342.051V75.0902L351.248 64.8074L362.564 52.0136L392.373 16.0468H372.017L343.11 51.4645H342.051V16.0468H325.068Z" fill="currentColor"/></svg></a><ul><li><a href="software.html">Software</a></li><li><a href="models.html">Models</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="devdoc.html">Dev Doc</a></li><li><a href="faq.html">FAQ</a></li></ul><a class="btn" data-reserve href="software.html#early">Get early access</a></nav>
+<button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+<div id="mmenu" aria-hidden="true"><a href="software.html">Software</a><a href="models.html">Models</a><a href="pricing.html">Pricing</a><a href="devdoc.html">Dev Doc</a><a href="#faq">FAQ</a><a class="mcta" data-reserve href="#">Get early access</a></div>
+
+
+<main id="mob" aria-label="Tokkey (mobile)">
+<section class="k-m1"><img class="k-m1bg" src="m_ripple_hero.jpg" alt="" aria-hidden="true">
+<h1 class="k-mg">Own Your <span>Intelligence</span><b class="gr">.</b></h1>
+<p class="k-m1s">A USB-C key that runs local AI<br>on your Mac.</p>
+<img class="k-m1k" src="tokkey.png" alt="Tokkey USB-C key — concept render">
+<a class="mcta" data-reserve href="#">Get in line</a>
+<div class="k-mscr"><span>Scroll</span><i></i></div></section>
+
+<section class="k-ms k-m2 k-rv"><p class="k-me">Works with your tools</p>
+<h2 class="k-mg">Turn your Mac into an <span>AI Mac</span><b class="gr">.</b></h2>
+<p class="k-mp">Use Tokkey inside the agents you already work in. Same workflow, local model.</p>
+<div class="k-chips"><div><span class="k-mch"><i></i>Claude Code</span></div><div class="k-o1"><span class="k-mch"><i></i>OpenClaw</span></div><div><span class="k-mch"><i></i>Hermes</span><span class="k-mch"><i></i>Cline</span></div><div class="k-o2"><span class="k-mch"><i></i>Aider</span></div></div>
+<p class="k-mn">Larger models. Same Mac.</p></section>
+
+<section class="k-ms k-m3 k-rv"><img class="k-msoft" src="m_ripple_soft.jpg" alt="" aria-hidden="true"><p class="k-me">On your Mac</p>
+<h2 class="k-mg">A private agent<b class="gr">.</b></h2><p class="k-mp" style="margin-top:8px">Working on your Mac</p>
+<div class="k-lc k-chat"><div class="k-chh"><span class="k-ib"></span><b>Private Chat</b><span class="k-pl"><u></u>Qwen3.5 4B</span></div>
+<div class="k-bub k-u">Summarize the contracts in /Q3 and flag renewal dates.</div>
+<div class="k-rd"><span class="k-rchip">✓ Read 6 files · on this Mac</span></div>
+<p class="k-ans">Three renewals fall in Q4. Acme (Oct 31) and Northwind (Nov 15) auto-renew; Lumen needs written notice by Dec 1.</p>
+<div class="k-inp"><span>Message your local agent…</span><div class="k-ir"><i class="k-ic1"></i><i class="k-ic2"></i><i class="k-snd"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></i></div></div></div>
+<div class="k-gp"><u></u>Uses Tokkey’s local model.</div><div class="k-gp"><u></u>Tool network access is off.</div></section>
+
+<section class="k-ms k-m4 k-rv"><img class="k-msoft" src="m_ripple_soft.jpg" alt="" aria-hidden="true"><p class="k-me">Local first</p>
+<h2 class="k-mg">Local power. Cloud <span>by choice</span><b class="gr">.</b></h2>
+<div class="k-lc"><div class="k-lh"><b>Local Models</b><span class="k-at"><u></u>Attached</span></div>
+<div class="k-mr"><span class="k-ib"></span><div><b>Qwen3.6 35B-A3B</b><small>Recommended · 23 GB</small></div><span class="k-bt">Start</span></div>
+<div class="k-mr on"><span class="k-ib"></span><div><b>Qwen3.5 4B</b><small>2.8 GB · Alibaba Qwen</small></div><span class="k-bt k-run"><u></u>Running</span></div>
+<div class="k-mr"><span class="k-ib"></span><div><b>Qwen3.5 9B</b><small>5.7 GB · Qwen</small></div><span class="k-bt">Start</span></div>
+<p class="k-ft">Only one local model runs at a time.</p></div>
+<div class="k-lc" style="margin-top:16px"><div class="k-lh"><b>Router</b><span class="k-tgl"><i></i></span></div><p class="k-rs">Simple tasks run on your Tokkey. Hard ones go to a cloud model.</p>
+<div class="k-rbx"><div class="k-sel"><em>Local model</em><span class="k-ib"></span><b>Qwen3.5 4B</b><small>On this Mac</small></div><div class="k-dsh"><em>Cloud model</em><span class="k-ib"></span><b>Cloud model</b><small>You choose which</small></div></div>
+<div class="k-rpl"><span class="k-g"><u></u>Private task → Local</span><span><u></u>Hard task → Cloud</span></div></div></section>
+
+<section class="k-ms k-m5 k-rv"><p class="k-me">01 / 04</p>
+<h2 class="k-mg">Large models. A fraction of <span>the memory</span><b class="gr">.</b></h2>
+<div class="k-tabs" id="mtabs"><button class="on" data-i="0">Run large AI models</button><button data-i="1">Light guidance</button><button data-i="2">Lid closed</button><button data-i="3">Private memory <em>PRO</em></button></div>
+<div class="k-pn on" data-i="0">
+<div class="k-gc k-big"><small>35B parameters</small><h3>Qwen3.6 35B-A3B</h3><div class="k-num"><b>~5</b> GB</div><p>of memory with Tokkey</p><div class="k-bar"><i></i></div><em>vs ~23 GB without</em></div>
+<div class="k-gc"><div class="k-row"><div><small>70B parameters</small><h3>Llama 3.3 70B</h3></div><div class="k-num k-s"><b>~10</b> GB</div></div><div class="k-bar"><i></i></div><em>vs ~46 GB without</em></div>
+<div class="k-gc"><div class="k-row"><div><small>120B parameters</small><h3>gpt-oss 120B</h3></div><div class="k-num k-s"><b>~17</b> GB</div></div><div class="k-bar"><i></i></div><em>vs ~79 GB without</em></div></div>
+<div class="k-pn" data-i="1"><div class="k-gc"><small>Light states</small><h3>The light tells you what is happening.</h3><p>The key’s light shows what your agent is doing, without opening a window.</p><div class="k-lg"><span><u class="k-w"></u>Done</span><em>White pulse</em></div></div></div>
+<div class="k-pn" data-i="2"><div class="k-gc"><small>Lid closed</small><h3>Still working<b class="gr">.</b></h3><p>Close the Mac. A compatible local task keeps working in the background.</p><div class="k-chp"><span><u></u>Agent running</span><span>04:12:09 uptime</span></div><p>Contract review finished. Weekly report is drafting.</p></div></div>
+<div class="k-pn" data-i="3"><div class="k-gc"><small>Private memory · stored on the key</small><h3>12.4 GB<b class="gr">.</b></h3><div class="k-mrow"><span>Projects</span><em>38 notes</em></div><div class="k-mrow"><span>Preferences</span><em>Writing style</em></div><div class="k-mrow"><span>People</span><em>24 contacts</em></div><div class="k-chp"><span><u></u>Encrypted · never uploaded</span></div></div></div>
+</section>
+
+<section class="k-ms k-m6 k-rv"><p class="k-me">User comments</p>
+<h2 class="k-mg">Real <span>people</span>. Local AI<b class="gr">.</b></h2>
+<p class="k-mp">A little key. A different way to work. For those who want their AI to stay theirs.</p>
+<div class="k-qc k-ft"><div class="k-qp"><span>DE</span><div><b>Independent developer</b><small>Example profile</small></div></div><p>“My work lives on my Mac. My AI should, too.”</p></div>
+<div class="k-qc"><div class="k-qp"><span>RE</span><div><b>Researcher</b><small>Example profile</small></div></div><p>“My prompts. My files. My machine. That’s how I want to work.”</p></div>
+<div class="k-qc"><div class="k-qp"><span>CR</span><div><b>Creative technologist</b><small>Example profile</small></div></div><p>“A bigger model shouldn’t mean buying a new Mac.”</p></div>
+<p class="k-mnote">Concept layout · Quotes and profiles are illustrative.</p></section>
+</main>
 
 <section id="sx" class="pin"><div class="st">
 <div id="A"><div id="awrap"><div id="flow"></div><canvas id="fdots"></canvas>
@@ -817,13 +866,15 @@ an idea and getting started.”</p></div></div></div>
 
 <section id="faq"><div class="mono" style="margin-bottom:20px">FAQ</div><h2>Questions<span class="gr">.</span></h2><div class="fqw"><details class="fq" open><summary>What is Tokkey?<i>+</i></summary><p>A USB-C Local AI Key with Tokkey Runtime and a local API. It works with your Mac. It is not a new computer.</p></details><details class="fq"><summary>Which Macs and models are supported?<i>+</i></summary><p>Apple silicon Macs. More memory lets you run larger models; the Software page has a table to check your Mac. Not every Mac or model is guaranteed.</p></details><details class="fq"><summary>Does it add a GPU, NPU, or RAM?<i>+</i></summary><p>No. Your Mac provides compute and working memory.</p></details><details class="fq"><summary>Does Tokkey include a chat interface?<i>+</i></summary><p>Yes, Private Chat. Compatible external tools can connect through the local API.</p></details><details class="fq"><summary>Is Agent Hub a new Tokkey agent?<i>+</i></summary><p>No. It is the entry point to connect and manage compatible agents.</p></details><details class="fq"><summary>What is shared Memory?<i>+</i></summary><p>Saved user context that you choose to share across tools. It is not RAM expansion.</p></details><details class="fq"><summary>Does Router keep every request local?<i>+</i></summary><p>No. Router lets you choose between local and cloud, and shows the model, shared excerpt and expected cost first.</p></details><details class="fq"><summary>Can a task continue with the lid closed?<i>+</i></summary><p>On supported configurations, yes. Photos are not proof.</p></details><details class="fq"><summary>Do I need the internet?<i>+</i></summary><p>Downloads, updates and cloud tasks need a connection. Installed local models work locally.</p></details><details class="fq"><summary>What do the performance numbers mean?<i>+</i></summary><p>Claims in the supplied artwork are not yet matched to reports. Treat them as placeholders until evidence is published.</p></details><details class="fq"><summary>How much will it cost?<i>+</i></summary><p>The planned one-time launch price is $129. Final pricing, availability and terms will be confirmed before orders open.</p></details></div></section>
 
+<section id="mobcta" class="k-ms"><h2 class="k-mg">Own your intelligence<b class="gr">.</b></h2><p class="k-mp">Reserve yours with a deposit. Secure checkout by Stripe.</p><a class="mcta" data-reserve href="#">Get early access</a></section>
+
 <footer id="ft"><canvas id="ftc"></canvas>
 <div class="ftw"><div class="ftl"><a href="index.html" aria-label="Tokkey"><svg class="logo" viewBox="150 0 436 111" xmlns="http://www.w3.org/2000/svg"><path d="M510.351 16.0464H529.373L547.69 50.6405H548.475L566.792 16.0464H585.814L556.515 67.9768V96.3737H539.65V67.9768L510.351 16.0464Z" fill="currentColor"/><path d="M439.889 96.3737V16.0464H494.016V30.0488H456.872V49.1893H491.231V63.1916H456.872V82.3714H494.173V96.3737H439.889Z" fill="currentColor"/><path d="M303.783 55.016C303.783 63.7757 302.123 71.2279 298.802 77.3727C295.507 83.5176 291.01 88.2112 285.309 91.4536C279.635 94.6698 273.255 96.2779 266.169 96.2779C259.03 96.2779 252.624 94.6567 246.95 91.4143C241.276 88.172 236.791 83.4783 233.497 77.3335C230.202 71.1887 228.555 63.7495 228.555 55.016C228.555 46.2563 230.202 38.8041 233.497 32.6593C236.791 26.5144 241.276 21.8339 246.95 18.6177C252.624 15.3753 259.03 13.7541 266.169 13.7541C273.255 13.7541 279.635 15.3753 285.309 18.6177C291.01 21.8339 295.507 26.5144 298.802 32.6593C302.123 38.8041 303.783 46.2563 303.783 55.016ZM286.565 55.016C286.565 49.3418 285.715 44.5567 284.015 40.6606C282.342 36.7645 279.975 33.8098 276.916 31.7964C273.856 29.783 270.274 28.7763 266.169 28.7763C262.064 28.7763 258.481 29.783 255.422 31.7964C252.363 33.8098 249.983 36.7645 248.284 40.6606C246.61 44.5567 245.773 49.3418 245.773 55.016C245.773 60.6902 246.61 65.4753 248.284 69.3714C249.983 73.2675 252.363 76.2222 255.422 78.2356C258.481 80.249 262.064 81.2557 266.169 81.2557C270.274 81.2557 273.856 80.249 276.916 78.2356C279.975 76.2222 282.342 73.2675 284.015 69.3714C285.715 65.4753 286.565 60.6902 286.565 55.016Z" fill="currentColor"/><path d="M150.979 30.0488V16.0464H216.95V30.0488H192.358V96.3737H175.571V30.0488H150.979Z" fill="currentColor"/><rect x="371.673" y="96.8224" width="18.4848" height="18.4848" rx="9.24238" transform="rotate(-180 371.673 96.8224)" fill="currentColor"/><path d="M372.267 68.7234L377.867 77.7806L378.434 78.7826L390.302 95.0697C390.868 95.8475 391.773 96.3076 392.735 96.3076H405.618C408.077 96.3076 409.499 93.5194 408.055 91.5286L391.964 69.3382C391.157 68.2254 391.206 66.7074 392.083 65.649L416.313 36.4132C417.94 34.4504 416.544 31.4805 413.995 31.4805H401.474C400.57 31.4805 399.713 31.887 399.141 32.5877L372.495 65.2358C371.683 66.2307 371.591 67.6311 372.267 68.7234Z" fill="currentColor"/><path d="M325.068 16.0468V96.3741H342.051V75.0902L351.248 64.8074L362.564 52.0136L392.373 16.0468H372.017L343.11 51.4645H342.051V16.0468H325.068Z" fill="currentColor"/></svg></a><p>Intelligence, in your hands.</p></div>
 <div class="ftk"><b>Product</b><a href="software.html">Software</a><a href="models.html">Models</a><a href="pricing.html">Pricing</a><a href="devdoc.html">Dev Doc</a></div>
 <div class="ftk"><b>Company</b><a href="#">About</a><a class="hi" href="#">Careers</a><a class="hi" href="#">Contact</a><a href="#">Press</a></div>
-<div class="ftk"><b>Resources</b><a href="faq.html">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a><a href="software.html#early">Get early access</a></div></div>
+<div class="ftk"><b>Resources</b><a href="faq.html">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a><a data-reserve href="software.html#early">Get early access</a></div></div>
 <div class="ftb"><span>© 2026 Tokkey · Concept renders</span><span>Own your intelligence.</span></div></footer>
-<script>
+<script>if(!matchMedia('(max-width:767px)').matches){
 const $=id=>document.getElementById(id),clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),sm=t=>t*t*(3-2*t),lerp=(a,b,t)=>a+(b-a)*t,seg=(p,a,b)=>clamp((p-a)/(b-a)),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 // keys
 // agents
@@ -1055,4 +1106,24 @@ requestAnimationFrame(frame2);
 
 {const zf=()=>document.documentElement.style.setProperty('--z',Math.min(1,innerWidth/1920).toFixed(4));zf();addEventListener('resize',zf);
 const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.18});document.querySelectorAll('.fz').forEach(n=>io2.observe(n))}
-</script></body></html>
+
+}</script>
+<div class="toast" id="toast" role="status"><u></u>Deposit received. You’re in line.</div>
+<script>
+(()=>{const MQ=matchMedia('(max-width:767px)'),cfg=window.TOKKEY_CONFIG||{},live=cfg.STRIPE_URL&&!/REPLACE/.test(cfg.STRIPE_URL);
+/* every CTA marked data-reserve goes to Stripe (or to the demo thanks page until the real link is set in config.js) */
+document.querySelectorAll('[data-reserve]').forEach(a=>{a.href=live?cfg.STRIPE_URL:'thanks.html?demo=1'});
+{const was=MQ.matches;MQ.addEventListener('change',e=>{if(e.matches!==was)location.reload()})}
+/* welcome-back toast after thanks.html */
+try{const u=new URL(location.href);if(u.searchParams.get('reserved')==='1'){const t=document.getElementById('toast');t.classList.add('on');setTimeout(()=>t.classList.remove('on'),4200);u.searchParams.delete('reserved');history.replaceState(null,'',u.pathname+u.search+u.hash)}}catch(e){}
+if(!MQ.matches)return;
+const mb=document.getElementById('mnb'),mm=document.getElementById('mmenu');
+const tog=on=>{mb.setAttribute('aria-expanded',on);mm.classList.toggle('on',on);mm.setAttribute('aria-hidden',!on);document.body.style.overflow=on?'hidden':''};
+mb.onclick=()=>tog(mb.getAttribute('aria-expanded')!=='true');mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>tog(false)));
+const tabs=[...document.querySelectorAll('#mtabs button')],pns=[...document.querySelectorAll('#mob .k-m5 .k-pn')];
+tabs.forEach(b=>b.onclick=()=>{const i=+b.dataset.i;tabs.forEach(x=>x.classList.toggle('on',x===b));pns.forEach((p,j)=>p.classList.toggle('on',j===i))});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.08});
+document.querySelectorAll('#mob .k-rv').forEach(n=>io.observe(n));
+})();
+</script>
+</body></html>
