@@ -1,0 +1,11 @@
+<svg width="320" height="224" viewBox="0 0 320 224" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M32 147L160 98L288 147L160 196L32 147Z" fill="#CADBFF" fill-opacity="0.025" stroke="#7C879F" stroke-opacity="0.4"/>
+<path d="M288 147V159L160 209L32 159V147M160 209V196" stroke="#7C879F" stroke-opacity="0.3"/>
+<path d="M32 105L160 56L288 105L160 154L32 105Z" fill="#CADBFF" fill-opacity="0.04" stroke="#A2B0CF" stroke-opacity="0.55"/>
+<path d="M288 105V117L160 167L32 117V105M160 167V154" stroke="#7C879F" stroke-opacity="0.4"/>
+<path d="M32 63L160 14L288 63L160 112L32 63Z" fill="#CADBFF" fill-opacity="0.065" stroke="#C3D6FF" stroke-opacity="0.9" stroke-width="1.2"/>
+<path d="M288 63V75L160 125L32 75V63M160 125V112" stroke="#9DAECF" stroke-opacity="0.6"/>
+<path d="M116 63L160 46L204 63L160 80L116 63Z" stroke="#D6E4FF" stroke-width="1.2"/>
+<path d="M132 63L160 52L188 63L160 74L132 63Z" fill="#AECFFF" fill-opacity="0.17"/>
+<path d="M66 80L85 87M94 90L111 97M66 122L85 129M94 132L111 139M66 164L85 171M94 174L111 181" stroke="#C3D6FF" stroke-opacity="0.4" stroke-linecap="round"/>
+</svg>
