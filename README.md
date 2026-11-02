@@ -41,7 +41,11 @@ Page structure (top → bottom, tall `.pin` wrappers with a `position:sticky` ch
 
 ## 3. Notes for developers
 
-- Desktop-first design at **1440 px** wide. Breakpoint rules exist at 900 px but mobile is **not fully designed** yet — treat as TODO.
+- Desktop-first design at **1440 px** wide, plus a **mobile layer (≤ 767 px, designed at 390 × 844)** — one block at the end of the `<style>` tag, headed `MOBILE (<=767px)`. It follows the 8 key mobile screens in Figma (section "Mobile · 390×844"): 16 px margins, H2 40/48, stacked sections.
+  - Reflowed on mobile: User comments (3 cards), Personal intelligence, Local + cloud, Large models (stacked, not pinned), FAQ, footer.
+  - Pinned scroll scenes (hero, Turn your Mac, Private agent) keep their frame sequences; the hero frame uses `object-fit: contain` so "TOKKEY" is not cropped, and the agent chips use a 2-column layout sized to the screen width (JS: `MB` flag in the scroll loop).
+  - **Known gap:** "Release the True Power" (`#sr`) is still the desktop composition scaled down (~27 %). It needs its own mobile design or should be hidden on phones.
+  - Do not put `overflow-x: hidden` on `html`/`body` — it breaks `position: sticky` (all pinned scenes). The mobile layer uses `overflow-x: clip`.
 - Fonts: **Inter** (Google Fonts `<link>` in `<head>`) and **Commit Mono** (local `@font-face`, `fonts/`). **Nothing else.** See §5.
 - Performance: ~38 MB of frames/images. Before launch: serve behind a CDN with long cache headers, keep `webp`, lazy-load later sequences, and consider halving frame counts on mobile.
 - Several scenes are pure CSS "renders" (laptop, glass cards). Real product photography is **not** generated — product images come from the design team (see Photography rule below).

@@ -564,6 +564,116 @@ html{background:none}
 #s8 .apps{display:none!important}
 #faq .fqw{max-width:none;width:100%}#faq .fq p{max-width:none}
 #lid3 .scr{background:rgba(7,11,16,.5)!important}
+
+/* ===== MOBILE (<=767px) · v3 · 390px design basis, 16px margins, 8px grid ===== */
+@media(max-width:767px){
+html,body{overflow-x:clip;max-width:100%}
+nav{height:64px;padding:0 16px}
+nav .logo{height:24px}
+nav .btn{height:40px;padding:0 16px;font-size:14px}
+
+/* --- stacked sections that were 1920x1080 stages --- */
+.fz{width:auto!important;height:auto!important;zoom:1!important;margin:0;padding:96px 16px 64px;display:flex;flex-direction:column;align-items:stretch}
+.fz>*{position:static!important;left:auto!important;top:auto!important;width:auto!important;margin:0}
+#s7,#s9,#s11{padding:0}
+#s11{background:#000;color:#f5f5f7;position:relative;overflow:hidden}
+.mono,.c7l,.pl7,.e3l{font:400 12px/16px var(--mono,'Commit Mono',monospace)!important;letter-spacing:.08em!important;text-transform:uppercase;color:#b0b0ac}
+
+/* 06 / User comments */
+.c7l{text-align:left!important;margin-bottom:16px!important}
+#s7 .c7t{font:700 40px/48px Inter!important;letter-spacing:-.8px!important;text-align:left!important;margin-bottom:16px!important}
+.c7s{font:400 16px/24px Inter!important;letter-spacing:0!important;text-align:left!important;margin-bottom:32px!important}
+.c7s br{display:none}
+.c7amb{display:none}
+.c7w{display:flex!important;flex-direction:column;gap:16px;height:auto!important}
+.c7c{display:contents}
+.zgc{width:100%!important;height:auto!important;min-height:0;padding:24px;gap:24px;border-radius:24px;filter:none;order:3}
+.zgc.zft{order:1;padding:24px}
+.zgp,.zgq{width:auto!important}
+.zgq{font:400 20px/28px Inter!important;letter-spacing:-.2px!important;white-space:normal!important}
+.zgc.zft .zgq{font:500 24px/32px Inter!important;letter-spacing:-.48px!important}
+.zgq br{display:none}
+/* keep the 3 cards from the design: Developer, Researcher, Creative technologist */
+.c7w .c7c:nth-child(2) .zgc:not(.zft),.c7w .c7c:nth-child(3){display:none}
+.c7w .c7c:nth-child(1) .zgc:nth-child(1){order:2}.c7w .c7c:nth-child(1) .zgc:nth-child(2){order:3}
+.c7n{font:400 12px/16px Inter!important;text-align:left!important;margin-top:24px!important;color:#8e8e93}
+
+/* 02 / Personal intelligence */
+#s9 .fz{padding:96px 16px 64px}
+#s9 .zpp{order:4;width:100%!important;height:auto!important;aspect-ratio:4/3;border-radius:16px;margin:32px 0 16px!important}
+#s9 .pl7{order:1;margin-bottom:16px!important}
+#s9 .pt7{order:2;font:700 40px/48px Inter!important;letter-spacing:-.8px!important;margin-bottom:16px!important}
+#s9 .pd7{order:3;font:400 16px/24px Inter!important;letter-spacing:0!important}
+#s9 .pd7 br{display:none}
+#s9 .lc7{display:none}
+#s9 .pc7{order:5;font:500 20px/28px Inter!important;letter-spacing:-.2px!important;margin-top:16px!important}
+#s9 .pn7{order:6;font:400 12px/16px Inter!important;margin-top:8px!important}
+#s9 .pn7 br{display:none}
+#s9 .pcap{order:5;font:400 12px/16px Inter!important;color:#8e8e93}
+#s9 .pcap{order:4;margin:0 0 0!important}
+
+/* 03 / Local + cloud */
+#s11 .fz{padding:96px 16px 64px}
+#s11 .e3l:first-child{margin-bottom:16px!important}
+#s11 .e3t{font:600 40px/48px Inter!important;letter-spacing:-.8px!important;margin-bottom:16px!important}
+#s11 .e3v{font:400 16px/24px Inter!important;letter-spacing:0!important;margin-bottom:32px!important}
+#s11 .e3v br{display:none}
+#s11 .e3d,#s11 .e3i,#s11 .e3r,#s11 .e3l:not(:first-child),#s11 .rvv[style*="352px"]{display:none!important}
+#s11 .e3p{display:block;position:relative!important;width:100%!important;height:auto!important;padding:24px;filter:none;margin-bottom:32px!important}
+#s11 .e3p>*{position:static!important}
+#s11 .e3p h3{font:600 32px/40px Inter!important;margin:8px 0!important}
+#s11 .e3p .c{width:auto!important;margin:0 0 24px!important}
+#s11 .e3p .b1,#s11 .e3p .b2{display:inline-block;width:calc(50% - 4px)!important;height:48px;line-height:46px;font-size:16px}
+#s11 .e3p .b2{margin-left:8px}
+#s11 .e3n{width:auto!important;padding:24px 0;border-top:1px solid rgba(255,255,255,.14);margin:0!important}
+#s11 .e3n:last-of-type{border-bottom:1px solid rgba(255,255,255,.14)}
+
+/* FAQ */
+#faq{padding:96px 16px 64px}
+#faq h2{font-size:40px;line-height:48px;margin-bottom:32px}
+.fq summary{padding:20px 0;font-size:16px;line-height:24px;gap:16px;font-weight:600}
+.fq p{padding:0 0 20px;font-size:14px;line-height:22px}
+
+
+.ag{padding:6px 16px 6px 6px!important;gap:8px!important;font-size:14px!important}
+.ag i{width:32px!important;height:32px!important}.ag i svg{width:18px!important;height:18px!important}
+#vc{object-fit:contain!important}
+
+/* 04 / Large models (stacked, not pinned) */
+#s4{height:auto}
+#s4 .st{position:relative!important;height:auto!important;min-height:100vh;overflow:hidden}
+#s4 .g4{position:relative!important;inset:auto!important;display:flex!important;flex-direction:column;align-items:stretch!important;gap:24px!important;padding:96px 16px 64px!important}
+.l4,.t4s{flex:none}
+.t4s{gap:0;justify-content:flex-start}
+.t4i{padding:16px 0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.14)}
+.t4i h3{font-size:24px!important;line-height:32px;letter-spacing:-.48px}
+.t4i.on{background:none;padding-bottom:16px}
+.t4i.on h3{font-size:24px!important;letter-spacing:-.48px}
+.t4i p{font-size:14px;line-height:22px;max-width:none}
+.t4i .n{right:0;top:20px}
+.vis4{height:520px!important;border-radius:24px}
+.vis4.car{overflow:hidden}
+:root{--pk:24px}
+#sc0.sc{right:0}
+.cp{flex:0 0 calc(100% - 24px);border-radius:24px}
+.cp .vc4{left:16px;top:16px}
+.cp .vt4{right:16px;top:14px;max-width:calc(100% - 96px);font-size:14px;line-height:20px}
+.cpb{left:16px;right:16px;top:64px;bottom:16px;gap:12px}
+.mcd{padding:0 16px;border-radius:16px}
+.mcd h5{font-size:20px;margin:4px 0 8px}
+.mcd .cfm{flex-wrap:wrap;gap:0 8px}.mcd .cfm b{font-size:28px}
+.mcd .cfm em{margin-left:0;flex-basis:100%;font-size:11px}
+.cp .sdo{width:calc(100% - 36px)}
+.cp .sdth{flex:0 0 calc((100% - 28px)/3)}
+.dnav{right:16px;bottom:8px}
+.vis4>.vc4{left:16px;top:16px}
+.vis4>.vt4{right:16px;top:14px;max-width:calc(100% - 96px);font-size:14px;line-height:20px}
+/* Footer */
+#ft{min-height:0;padding:96px 16px 32px}
+.ftw{grid-template-columns:1fr 1fr;gap:32px 16px}
+.ftw .ftl p{font-size:16px;line-height:24px}
+.ftb{margin-top:48px;flex-direction:column;gap:8px}
+}
 </style></head><body>
 <nav><a href="index.html"><svg class="logo" viewBox="150 0 436 111" xmlns="http://www.w3.org/2000/svg"><path d="M510.351 16.0464H529.373L547.69 50.6405H548.475L566.792 16.0464H585.814L556.515 67.9768V96.3737H539.65V67.9768L510.351 16.0464Z" fill="currentColor"/><path d="M439.889 96.3737V16.0464H494.016V30.0488H456.872V49.1893H491.231V63.1916H456.872V82.3714H494.173V96.3737H439.889Z" fill="currentColor"/><path d="M303.783 55.016C303.783 63.7757 302.123 71.2279 298.802 77.3727C295.507 83.5176 291.01 88.2112 285.309 91.4536C279.635 94.6698 273.255 96.2779 266.169 96.2779C259.03 96.2779 252.624 94.6567 246.95 91.4143C241.276 88.172 236.791 83.4783 233.497 77.3335C230.202 71.1887 228.555 63.7495 228.555 55.016C228.555 46.2563 230.202 38.8041 233.497 32.6593C236.791 26.5144 241.276 21.8339 246.95 18.6177C252.624 15.3753 259.03 13.7541 266.169 13.7541C273.255 13.7541 279.635 15.3753 285.309 18.6177C291.01 21.8339 295.507 26.5144 298.802 32.6593C302.123 38.8041 303.783 46.2563 303.783 55.016ZM286.565 55.016C286.565 49.3418 285.715 44.5567 284.015 40.6606C282.342 36.7645 279.975 33.8098 276.916 31.7964C273.856 29.783 270.274 28.7763 266.169 28.7763C262.064 28.7763 258.481 29.783 255.422 31.7964C252.363 33.8098 249.983 36.7645 248.284 40.6606C246.61 44.5567 245.773 49.3418 245.773 55.016C245.773 60.6902 246.61 65.4753 248.284 69.3714C249.983 73.2675 252.363 76.2222 255.422 78.2356C258.481 80.249 262.064 81.2557 266.169 81.2557C270.274 81.2557 273.856 80.249 276.916 78.2356C279.975 76.2222 282.342 73.2675 284.015 69.3714C285.715 65.4753 286.565 60.6902 286.565 55.016Z" fill="currentColor"/><path d="M150.979 30.0488V16.0464H216.95V30.0488H192.358V96.3737H175.571V30.0488H150.979Z" fill="currentColor"/><rect x="371.673" y="96.8224" width="18.4848" height="18.4848" rx="9.24238" transform="rotate(-180 371.673 96.8224)" fill="currentColor"/><path d="M372.267 68.7234L377.867 77.7806L378.434 78.7826L390.302 95.0697C390.868 95.8475 391.773 96.3076 392.735 96.3076H405.618C408.077 96.3076 409.499 93.5194 408.055 91.5286L391.964 69.3382C391.157 68.2254 391.206 66.7074 392.083 65.649L416.313 36.4132C417.94 34.4504 416.544 31.4805 413.995 31.4805H401.474C400.57 31.4805 399.713 31.887 399.141 32.5877L372.495 65.2358C371.683 66.2307 371.591 67.6311 372.267 68.7234Z" fill="currentColor"/><path d="M325.068 16.0468V96.3741H342.051V75.0902L351.248 64.8074L362.564 52.0136L392.373 16.0468H372.017L343.11 51.4645H342.051V16.0468H325.068Z" fill="currentColor"/></svg></a><ul><li><a href="software.html">Software</a></li><li><a href="models.html">Models</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="devdoc.html">Dev Doc</a></li><li><a href="faq.html">FAQ</a></li></ul><a class="btn" href="software.html#early">Get early access</a></nav>
 
@@ -640,7 +750,7 @@ html{background:none}
 <div class="fl6 demo" id="d6" style="opacity:0"><div class="mono">Tokkey · local · lid closed</div><pre id="dtx"></pre><div class="stats"><span class="g">Qwen3.6 35B-A3B</span><span>5 GB</span><span id="tps">41 tok/s</span><span>Offline ✓</span></div></div>
 <div class="seg" id="seg6"><button data-v="0" class="on">Without Tokkey</button><button data-v="1">With Tokkey</button><a href="software.html">Explore more →</a></div></div></section>
 
-<section id="s7"><div class="fz" id="fz7"><p class="c7l rvv">User Comments</p><h2 class="c7t rvv" style="--d:.05s"><span>Real people. Local AI</span><span class="gr">.</span></h2><p class="c7s rvv" style="--d:.1s">A little key. A different way to work.<br>For those who want their AI to stay theirs.</p><div class="c7amb"></div>
+<section id="s7"><div class="fz" id="fz7"><p class="c7l rvv">User Comments</p><h2 class="c7t rvv" style="--d:.05s"><span>Real people. Local AI</span><span class="gr">.</span></h2><p class="c7s rvv" style="--d:.1s">A little key. A different way to work. <br>For those who want their AI to stay theirs.</p><div class="c7amb"></div>
 <div class="c7w"><div class="c7c" style="padding-top:40px"><div class="zgc rvv" style="--d:0.15s"><div class="zgp"><div class="zgav">RE</div><div class="zgid"><b>Researcher</b><span>Example profile</span></div></div><p class="zgq">“My prompts. My files.
 My machine. That’s how
 I want to work.”</p></div><div class="zgc rvv" style="--d:0.3s"><div class="zgp"><div class="zgav">CR</div><div class="zgid"><b>Creative technologist</b><span>Example profile</span></div></div><p class="zgq">“A bigger model shouldn’t
@@ -673,17 +783,17 @@ an idea and getting started.”</p></div></div></div>
 
 <section id="s9"><div class="fz" id="fz9"><img class="zpp rvv" src="s7_photo.webp" alt="Working on a Mac at a desk"><p class="pl7 rvv" style="--d:.05s">02 / Personal intelligence</p>
 <h2 class="pt7 rvv" style="--d:.1s"><span class="g">Personal intelligence.<br>Personal privacy</span><span class="gr">.</span></h2>
-<p class="pd7 rvv" style="--d:.15s">The better AI knows your projects, files and<br>preferences, the more personal its context<br>becomes. Keep that work close.</p>
+<p class="pd7 rvv" style="--d:.15s">The better AI knows your projects, files and <br>preferences, the more personal its context <br>becomes. Keep that work close.</p>
 <div class="lc7 rvv" style="--d:.2s"><span class="zo">On your Mac</span><img class="zdt" src="s7_dot.svg" alt="">
 <div class="zci" style="top:71px"><img src="s7_file.svg" alt="">Project notes</div><div class="zci" style="top:135px"><img src="s7_file.svg" alt="">Working draft</div><div class="zci" style="top:199px"><img src="s7_file.svg" alt="">Your preferences</div>
 <img class="zrl" src="s7_rel.svg" alt=""><div class="zlm"><b>Local model</b><span>Processes on your Mac</span></div><p class="zcp7">The context you choose to share.</p></div>
-<p class="pc7 rvv" style="--d:.25s">Your context. Processed on your Mac.</p><p class="pn7 rvv" style="--d:.3s">Shown: local inference. Other connected tools may<br>use network services under their own policies.</p>
+<p class="pc7 rvv" style="--d:.25s">Your context. Processed on your Mac.</p><p class="pn7 rvv" style="--d:.3s">Shown: local inference. Other connected tools may <br>use network services under their own policies.</p>
 <p class="pcap rvv" style="--d:.1s">Your projects. Your notes. Your next idea.</p></div></section>
 
 <section id="s11"><div class="fz" id="fz11">
 <p class="e3l rvv" style="left:128px;top:80px">03 / Local + cloud</p>
 <h2 class="e3t rvv" style="--d:.05s">Local power.<br>Cloud <span class="g">by choice</span><span class="gr">.</span></h2>
-<p class="e3v rvv" style="--d:.12s">Tokkey brings larger local models to your Mac.<br>When a task needs more, bring in the cloud—<br>with the context you choose to share.</p>
+<p class="e3v rvv" style="--d:.12s">Tokkey brings larger local models to your Mac. <br>When a task needs more, bring in the cloud— <br>with the context you choose to share.</p>
 <div class="e3d rvv" style="--d:.1s"><span class="e3l e3m">On your Mac</span><i class="dot"></i><span class="lb">Local</span><img src="s3_mac.svg" alt="MacBook with Tokkey, line illustration" style="left:8px;top:64px;width:552px;height:332px"><span class="tk">Tokkey</span>
 <div class="cap"><b>Larger models. Same Mac.</b><span>Your Mac does the processing. Tokkey makes more possible.</span></div>
 <div class="e3x" style="left:504px;top:120px"><b>Project notes</b><span>Available locally</span></div><div class="e3x" style="left:504px;top:224px"><b>Selected summary</b><span>Shared with permission</span></div></div>
@@ -722,7 +832,7 @@ $('ags').innerHTML=AG.map(a=>`<div class="ag glass"><i>${a[1]}</i>${a[0]}</div>`
 const agEls=[...document.querySelectorAll('.ag')];
 let RK=1,ROV=0;
 let LZ={hl:1,cut:1,dx:0,dy:0,z:1},K3=1,HK={x:0,y:0},W,H,TK={x:0,y:0},SX={top:0,h:0},S3={top:0,h:0},SR={top:0,h:0},S4={top:0,h:0};
-function size(){W=innerWidth;H=innerHeight;{const k=Math.min(1,innerWidth/1440),c=$('rcv');RK=k;ROV=Math.max(0,80+1050*k-H);c.style.top='80px';$('lap').style.width=(1779*k)+'px'}const sy=scrollY;const g=id=>{const r=$(id).getBoundingClientRect();return{top:r.top+sy,h:r.height-H}};SX=g('sx');S3=g('s3');SR=g('sr');S4=g('s4');
+function size(){W=innerWidth;H=innerHeight;{const k=Math.min(1,innerWidth/1440),c=$('rcv');RK=k;ROV=Math.max(0,80+1050*k-H);c.style.top=(innerWidth<600?Math.max(80,Math.round((innerHeight-1050*k)/2)):80)+'px';$('lap').style.width=(1779*k)+'px'}const sy=scrollY;const g=id=>{const r=$(id).getBoundingClientRect();return{top:r.top+sy,h:r.height-H}};SX=g('sx');S3=g('s3');SR=g('sr');S4=g('s4');
  const s=Math.min(W/1600,H/900),ox=(W-1600*s)/2,oy=(H-900*s)/2;$('awrap').style.transformOrigin=`${ox+533*s}px ${oy+592*s}px`;const iw=Math.max(W,H*16/9),ih=iw*9/16,px=(W-iw)/2,py=(H-ih)/2;TK={x:px+.4275*iw,y:py+.569*ih};HK={x:ox+533*s,y:oy+592*s};const tb=$('tkB');tb.style.left=TK.x+'px';tb.style.top=TK.y+'px';K3=$('lap').clientWidth*.439/1000;$('lid3').style.transform=`scale(${K3})`;{const Wl=$('lap').clientWidth,Hl=Wl*9/16,cx=.283*Wl+500*K3,cy=.116*Hl+322.5*K3;$('lap').style.transformOrigin=cx+'px '+cy+'px';LZ={hl:Hl,cut:cy+322.5*K3+34*K3,dx:cx-Wl/2,dy:cy-Hl/2+.155*H,z:Math.min(W/(1000*K3),(H-110)/(645*K3))}}}
 size();addEventListener('resize',size);addEventListener('load',size);setTimeout(size,600);
 // intro (time-based)
@@ -807,9 +917,9 @@ requestAnimationFrame(frame);Y+=(scrollY-Y)*.14;intro(now);if(window.ftdots)ftdo
  // lid closes slightly during push
  $('B').style.opacity=seg(p,.5,.54)*(1-seg(qq,.02,.06));
  $('t2').style.opacity=seg(p,.68,.74);$('t2').style.transform=`translateY(${lerp(24,0,seg(p,.68,.76))-exo*H*1.25}px)`;
- let absorbed=0;const x0=W*.06,n=AG.length,tb=$('t2').getBoundingClientRect().bottom-lerp(24,0,seg(p,.68,.76))+exo*H*1.25;
+ let absorbed=0;const MB=W<600,x0=MB?16:W*.06,n=AG.length,tb=$('t2').getBoundingClientRect().bottom-lerp(24,0,seg(p,.68,.76))+exo*H*1.25;
  agEls.forEach((el,i)=>{const a=seg(p,.68+i*.004,.72+i*.004),f=ease(seg(p,.76+i*.03,.84+i*.03));absorbed+=f>.98?1:f;
-  const chh=agEls[0].offsetHeight||64,gp=chh+30,cl=Math.floor(i/2),cc=i%2,sx=x0+cc*Math.min(250,W*.18),sy=tb+56+chh/2+cl*gp,px=lerp(sx,TK.x,f),py=lerp(sy,TK.y,f)-Math.sin(f*Math.PI)*H*.07;const scl=lerp(1,.12,f);
+  const chh=agEls[0].offsetHeight||64,gp=chh+30,cl=Math.floor(i/2),cc=i%2,sx=x0+cc*(MB?(W-32)/2:Math.min(250,W*.18)),sy=tb+56+chh/2+cl*gp,px=lerp(sx,TK.x,f),py=lerp(sy,TK.y,f)-Math.sin(f*Math.PI)*H*.07;const scl=lerp(1,.12,f);
   el.style.opacity=a*(1-seg(f,.8,1))*(1-seg(p,.97,.995));el.style.transform=`translate(${px}px,${py}px) translate(0,-50%) scale(${scl})`});
  const hv=clamp(absorbed/n);$('halo').style.opacity=.04+hv*.2;bas(now,seg(p,.64,.72)*(.55+.45*hv)*(1-seg(p,.96,.995)));$('tkB').style.transform=`scale(${1+hv*.08})`;
  // S3
