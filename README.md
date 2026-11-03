@@ -41,11 +41,23 @@ Page structure (top → bottom, tall `.pin` wrappers with a `position:sticky` ch
 
 ## 3. Notes for developers
 
-- Desktop-first design at **1440 px** wide. Breakpoint rules exist at 900 px but mobile is **not fully designed** yet — treat as TODO.
+- Desktop-first design at **1440 px** wide. On phones (**≤ 767 px**) the site is a **separate, static, simplified layout** that matches the Figma section "Mobile · 390×844":
+  - Markup: `<main id="mob">` (hero → Turn your Mac → private agent → local models/router → large models tabs → comments), then FAQ, a CTA block (`#mobcta`) and the footer. CSS: the block headed `MOBILE (<=767px)` at the end of `<style>`; all mobile class names are prefixed `k-` to avoid clashing with desktop classes.
+  - The hero has **no animation** on mobile. The big scroll-driven script is skipped on phones (it is wrapped in `if(!matchMedia('(max-width:767px)').matches){…}`), so the 38 MB frame sequences are **not downloaded** (mobile page ≈ 2.6 MB). The desktop scenes (`#sx #s3 #sr #s4 #s6–#s11`) are hidden with `display:none`.
+  - The layout is chosen at load; crossing the 767 px breakpoint reloads the page.
+  - Do not put `overflow-x:hidden` on `html`/`body` (breaks `position:sticky` on desktop); the mobile layer uses `overflow-x:clip`.
+  - Mobile backgrounds `m_ripple_hero.jpg` / `m_ripple_soft.jpg` are generated dotted images, not the desktop concentric ripple.
 - Fonts: **Inter** (Google Fonts `<link>` in `<head>`) and **Commit Mono** (local `@font-face`, `fonts/`). **Nothing else.** See §5.
 - Performance: ~38 MB of frames/images. Before launch: serve behind a CDN with long cache headers, keep `webp`, lazy-load later sequences, and consider halving frame counts on mobile.
 - Several scenes are pure CSS "renders" (laptop, glass cards). Real product photography is **not** generated — product images come from the design team (see Photography rule below).
 - Copy is placeholder where marked (performance numbers, testimonials). Do not ship claims without the test report.
+
+## 3b. Deposit flow (Stripe)
+
+1. Every CTA marked `data-reserve` ("Get early access", "Get in line") goes to the Stripe **Payment Link** set in `config.js` → `STRIPE_URL`. Until that is replaced, the buttons open `thanks.html?demo=1` so the whole flow can be previewed.
+2. In Stripe Dashboard → Payment Links → your link → *After payment* → *Don't show confirmation page* → redirect to `https://YOUR-DOMAIN/thanks.html?session_id={CHECKOUT_SESSION_ID}` (Stripe docs: [Customize redirect behavior](https://docs.stripe.com/payments/checkout/custom-success-page)).
+3. `thanks.html` plays a confetti burst ("Congrats on unlocking local AI power."), holds, then sends the user to `index.html?reserved=1`, where a small toast says "Deposit received. You're in line." Timings are in `config.js` (`CONFETTI_MS` 1600, `HOLD_MS` 1000). Respects `prefers-reduced-motion` (no confetti, redirect after 1.5 s).
+4. `thanks.html` is static and does **not** verify payment — anyone can open it. It only celebrates; the source of truth is the Stripe Dashboard. Do not unlock anything real behind it.
 
 ## 4. Repo hygiene (replacing the old upload)
 
