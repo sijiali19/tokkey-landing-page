@@ -454,7 +454,7 @@ footer{display:flex;justify-content:space-between;padding:28px 48px 40px;color:#
 #lid3 .scr{background-color:#070b10!important}
 
 /* ===== V2 screens 6/7 from Figma (1920x1080 canvas, scaled with zoom) ===== */
-#s7,#s9{background:#000;color:#f5f5f7;padding:40px 0;position:relative;overflow:hidden}
+#s7,#s9,#s12{background:#000;color:#f5f5f7;padding:40px 0;position:relative;overflow:hidden}
 .fz{position:relative;width:1920px;height:1080px;margin:0 auto;zoom:var(--z,1);font-family:Inter,system-ui,sans-serif}
 .fz *{box-sizing:border-box}
 .fz .rvv{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
@@ -567,162 +567,213 @@ html{background:none}
 
 
 
-/* ===== MOBILE (<=767px) · static layout from Figma "Mobile · 390x844" =====
-   Scroll-driven scenes (#sx #s3 #sr #s4 #s6-#s11) are NOT used on phones: the page shows #mob,
-   then FAQ, CTA and footer. The big script is skipped on phones, so no frame sequences load. */
+/* ===== MOBILE (<=767px) · text-only, fluid, one spacing system =====
+   Spacing tokens (multiples of 8): --gx page gutter 16 (24 from 480px), --gy section padding 64,
+   --g1 16 (eyebrow>title>body), --g2 32 (block>block). Content column max 560px, centered on large phones.
+   No images, no frame sequences, no scroll scenes: #mob + FAQ + CTA + footer only. */
 #mob,#mobcta,.mnb,#mmenu{display:none}
 .toast{display:none;position:fixed;left:50%;top:76px;transform:translate(-50%,-80px);z-index:200;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:99px;background:rgba(20,20,22,.92);border:1px solid rgba(255,255,255,.18);color:#f2f2f2;font:500 14px Inter,sans-serif;backdrop-filter:blur(16px);transition:transform .5s cubic-bezier(.2,.7,.2,1);white-space:nowrap}
 .toast.on{display:flex;transform:translate(-50%,0)}.toast u{width:8px;height:8px;border-radius:50%;background:#4ABE18}
 @media(max-width:767px){
+:root{--gx:16px;--gy:64px;--g1:16px;--g2:32px;--col:max(var(--gx),calc((100vw - 560px)/2));--hl:rgba(255,255,255,.12);--t1:#f2f2f2;--t2:#a1a1a6;--t3:#8e8e93;
+--h2:clamp(32px,10vw,40px);--h2l:clamp(40px,12vw,48px)}
+@media(min-width:480px){:root{--gx:24px}}
 html,body{overflow-x:clip;max-width:100%;background:#000}
-#sx,#s3,#sr,#s4,#s6,#s7,#s8,#s9,#s10,#s11,#fdots{display:none!important}
+#sx,#s3,#sr,#s4,#s6,#s7,#s8,#s9,#s10,#s11,#s12,#fdots{display:none!important}
 #mob,#mobcta{display:block}
 .toast.on{display:flex}
-/* nav */
-nav{height:64px;padding:0 16px;background:rgba(0,0,0,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
-nav .logo{height:24px}nav ul,nav .btn{display:none}
-.mnb{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;position:fixed;right:16px;top:12px;z-index:90;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);cursor:pointer;padding:0}
+/* nav · same logotype SVG as desktop */
+nav{height:64px;padding:0 var(--col);background:rgba(0,0,0,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}
+nav .logo{height:24px;width:auto;display:block}nav ul,nav .btn{display:none}
+.mnb{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;position:fixed;right:max(var(--gx),calc((100vw - 560px)/2));top:12px;z-index:90;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);cursor:pointer;padding:0}
 .mnb i{display:block;width:16px;height:1.5px;background:#fff;transition:transform .25s}
 .mnb[aria-expanded=true] i:first-child{transform:translateY(3.75px) rotate(45deg)}.mnb[aria-expanded=true] i:last-child{transform:translateY(-3.75px) rotate(-45deg)}
-#mmenu{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.96);padding:96px 16px 32px;flex-direction:column;gap:0;opacity:0;pointer-events:none;transition:opacity .25s}
-#mmenu.on{display:flex;opacity:1;pointer-events:auto}#mmenu{display:flex;visibility:hidden}#mmenu.on{visibility:visible}
-#mmenu a:not(.mcta){font:600 32px/40px Inter;letter-spacing:-.02em;color:#f2f2f2;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
-#mmenu .mcta{margin-top:32px}
-/* shared */
-#mob{font-family:Inter,system-ui,sans-serif;color:#f5f5f7;background:#000}
+#mmenu{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.97);padding:96px var(--col) 32px;flex-direction:column;gap:0;opacity:0;pointer-events:none;transition:opacity .25s;display:flex;visibility:hidden}
+#mmenu.on{opacity:1;pointer-events:auto;visibility:visible}
+#mmenu a:not(.mcta){font:600 clamp(28px,8.2vw,32px)/40px Inter;letter-spacing:-.02em;color:var(--t1);padding:16px 0;border-bottom:1px solid var(--hl)}
+#mmenu .mcta{margin-top:var(--g2)}
+/* shared type */
+#mob{font-family:Inter,system-ui,sans-serif;color:var(--t1);background:#000}
 #mob *{box-sizing:border-box}
-.k-mg{margin:0;font:700 40px/48px Inter;letter-spacing:-.8px;color:#fff;background:linear-gradient(95deg,#f3f7ff 0%,#bcd7ff 26%,#8fbfff 42%,#f6f9ff 62%,#fff 78%,#cfe2ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.k-mg{margin:0;font:700 var(--h2)/var(--h2l) Inter;letter-spacing:-.02em;color:#fff;background:linear-gradient(95deg,#f3f7ff 0%,#bcd7ff 26%,#8fbfff 42%,#f6f9ff 62%,#fff 78%,#cfe2ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .k-mg .gr,.gr{color:#4ABE18;-webkit-text-fill-color:#4ABE18;font-weight:inherit}
 .k-mg span{-webkit-text-fill-color:transparent}
-.k-me{margin:0 0 16px;font:400 12px/16px 'Commit Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#b0b0ac}
-.k-mp{margin:16px 0 0;font:400 16px/24px Inter;color:#a1a1a6}
-.k-mn{margin:32px 0 0;font:500 16px/24px Inter;color:#f2f2f2}
-.k-ms{position:relative;padding:80px 16px 48px;overflow:hidden}
-.k-msoft{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;z-index:0;pointer-events:none}
-.k-ms>*{position:relative;z-index:1}.k-ms>.k-msoft{position:absolute}
-.k-rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.k-rv.on{opacity:1;transform:none}
+.k-me{margin:0 0 var(--g1);font:400 12px/16px 'Commit Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#b0b0ac}
+.k-mp{margin:var(--g1) 0 0;font:400 16px/24px Inter;color:var(--t2)}
+.k-mn{margin:var(--g2) 0 0;font:500 16px/24px Inter;color:var(--t1)}
+.k-ms{position:relative;padding:var(--gy) var(--col);border-top:1px solid rgba(255,255,255,.08)}
+.k-rv{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}.k-rv.on{opacity:1;transform:none}
 .mcta{display:flex;align-items:center;justify-content:center;height:48px;border-radius:99px;background:#fff;color:#000!important;font:600 16px Inter;text-align:center}
-/* 1 hero (no animation) */
-.k-m1{position:relative;min-height:100svh;padding:112px 16px 0;text-align:center;overflow:hidden;display:flex;flex-direction:column;align-items:center}
-.k-m1bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.k-m1>*{position:relative;z-index:1}.k-m1>.k-m1bg{position:absolute}
-.k-m1 .k-mg{font-size:48px;line-height:56px;letter-spacing:-.96px}
-.k-m1s{margin:16px 0 0;font:400 16px/24px Inter;color:#a1a1a6}
-.k-m1k{width:min(300px,78vw);height:auto;margin:32px 0 0}
-.k-m1 .mcta{position:absolute;left:16px;right:16px;bottom:56px}
-.k-mscr{position:absolute;bottom:12px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:4px;font:400 10px/12px 'Commit Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#8e8e93}
-.k-mscr i{width:1px;height:12px;background:#8e8e93}
-/* 2 chips */
-.k-chips{margin-top:32px;display:flex;flex-direction:column;gap:16px}.k-chips>div{display:flex;gap:16px}.k-chips .k-o1{padding-left:78px}.k-chips .k-o2{padding-left:48px}
-.k-mch{display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:24px;border:1px solid rgba(242,242,242,.24);background:rgba(255,255,255,.06);font:600 16px Inter;color:#f2f2f2;backdrop-filter:blur(16px)}
-.k-mch i,.k-gp u,.k-at u,.k-rpl u,.k-chp u,.k-lg u,.k-pl u,.k-bt u{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ABE18}
-/* frosted light app cards */
-.k-lc{margin-top:32px;border-radius:24px;padding:16px;color:#111110;background:linear-gradient(180deg,rgba(246,245,241,.9),rgba(246,245,241,.75));box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 24px 48px rgba(0,0,0,.4);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
-.k-ib{display:inline-block;flex:none;width:32px;height:32px;border-radius:8px;background:#fff;border:1px solid rgba(17,17,16,.1);position:relative}
-.k-ib:after{content:"";position:absolute;left:9px;top:9px;width:6px;height:6px;border-radius:1px;background:#111110;box-shadow:8px 0 0 #111110,0 8px 0 #111110,8px 8px 0 #4ABE18}
-.k-chh{display:flex;align-items:center;gap:8px;margin-bottom:16px}.k-chh .k-ib{width:24px;height:24px;border-radius:6px}.k-chh .k-ib:after{display:none}.k-chh b{flex:1;text-align:center;font:600 14px Inter}
-.k-pl{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:99px;background:rgba(17,17,16,.08);font:500 11px Inter}
-.k-bub{padding:12px 16px;border-radius:16px;font:400 14px/20px Inter}.k-bub.k-u{background:#1a1a18;color:#fff;margin-left:32px}
-.k-rd{margin:12px 0 8px}.k-rchip{display:inline-block;padding:4px 10px;border-radius:99px;background:rgba(17,17,16,.06);font:500 11px/16px Inter;color:#3c3c38}
-.k-ans{margin:0;font:400 14px/22px Inter;color:#111110}
-.k-inp{margin-top:16px;border-radius:16px;background:#fff;padding:12px 16px;box-shadow:0 1px 0 rgba(17,17,16,.06);color:#8e8e93;font:400 14px Inter}.k-inp .k-ir{display:flex;align-items:center;gap:8px;margin-top:20px}
-.k-ic1,.k-ic2{width:16px;height:16px;border:1.5px solid #8e8e93;border-radius:4px}.k-snd{margin-left:auto;width:32px;height:32px;border-radius:50%;background:#111110;display:grid;place-items:center}
-.k-gp{display:flex;align-items:center;gap:8px;height:40px;margin-top:8px;padding:0 16px;border-radius:99px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);font:400 14px Inter;color:#f2f2f2;backdrop-filter:blur(16px)}.k-m3 .k-gp:first-of-type{margin-top:16px}
-.k-lh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.k-lh b{font:600 16px Inter}
-.k-at{display:inline-flex;align-items:center;gap:6px;font:400 10px 'Commit Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#5c5c58}
-.k-mr{display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:16px}.k-mr.on{background:rgba(255,255,255,.7)}.k-mr>div{flex:1;min-width:0}.k-mr b{display:block;font:600 14px/20px Inter}.k-mr small{display:block;font:400 12px/16px Inter;color:#5c5c58}
-.k-bt{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:99px;border:1px solid rgba(17,17,16,.14);background:rgba(255,255,255,.6);font:500 13px Inter}.k-bt.k-run{background:#111110;color:#fff;border-color:#111110}
-.k-ft{margin:8px 0 0;font:400 12px/16px Inter;color:#5c5c58}
-.k-tgl{width:40px;height:24px;border-radius:99px;background:#111110;position:relative}.k-tgl i{position:absolute;right:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#fff}
-.k-rs{margin:0 0 12px;font:400 13px/18px Inter;color:#5c5c58}
-.k-rbx{display:grid;grid-template-columns:1fr 1fr;gap:8px}.k-rbx>div{border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px}.k-rbx .k-sel{background:#fff}.k-rbx .k-dsh{border:1px dashed rgba(17,17,16,.3)}
-.k-rbx em{font:normal 10px 'Commit Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#5c5c58;margin-bottom:8px}.k-rbx .k-ib{margin-bottom:8px}.k-rbx b{font:600 14px/20px Inter}.k-rbx small{font:400 12px/16px Inter;color:#5c5c58}
-.k-rpl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.k-rpl span{display:flex;align-items:center;gap:6px;height:32px;padding:0 10px;border-radius:99px;background:rgba(17,17,16,.06);font:500 11px Inter;white-space:nowrap}.k-rpl .k-g{background:rgba(74,190,24,.14)}.k-rpl span:last-child u{background:#8e8e93}
-/* 5 large models */
-.k-tabs{display:flex;gap:8px;margin:32px -16px 16px;padding:0 16px;overflow-x:auto;scrollbar-width:none}.k-tabs::-webkit-scrollbar{display:none}
-.k-tabs button{flex:none;height:40px;padding:0 16px;border-radius:99px;border:1px solid rgba(242,242,242,.24);background:rgba(255,255,255,.06);color:#f2f2f2;font:600 14px Inter;cursor:pointer}.k-tabs button.on{background:#fff;color:#000;border-color:#fff}
-.k-tabs em{font:600 10px 'Commit Mono',monospace;font-style:normal;margin-left:6px;padding:2px 6px;border-radius:99px;background:linear-gradient(100deg,#FF9A62,#B678FF,#4FE3D4);color:#000}
-.k-pn{display:none}.k-pn.on{display:block}
-.k-gc{margin-bottom:12px;padding:20px;border-radius:24px;border:1px solid rgba(255,255,255,.16);background:linear-gradient(157deg,rgba(255,255,255,.1),rgba(255,255,255,.03))}
-.k-gc small{display:block;font:400 11px/16px 'Commit Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#b0b0ac}.k-gc h3{margin:4px 0 0;font:600 20px/28px Inter;letter-spacing:-.2px;color:#fff}
-.k-gc p{margin:8px 0 0;font:400 14px/22px Inter;color:#a1a1a6}.k-gc em{display:block;margin-top:8px;font:normal 11px 'Commit Mono',monospace;letter-spacing:.04em;color:#8e8e93}
-.k-num{font:600 16px Inter;color:#b0b0ac;margin-top:16px}.k-num b{font:700 56px/56px Inter;letter-spacing:-2px;background:linear-gradient(95deg,#f3f7ff,#8fbfff 50%,#cfe2ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.k-num.k-s{margin:0}.k-num.k-s b{font-size:24px;line-height:32px;letter-spacing:-.5px}
-.k-gc .k-row{display:flex;justify-content:space-between;align-items:flex-start}
-.k-bar{height:4px;border-radius:2px;background:rgba(255,255,255,.14);margin-top:12px;overflow:hidden}.k-bar i{display:block;height:100%;width:22%;border-radius:2px;background:#fff}
-.k-lg{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.06);font:500 14px Inter}.k-lg span{display:flex;align-items:center;gap:8px}.k-lg u.k-w{background:#fff}.k-lg em{margin:0}
-.k-chp{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.k-chp span{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:99px;border:1px solid rgba(255,255,255,.2);font:500 12px Inter}
-.k-mrow{display:flex;justify-content:space-between;margin-top:8px;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.06);font:500 14px Inter}.k-mrow em{margin:0}
-.k-gc h3 b.gr{font-weight:600}
+.k-mch i,.k-gp u,.k-at u,.k-rpl u,.k-chp u,.k-lg u,.k-pl u,.k-bt u{display:inline-block;flex:none;width:8px;height:8px;border-radius:50%;background:#4ABE18}
+/* 1 hero */
+.k-m1{min-height:100svh;min-height:100vh;padding:calc(64px + 15svh) var(--col) 32px;text-align:center;display:flex;flex-direction:column;align-items:center;background:#000 url(m_ripple_hero.jpg) center/cover no-repeat}
+@supports(height:100svh){.k-m1{min-height:100svh}}
+.k-m1 .k-mg{font-size:clamp(36px,12.3vw,48px);line-height:clamp(44px,14.4vw,56px)}
+.k-m1s{margin:var(--g1) 0 0;font:400 16px/24px Inter;color:var(--t2)}
+.k-m1 .mcta{width:100%;margin-top:auto}
+.k-mscr{margin-top:var(--g2);display:flex;flex-direction:column;align-items:center;gap:8px;font:400 10px/12px 'Commit Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--t3)}
+.k-mscr i{width:1px;height:24px;background:var(--t3)}
+/* 2 tools */
+.k-chips{margin-top:var(--g2);display:flex;flex-wrap:wrap;gap:8px}
+.k-chips>div{display:contents}
+.k-mch{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px;border-radius:99px;border:1px solid rgba(242,242,242,.24);background:rgba(255,255,255,.04);font:600 14px Inter;color:var(--t1)}
+/* hairline lists (text only) */
+.k-list{margin-top:var(--g2);border-top:1px solid var(--hl)}
+.k-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--hl)}
+.k-row>div{min-width:0}
+.k-row b{display:block;font:600 16px/24px Inter;color:#fff}
+.k-row small{display:block;font:400 14px/20px Inter;color:var(--t3)}
+.k-row em{flex:none;display:inline-flex;align-items:center;gap:8px;font:normal 12px/24px 'Commit Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--t2)}
+.k-row em u{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ABE18}
+.k-row.k-col{display:block}
+.k-row.k-col small{font:400 12px/16px 'Commit Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.k-row.k-col p{margin:0;font:400 16px/24px Inter;color:var(--t1)}
+.k-row.k-col p+p{margin-top:8px;color:var(--t2)}
+.k-sub{margin:var(--g2) 0 0;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.k-sub h3{margin:0;font:600 20px/28px Inter;letter-spacing:-.01em;color:#fff}
+.k-sub em{font:normal 12px/16px 'Commit Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);display:inline-flex;align-items:center;gap:8px}
+.k-sub em u{display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ABE18}
+.k-sub+.k-mp,.k-sub+.k-list{margin-top:8px}.k-sub+.k-mp+.k-list{margin-top:var(--g1)}
+.k-ft{margin:var(--g1) 0 0;font:400 14px/20px Inter;color:var(--t3)}
+/* 5 tabs */
+.k-tabs{display:flex;gap:8px;margin:var(--g2) calc(var(--col)*-1) 0;padding:0 var(--col);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.k-tabs::-webkit-scrollbar{display:none}
+.k-tabs button{flex:none;height:40px;padding:0 16px;border-radius:99px;border:1px solid rgba(242,242,242,.24);background:rgba(255,255,255,.04);color:var(--t1);font:600 14px Inter;cursor:pointer;white-space:nowrap}.k-tabs button.on{background:#fff;color:#000;border-color:#fff}
+.k-tabs em{font:600 10px 'Commit Mono',monospace;font-style:normal;margin-left:8px;padding:2px 6px;border-radius:99px;background:linear-gradient(100deg,#FF9A62,#B678FF,#4FE3D4);color:#000}
+.k-pn{display:none;margin-top:var(--g2)}.k-pn.on{display:block}
+.k-fg{display:flex;align-items:flex-end;justify-content:flex-end;flex-direction:column;text-align:right}
+.k-fg b{font:700 32px/40px Inter;letter-spacing:-.02em;color:#fff}.k-fg b i{font:600 16px Inter;font-style:normal;color:var(--t2);margin-left:4px;letter-spacing:0}
+.k-fg small{font:400 12px/16px 'Commit Mono',ui-monospace,monospace;letter-spacing:.04em;color:var(--t3)}
+.k-pn h3{margin:0;font:600 24px/32px Inter;letter-spacing:-.01em;color:#fff}
+.k-pn h3+p{margin:8px 0 0;font:400 16px/24px Inter;color:var(--t2)}
+.k-pn .k-list{margin-top:var(--g2)}
+.k-pn .k-eb{display:block;margin-bottom:8px;font:400 12px/16px 'Commit Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#b0b0ac}
+.k-chp{display:flex;gap:8px;flex-wrap:wrap;margin-top:var(--g1)}.k-chp span{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:99px;border:1px solid rgba(255,255,255,.2);font:500 12px Inter;color:var(--t1)}
 /* 6 comments */
-.k-m6 .k-mg+.k-mp{margin-bottom:32px}
-.k-qc{margin-bottom:12px;padding:20px;border-radius:24px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(157deg,rgba(255,255,255,.1),rgba(255,255,255,.03))}.k-qc.k-ft{border-color:rgba(255,255,255,.4);background:linear-gradient(154deg,rgba(70,70,82,.9),rgba(24,24,30,.94))}
-.k-qp{display:flex;align-items:center;gap:12px;margin-bottom:16px}.k-qp span{width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.1);display:grid;place-items:center;font:500 13px Inter;color:#e5e5ea}.k-qp b{display:block;font:600 14px/20px Inter;color:#fff}.k-qp small{font:400 12px/16px Inter;color:#a1a1a6}
-.k-qc p{margin:0;font:500 20px/28px Inter;letter-spacing:-.2px;color:#f5f5f7}.k-mnote{margin:24px 0 0;font:400 12px/16px Inter;color:#8e8e93}
-/* FAQ + CTA + footer */
-#faq{padding:80px 16px 48px}#faq h2{font-size:40px;line-height:48px;margin-bottom:32px}
-.fq summary{padding:20px 0;font-size:16px;line-height:24px;gap:16px;font-weight:600}.fq p{padding:0 0 20px;font-size:14px;line-height:22px}
-#mobcta{padding:48px 16px 64px;border-top:1px solid rgba(255,255,255,.1)}#mobcta .mcta{margin-top:24px}
-#ft{min-height:0;padding:48px 16px 32px}#ftc{display:none}
-.ftw{grid-template-columns:1fr 1fr;gap:32px 16px}.ftw .ftl p{font-size:16px;line-height:24px}.ftb{margin-top:48px;flex-direction:column;gap:8px}
+.k-q{margin:0;padding:24px 0;border-bottom:1px solid var(--hl)}
+.k-q p{margin:0;font:500 20px/28px Inter;letter-spacing:-.01em;color:#f5f5f7}
+.k-q small{display:block;margin-top:16px;font:400 14px/20px Inter;color:var(--t3)}.k-q small b{color:var(--t2);font-weight:600}
+.k-mq{margin-top:var(--g2);border-top:1px solid var(--hl)}
+.k-mnote{margin:var(--g2) 0 0;font:400 12px/16px Inter;color:var(--t3)}
+/* FAQ · CTA · footer share the same gutter + rhythm */
+#faq{padding:var(--gy) var(--col);border-top:1px solid rgba(255,255,255,.08)}#faq .mono{margin-bottom:var(--g1)}#faq h2{font:700 var(--h2)/var(--h2l) Inter;letter-spacing:-.02em;margin:0 0 var(--g2)}
+.fq summary{padding:16px 0;font-size:16px;line-height:24px;gap:16px;font-weight:600}.fq p{padding:0 0 16px;font-size:16px;line-height:24px}
+#mobcta{padding:var(--gy) var(--col);border-top:1px solid rgba(255,255,255,.08)}#mobcta .mcta{margin-top:var(--g2)}
+#ft{min-height:0;padding:var(--gy) var(--col) 32px;border-top:1px solid rgba(255,255,255,.08)}#ftc{display:none}
+.ftw{grid-template-columns:1fr 1fr;gap:var(--g2) 16px}.ftw .ftl{grid-column:1/-1}.ftw .ftl .logo{height:24px;width:auto}.ftw .ftl p{margin-top:16px;font-size:16px;line-height:24px}
+.ftw .ftk b{margin-bottom:16px}.ftw .ftk a{margin-bottom:8px}
+.ftb{margin-top:var(--g2);flex-direction:column;gap:8px;padding-top:16px;font-size:12px;line-height:16px}
 }
-</style></head><body>
-<nav><a href="index.html"><svg class="logo" viewBox="150 0 436 111" xmlns="http://www.w3.org/2000/svg"><path d="M510.351 16.0464H529.373L547.69 50.6405H548.475L566.792 16.0464H585.814L556.515 67.9768V96.3737H539.65V67.9768L510.351 16.0464Z" fill="currentColor"/><path d="M439.889 96.3737V16.0464H494.016V30.0488H456.872V49.1893H491.231V63.1916H456.872V82.3714H494.173V96.3737H439.889Z" fill="currentColor"/><path d="M303.783 55.016C303.783 63.7757 302.123 71.2279 298.802 77.3727C295.507 83.5176 291.01 88.2112 285.309 91.4536C279.635 94.6698 273.255 96.2779 266.169 96.2779C259.03 96.2779 252.624 94.6567 246.95 91.4143C241.276 88.172 236.791 83.4783 233.497 77.3335C230.202 71.1887 228.555 63.7495 228.555 55.016C228.555 46.2563 230.202 38.8041 233.497 32.6593C236.791 26.5144 241.276 21.8339 246.95 18.6177C252.624 15.3753 259.03 13.7541 266.169 13.7541C273.255 13.7541 279.635 15.3753 285.309 18.6177C291.01 21.8339 295.507 26.5144 298.802 32.6593C302.123 38.8041 303.783 46.2563 303.783 55.016ZM286.565 55.016C286.565 49.3418 285.715 44.5567 284.015 40.6606C282.342 36.7645 279.975 33.8098 276.916 31.7964C273.856 29.783 270.274 28.7763 266.169 28.7763C262.064 28.7763 258.481 29.783 255.422 31.7964C252.363 33.8098 249.983 36.7645 248.284 40.6606C246.61 44.5567 245.773 49.3418 245.773 55.016C245.773 60.6902 246.61 65.4753 248.284 69.3714C249.983 73.2675 252.363 76.2222 255.422 78.2356C258.481 80.249 262.064 81.2557 266.169 81.2557C270.274 81.2557 273.856 80.249 276.916 78.2356C279.975 76.2222 282.342 73.2675 284.015 69.3714C285.715 65.4753 286.565 60.6902 286.565 55.016Z" fill="currentColor"/><path d="M150.979 30.0488V16.0464H216.95V30.0488H192.358V96.3737H175.571V30.0488H150.979Z" fill="currentColor"/><rect x="371.673" y="96.8224" width="18.4848" height="18.4848" rx="9.24238" transform="rotate(-180 371.673 96.8224)" fill="currentColor"/><path d="M372.267 68.7234L377.867 77.7806L378.434 78.7826L390.302 95.0697C390.868 95.8475 391.773 96.3076 392.735 96.3076H405.618C408.077 96.3076 409.499 93.5194 408.055 91.5286L391.964 69.3382C391.157 68.2254 391.206 66.7074 392.083 65.649L416.313 36.4132C417.94 34.4504 416.544 31.4805 413.995 31.4805H401.474C400.57 31.4805 399.713 31.887 399.141 32.5877L372.495 65.2358C371.683 66.2307 371.591 67.6311 372.267 68.7234Z" fill="currentColor"/><path d="M325.068 16.0468V96.3741H342.051V75.0902L351.248 64.8074L362.564 52.0136L392.373 16.0468H372.017L343.11 51.4645H342.051V16.0468H325.068Z" fill="currentColor"/></svg></a><ul><li><a href="software.html">Software</a></li><li><a href="models.html">Models</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="devdoc.html">Dev Doc</a></li><li><a href="faq.html">FAQ</a></li></ul><a class="btn" data-reserve href="software.html#early">Get early access</a></nav>
+</style><style>
+/* ===== Screen 3 · three hover-switchable app pages (from Figma 1/2/3) ===== */
+#lid3 .scr{overflow:visible!important;background:transparent!important}
+/* glass sheet over the WHOLE laptop (screen + bezel), per Figma 'box' 1521x981 r40 */
+.s3glass{position:absolute;left:-21px;top:-22px;width:1038px;height:676px;border-radius:32px;background:rgba(7,11,16,.5);backdrop-filter:blur(9px) saturate(1.05);-webkit-backdrop-filter:blur(9px) saturate(1.05);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(255,255,255,.07);pointer-events:none}
+.s3st.fast .s3w,.s3st.fast .s3h,.s3st.fast .s3p{transition-duration:.12s!important;transition-delay:0s!important}
+.s3ui{position:absolute;inset:0;overflow:visible}
+.s3st{position:absolute;left:5px;top:0;width:1478px;height:962px;transform-origin:0 0;transform:scale(.6705)}
+.s3pool{position:absolute;left:194px;top:68px;width:1057px;height:953px;border-radius:50%;background:radial-gradient(closest-side,rgba(38,61,82,.62),rgba(38,61,82,0));pointer-events:none}
+.s3w{z-index:1;position:absolute;left:275px;top:265px;width:937px;height:555px;border-radius:17.34px;box-shadow:0 30px 83px rgba(0,0,0,.38),0 0 0 1px rgba(255,255,255,.12);opacity:0;transition:opacity .45s ease;pointer-events:none;user-select:none}
+.s3st[data-p=models] .s3w[data-p=models],.s3st[data-p=chat] .s3w[data-p=chat],.s3st[data-p=router] .s3w[data-p=router]{opacity:1}
+.s3pg{position:absolute;inset:0;pointer-events:none;z-index:2}
+.s3h{position:absolute;left:223px;top:115px;width:1040px;margin:0;text-align:center;font:700 48px/104px Inter,system-ui,sans-serif;letter-spacing:-.05em;background:linear-gradient(95deg,#f3f7ff 0%,#bcd7ff 22%,#8fbfff 38%,#f6f9ff 58%,#fff 76%,#cfe2ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+.s3h .gr{color:#4ABE18;-webkit-text-fill-color:#4ABE18}
+.s3p{position:absolute;height:61px;display:flex;align-items:center;gap:14px;padding:0 26px 0 22px;border-radius:40px;background:rgba(53,47,47,.4);border:1px solid rgba(214,214,214,.16);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 20px 50px rgba(0,0,0,.3);white-space:nowrap;opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.s3p i{flex:none;width:13px;height:13px;border-radius:50%}
+.s3p b{font:500 23px Inter,system-ui,sans-serif;color:#f2f2f2;letter-spacing:-.01em}
+.s3p em{font:400 17px var(--mono);font-style:normal;color:#a9c4ed;letter-spacing:0}
+.s3st[data-p=models] .s3pg[data-p=models] .s3h,.s3st[data-p=chat] .s3pg[data-p=chat] .s3h,.s3st[data-p=router] .s3pg[data-p=router] .s3h,
+.s3st[data-p=models] .s3pg[data-p=models] .s3p,.s3st[data-p=chat] .s3pg[data-p=chat] .s3p,.s3st[data-p=router] .s3pg[data-p=router] .s3p{opacity:1;transform:none}
+.s3pg .s3p:nth-of-type(2){transition-delay:.05s}.s3pg .s3p:nth-of-type(3){transition-delay:.1s}.s3pg .s3p:nth-of-type(4){transition-delay:.15s}
+.s3t{position:absolute;left:285px;width:190px;height:38px;border:0;border-radius:10px;background:transparent;cursor:pointer;padding:0;z-index:5;-webkit-tap-highlight-color:transparent}
+.s3t:focus-visible{outline:2px solid rgba(74,190,24,.9);outline-offset:1px}
+</style>
+<style>
+/* ===== Screens 06 / Scene 02 / Scene 03 — aligned to Figma (1920x1080 stage) ===== */
+.f3g{background:linear-gradient(90deg,#f3f7ff 0%,#bcd7ff 26%,#8fbfff 42%,#f6f9ff 62%,#fff 78%,#cfe2ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.f3art{position:absolute;left:0;top:0;width:1920px;height:1080px;pointer-events:none;user-select:none}
+#s11 .e3t{left:128px;top:128px;width:976px;font:600 80px/88px Inter;letter-spacing:-3.2px;color:#f2f2f2}
+#s11 .e3t .f3g{background-size:976px 100%;background-repeat:no-repeat;display:inline-block}
+#s11 .e3t .gr{color:#4ABE18;-webkit-text-fill-color:#4ABE18}
+#s11 .e3v{left:913px;top:184px;width:672px;letter-spacing:-.24px}
+.f3cap{position:absolute;margin:0}.f3cap b{display:block;width:728px;font:500 24px/32px Inter;color:#f2f2f2}.f3cap span{display:block;font:400 16px/24px Inter;color:#8e8e93}
+#s11 .f3cap[style*="1424"] b{width:352px}#s11 .f3cap[style*="1424"] span{color:#b0b0ac}
+#s11 .e3x{position:absolute;width:240px;height:72px;border-radius:16px;border:1px solid rgba(255,255,255,.2);background:linear-gradient(155deg,rgba(255,255,255,.13),rgba(255,255,255,.04));backdrop-filter:blur(35.6px);-webkit-backdrop-filter:blur(35.6px);box-shadow:0 20px 60px rgba(0,0,0,.28)}
+.f3h{position:absolute;top:377px;margin:0;font:600 32px/39px Inter;letter-spacing:-1.28px;white-space:nowrap}
+#s11 .e3p{left:913px;top:471px;width:328px;height:281px;border-radius:24px;border:1px solid rgba(255,255,255,.45);background:linear-gradient(155deg,rgba(70,70,82,.92) 0%,rgba(24,24,30,.94) 100%);backdrop-filter:none;-webkit-backdrop-filter:none;filter:none}
+#s11 .e3p h3{left:31px;top:50px;font:600 32px/40px Inter;color:#f2f2f2;letter-spacing:0;width:280px;white-space:nowrap}
+#s11 .e3p .c{left:31px;top:119px;width:240px}
+#s11 .e3p .b1,#s11 .e3p .b2{top:201px}#s11 .e3p .b1{left:31px}#s11 .e3p .b2{left:159px}
+#s11 .e3r{left:889px;top:806px;width:352px;text-align:center}
+#s11 .e3n{left:auto}
+/* 06 statement */
+#s12 .c12{position:absolute;left:264px;top:444px;width:1392px;margin:0;text-align:center;font:700 80px/96px Inter;letter-spacing:-3.2px}
+#s12 .c12 span{display:block}#s12 .c12a{color:#d9d9d9}#s12 .c12a .gr{display:inline;color:#4ABE18}
+#s12 .c12b{background:linear-gradient(90deg,#f3f7ff 0%,#bcd7ff 26%,#8fbfff 42%,#f6f9ff 62%,#fff 78%,#cfe2ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+/* Scene 02: gradient spans the whole 704px text box on each line, like Figma */
+#s9 .pt7 span.g{-webkit-box-decoration-break:clone;box-decoration-break:clone;background-size:704px 100%;background-repeat:no-repeat}
+@media(max-width:767px){#s12{display:none!important}}
+</style>
+</head><body>
+<nav><a href="index.html"><svg class="logo" viewBox="150 0 436 111" xmlns="http://www.w3.org/2000/svg"><path d="M510.351 16.0464H529.373L547.69 50.6405H548.475L566.792 16.0464H585.814L556.515 67.9768V96.3737H539.65V67.9768L510.351 16.0464Z" fill="currentColor"/><path d="M439.889 96.3737V16.0464H494.016V30.0488H456.872V49.1893H491.231V63.1916H456.872V82.3714H494.173V96.3737H439.889Z" fill="currentColor"/><path d="M303.783 55.016C303.783 63.7757 302.123 71.2279 298.802 77.3727C295.507 83.5176 291.01 88.2112 285.309 91.4536C279.635 94.6698 273.255 96.2779 266.169 96.2779C259.03 96.2779 252.624 94.6567 246.95 91.4143C241.276 88.172 236.791 83.4783 233.497 77.3335C230.202 71.1887 228.555 63.7495 228.555 55.016C228.555 46.2563 230.202 38.8041 233.497 32.6593C236.791 26.5144 241.276 21.8339 246.95 18.6177C252.624 15.3753 259.03 13.7541 266.169 13.7541C273.255 13.7541 279.635 15.3753 285.309 18.6177C291.01 21.8339 295.507 26.5144 298.802 32.6593C302.123 38.8041 303.783 46.2563 303.783 55.016ZM286.565 55.016C286.565 49.3418 285.715 44.5567 284.015 40.6606C282.342 36.7645 279.975 33.8098 276.916 31.7964C273.856 29.783 270.274 28.7763 266.169 28.7763C262.064 28.7763 258.481 29.783 255.422 31.7964C252.363 33.8098 249.983 36.7645 248.284 40.6606C246.61 44.5567 245.773 49.3418 245.773 55.016C245.773 60.6902 246.61 65.4753 248.284 69.3714C249.983 73.2675 252.363 76.2222 255.422 78.2356C258.481 80.249 262.064 81.2557 266.169 81.2557C270.274 81.2557 273.856 80.249 276.916 78.2356C279.975 76.2222 282.342 73.2675 284.015 69.3714C285.715 65.4753 286.565 60.6902 286.565 55.016Z" fill="currentColor"/><path d="M150.979 30.0488V16.0464H216.95V30.0488H192.358V96.3737H175.571V30.0488H150.979Z" fill="currentColor"/><rect x="371.673" y="96.8224" width="18.4848" height="18.4848" rx="9.24238" transform="rotate(-180 371.673 96.8224)" fill="currentColor"/><path d="M372.267 68.7234L377.867 77.7806L378.434 78.7826L390.302 95.0697C390.868 95.8475 391.773 96.3076 392.735 96.3076H405.618C408.077 96.3076 409.499 93.5194 408.055 91.5286L391.964 69.3382C391.157 68.2254 391.206 66.7074 392.083 65.649L416.313 36.4132C417.94 34.4504 416.544 31.4805 413.995 31.4805H401.474C400.57 31.4805 399.713 31.887 399.141 32.5877L372.495 65.2358C371.683 66.2307 371.591 67.6311 372.267 68.7234Z" fill="currentColor"/><path d="M325.068 16.0468V96.3741H342.051V75.0902L351.248 64.8074L362.564 52.0136L392.373 16.0468H372.017L343.11 51.4645H342.051V16.0468H325.068Z" fill="currentColor"/></svg></a><ul><li><a href="software.html">Software</a></li><li><a href="technology.html">Technology</a></li></ul><a class="btn" data-reserve href="software.html#early">Reserve your spot</a></nav>
 <button class="mnb" id="mnb" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
-<div id="mmenu" aria-hidden="true"><a href="software.html">Software</a><a href="models.html">Models</a><a href="pricing.html">Pricing</a><a href="devdoc.html">Dev Doc</a><a href="#faq">FAQ</a><a class="mcta" data-reserve href="#">Get early access</a></div>
+<div id="mmenu" aria-hidden="true"><a href="software.html">Software</a><a href="technology.html">Technology</a><a class="mcta" data-reserve href="#">Reserve your spot</a></div>
 
 
 <main id="mob" aria-label="Tokkey (mobile)">
-<section class="k-m1"><img class="k-m1bg" src="m_ripple_hero.jpg" alt="" aria-hidden="true">
+<section class="k-m1">
 <h1 class="k-mg">Own Your <span>Intelligence</span><b class="gr">.</b></h1>
 <p class="k-m1s">A USB-C key that runs local AI<br>on your Mac.</p>
-<img class="k-m1k" src="tokkey.png" alt="Tokkey USB-C key — concept render">
-<a class="mcta" data-reserve href="#">Get in line</a>
+<a class="mcta" data-reserve href="#">Reserve your spot</a>
 <div class="k-mscr"><span>Scroll</span><i></i></div></section>
 
 <section class="k-ms k-m2 k-rv"><p class="k-me">Works with your tools</p>
 <h2 class="k-mg">Turn your Mac into an <span>AI Mac</span><b class="gr">.</b></h2>
 <p class="k-mp">Use Tokkey inside the agents you already work in. Same workflow, local model.</p>
-<div class="k-chips"><div><span class="k-mch"><i></i>Claude Code</span></div><div class="k-o1"><span class="k-mch"><i></i>OpenClaw</span></div><div><span class="k-mch"><i></i>Hermes</span><span class="k-mch"><i></i>Cline</span></div><div class="k-o2"><span class="k-mch"><i></i>Aider</span></div></div>
+<div class="k-chips"><div><span class="k-mch"><i></i>Claude Code</span><span class="k-mch"><i></i>OpenClaw</span><span class="k-mch"><i></i>Hermes</span><span class="k-mch"><i></i>Cline</span><span class="k-mch"><i></i>Aider</span></div></div>
 <p class="k-mn">Larger models. Same Mac.</p></section>
 
-<section class="k-ms k-m3 k-rv"><img class="k-msoft" src="m_ripple_soft.jpg" alt="" aria-hidden="true"><p class="k-me">On your Mac</p>
-<h2 class="k-mg">A private agent<b class="gr">.</b></h2><p class="k-mp" style="margin-top:8px">Working on your Mac</p>
-<div class="k-lc k-chat"><div class="k-chh"><span class="k-ib"></span><b>Private Chat</b><span class="k-pl"><u></u>Qwen3.5 4B</span></div>
-<div class="k-bub k-u">Summarize the contracts in /Q3 and flag renewal dates.</div>
-<div class="k-rd"><span class="k-rchip">✓ Read 6 files · on this Mac</span></div>
-<p class="k-ans">Three renewals fall in Q4. Acme (Oct 31) and Northwind (Nov 15) auto-renew; Lumen needs written notice by Dec 1.</p>
-<div class="k-inp"><span>Message your local agent…</span><div class="k-ir"><i class="k-ic1"></i><i class="k-ic2"></i><i class="k-snd"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg></i></div></div></div>
-<div class="k-gp"><u></u>Uses Tokkey’s local model.</div><div class="k-gp"><u></u>Tool network access is off.</div></section>
+<section class="k-ms k-m3 k-rv"><p class="k-me">On your Mac</p>
+<h2 class="k-mg">A private agent<b class="gr">.</b></h2><p class="k-mp">Working on your Mac.</p>
+<div class="k-list">
+<div class="k-row k-col"><small>You</small><p>Summarize the contracts in /Q3 and flag renewal dates.</p></div>
+<div class="k-row k-col"><small>Qwen3.5 4B · read 6 files on this Mac</small><p>Three renewals fall in Q4. Acme (Oct 31) and Northwind (Nov 15) auto-renew; Lumen needs written notice by Dec 1.</p></div>
+<div class="k-row"><div><b>Uses Tokkey’s local model.</b></div><em><u></u></em></div>
+<div class="k-row"><div><b>Tool network access is off.</b></div><em><u></u></em></div></div></section>
 
-<section class="k-ms k-m4 k-rv"><img class="k-msoft" src="m_ripple_soft.jpg" alt="" aria-hidden="true"><p class="k-me">Local first</p>
+<section class="k-ms k-m4 k-rv"><p class="k-me">Local first</p>
 <h2 class="k-mg">Local power. Cloud <span>by choice</span><b class="gr">.</b></h2>
-<div class="k-lc"><div class="k-lh"><b>Local Models</b><span class="k-at"><u></u>Attached</span></div>
-<div class="k-mr"><span class="k-ib"></span><div><b>Qwen3.6 35B-A3B</b><small>Recommended · 23 GB</small></div><span class="k-bt">Start</span></div>
-<div class="k-mr on"><span class="k-ib"></span><div><b>Qwen3.5 4B</b><small>2.8 GB · Alibaba Qwen</small></div><span class="k-bt k-run"><u></u>Running</span></div>
-<div class="k-mr"><span class="k-ib"></span><div><b>Qwen3.5 9B</b><small>5.7 GB · Qwen</small></div><span class="k-bt">Start</span></div>
-<p class="k-ft">Only one local model runs at a time.</p></div>
-<div class="k-lc" style="margin-top:16px"><div class="k-lh"><b>Router</b><span class="k-tgl"><i></i></span></div><p class="k-rs">Simple tasks run on your Tokkey. Hard ones go to a cloud model.</p>
-<div class="k-rbx"><div class="k-sel"><em>Local model</em><span class="k-ib"></span><b>Qwen3.5 4B</b><small>On this Mac</small></div><div class="k-dsh"><em>Cloud model</em><span class="k-ib"></span><b>Cloud model</b><small>You choose which</small></div></div>
-<div class="k-rpl"><span class="k-g"><u></u>Private task → Local</span><span><u></u>Hard task → Cloud</span></div></div></section>
+<div class="k-sub"><h3>Local Models</h3><em><u></u>Attached</em></div>
+<div class="k-list">
+<div class="k-row"><div><b>Qwen3.6 35B-A3B</b><small>Recommended · 23 GB</small></div><em>Start</em></div>
+<div class="k-row"><div><b>Qwen3.5 4B</b><small>2.8 GB · Alibaba Qwen</small></div><em><u></u>Running</em></div>
+<div class="k-row"><div><b>Qwen3.5 9B</b><small>5.7 GB · Qwen</small></div><em>Start</em></div></div>
+<p class="k-ft">Only one local model runs at a time.</p>
+<div class="k-sub"><h3>Router</h3><em><u></u>On</em></div>
+<p class="k-mp">Simple tasks run on your Tokkey. Hard ones go to a cloud model.</p>
+<div class="k-list">
+<div class="k-row"><div><b>Private task</b><small>Local model · Qwen3.5 4B · on this Mac</small></div><em><u></u>Local</em></div>
+<div class="k-row"><div><b>Hard task</b><small>Cloud model · you choose which</small></div><em>Cloud</em></div></div></section>
 
 <section class="k-ms k-m5 k-rv"><p class="k-me">01 / 04</p>
 <h2 class="k-mg">Large models. A fraction of <span>the memory</span><b class="gr">.</b></h2>
 <div class="k-tabs" id="mtabs"><button class="on" data-i="0">Run large AI models</button><button data-i="1">Light guidance</button><button data-i="2">Lid closed</button><button data-i="3">Private memory <em>PRO</em></button></div>
-<div class="k-pn on" data-i="0">
-<div class="k-gc k-big"><small>35B parameters</small><h3>Qwen3.6 35B-A3B</h3><div class="k-num"><b>~5</b> GB</div><p>of memory with Tokkey</p><div class="k-bar"><i></i></div><em>vs ~23 GB without</em></div>
-<div class="k-gc"><div class="k-row"><div><small>70B parameters</small><h3>Llama 3.3 70B</h3></div><div class="k-num k-s"><b>~10</b> GB</div></div><div class="k-bar"><i></i></div><em>vs ~46 GB without</em></div>
-<div class="k-gc"><div class="k-row"><div><small>120B parameters</small><h3>gpt-oss 120B</h3></div><div class="k-num k-s"><b>~17</b> GB</div></div><div class="k-bar"><i></i></div><em>vs ~79 GB without</em></div></div>
-<div class="k-pn" data-i="1"><div class="k-gc"><small>Light states</small><h3>The light tells you what is happening.</h3><p>The key’s light shows what your agent is doing, without opening a window.</p><div class="k-lg"><span><u class="k-w"></u>Done</span><em>White pulse</em></div></div></div>
-<div class="k-pn" data-i="2"><div class="k-gc"><small>Lid closed</small><h3>Still working<b class="gr">.</b></h3><p>Close the Mac. A compatible local task keeps working in the background.</p><div class="k-chp"><span><u></u>Agent running</span><span>04:12:09 uptime</span></div><p>Contract review finished. Weekly report is drafting.</p></div></div>
-<div class="k-pn" data-i="3"><div class="k-gc"><small>Private memory · stored on the key</small><h3>12.4 GB<b class="gr">.</b></h3><div class="k-mrow"><span>Projects</span><em>38 notes</em></div><div class="k-mrow"><span>Preferences</span><em>Writing style</em></div><div class="k-mrow"><span>People</span><em>24 contacts</em></div><div class="k-chp"><span><u></u>Encrypted · never uploaded</span></div></div></div>
+<div class="k-pn on" data-i="0"><div class="k-list">
+<div class="k-row"><div><small>35B parameters</small><b>Qwen3.6 35B-A3B</b></div><div class="k-fg"><b>~5<i>GB</i></b><small>vs ~23 GB without</small></div></div>
+<div class="k-row"><div><small>70B parameters</small><b>Llama 3.3 70B</b></div><div class="k-fg"><b>~10<i>GB</i></b><small>vs ~46 GB without</small></div></div>
+<div class="k-row"><div><small>120B parameters</small><b>gpt-oss 120B</b></div><div class="k-fg"><b>~17<i>GB</i></b><small>vs ~79 GB without</small></div></div></div>
+<p class="k-ft">Memory used with Tokkey, compared with running the same model without it.</p></div>
+<div class="k-pn" data-i="1"><span class="k-eb">Light states</span><h3>The light tells you what is happening.</h3><p>The key’s light shows what your agent is doing, without opening a window.</p><div class="k-list"><div class="k-row"><div><b>Done</b></div><em>White pulse</em></div></div></div>
+<div class="k-pn" data-i="2"><span class="k-eb">Lid closed</span><h3>Still working<b class="gr">.</b></h3><p>Close the Mac. A compatible local task keeps working in the background.</p><div class="k-chp"><span><u></u>Agent running</span><span>04:12:09 uptime</span></div><p class="k-ft">Contract review finished. Weekly report is drafting.</p></div>
+<div class="k-pn" data-i="3"><span class="k-eb">Private memory · stored on the key</span><h3>12.4 GB<b class="gr">.</b></h3><div class="k-list"><div class="k-row"><div><b>Projects</b></div><em>38 notes</em></div><div class="k-row"><div><b>Preferences</b></div><em>Writing style</em></div><div class="k-row"><div><b>People</b></div><em>24 contacts</em></div></div><div class="k-chp"><span><u></u>Encrypted · never uploaded</span></div></div>
 </section>
 
 <section class="k-ms k-m6 k-rv"><p class="k-me">User comments</p>
 <h2 class="k-mg">Real <span>people</span>. Local AI<b class="gr">.</b></h2>
 <p class="k-mp">A little key. A different way to work. For those who want their AI to stay theirs.</p>
-<div class="k-qc k-ft"><div class="k-qp"><span>DE</span><div><b>Independent developer</b><small>Example profile</small></div></div><p>“My work lives on my Mac. My AI should, too.”</p></div>
-<div class="k-qc"><div class="k-qp"><span>RE</span><div><b>Researcher</b><small>Example profile</small></div></div><p>“My prompts. My files. My machine. That’s how I want to work.”</p></div>
-<div class="k-qc"><div class="k-qp"><span>CR</span><div><b>Creative technologist</b><small>Example profile</small></div></div><p>“A bigger model shouldn’t mean buying a new Mac.”</p></div>
+<div class="k-mq">
+<figure class="k-q"><p>“My work lives on my Mac. My AI should, too.”</p><small><b>Independent developer</b> · Example profile</small></figure>
+<figure class="k-q"><p>“My prompts. My files. My machine. That’s how I want to work.”</p><small><b>Researcher</b> · Example profile</small></figure>
+<figure class="k-q"><p>“A bigger model shouldn’t mean buying a new Mac.”</p><small><b>Creative technologist</b> · Example profile</small></figure></div>
 <p class="k-mnote">Concept layout · Quotes and profiles are illustrative.</p></section>
 </main>
 
@@ -740,23 +791,8 @@ nav .logo{height:24px}nav ul,nav .btn{display:none}
 
 <section id="s3" class="pin"><div class="st"><div class="blob" style="width:700px;height:500px;left:-10%;top:30%;background:#5E9BFF;opacity:.14"></div><div class="blob" style="width:700px;height:500px;right:-10%;top:20%;background:#B678FF;opacity:.14"></div>
 <canvas id="bas3"></canvas><h2 class="t3" id="t3">A private agent.<br><span class="ai">Working on your Mac</span><span class="gr">.</span></h2>
-<div class="lapwrap" id="lap"><canvas class="limg" id="lapc" width="1600" height="900"></canvas><div class="lid" id="lid3"><div class="scr">
-<div class="menubar"><b>Tokkey</b><span>File</span><span>Edit</span><span>View</span><span>Window</span><span style="margin-left:auto">Wed 9:41</span></div>
-<div class="sdots"></div>
-<div class="c2 cm" id="p1"><div class="ch"><div><h3>Local Models</h3><p>Download, start, and manage models stored on this Mac.</p></div><span class="gb">Tokkey hardware</span></div>
-<div class="mr"><i class="cb"></i><div><b>Qwen3.6 35B-A3B</b><small>Recommended · 23 GB · Qwen</small></div><span class="gb">Start</span></div>
-<div class="mr on"><i class="cb g"></i><div><b>Qwen3.5 4B</b><small>2.8 GB · Alibaba Qwen</small></div><span class="rn"><u></u>Running</span></div>
-<div class="mr"><i class="cb"></i><div><b>Qwen3.5 9B</b><small>5.7 GB · Qwen</small></div><span class="gb">Start</span></div></div>
-<div class="c2 cc" id="p2"><i class="cb big"></i><h3>Private Chat</h3><p>A local agent for your Mac.</p><div class="bl"><span><u></u>Uses Tokkey’s local model.</span><span><u></u>Tool network access is off.</span></div>
-<div class="inp2"><span>Message your local agent… Paste images or files here.</span><div class="ir"><span class="gb">Ask</span><span class="mp"><u></u>Qwen3.5 4B · Local</span><i class="sn"></i></div></div></div>
-<div class="c2 cr" id="p3"><div class="ch"><div><h3>Router</h3><p>Simple tasks run on your Tokkey. Hard ones go to a cloud model.</p></div><i class="tg"></i></div>
-<div class="rb"><div><em>LOCAL MODEL</em><p>Current running model on this Mac</p><div class="rm"><i class="cb g"></i><b>Qwen3.5 4B<small>On this Mac</small></b></div></div><div><em>CLOUD MODEL</em><p>Used only for complex tasks</p><div class="rm"><i class="cb"></i><b>Cloud model<small>You choose which</small></b></div></div></div></div>
-<div class="fp" id="f1" style="left:70px;top:296px"><u></u>Nothing leaves this Mac<em>0 B sent</em></div>
-<div class="fp" id="f2" style="left:628px;top:336px"><u class="gr"></u>Private task → Local<em>on-device</em></div>
-<div class="fp" id="f3" style="left:700px;top:390px"><u class="bl2"></u>Hard task → Cloud<em>you choose</em></div>
-<div class="tasks2" id="tasks"><div class="tr"><i class="ic"></i><div class="tx"><b><span class="tl">Local agent:</span> Audit overdue invoices</b><span class="ch2">Local orchestrator</span><span class="mu">Fetching fees</span></div><div class="mt"><span>CPU <svg viewBox="0 0 40 10"><path d="M0 7 C6 3 9 8 15 5 S27 2 40 6" fill="none" stroke="#7fd6c6" stroke-width="1.4"/></svg><em id="cpu">19%</em></span><span>Memory <em id="mem">81%</em></span><span>GPU <svg viewBox="0 0 40 10"><path d="M0 6 C8 8 12 2 20 5 S32 8 40 3" fill="none" stroke="#9a8cff" stroke-width="1.4"/></svg><em id="gpu">60%</em></span></div><i class="stp"></i><i class="chv"></i></div>
-<div class="tr"><i class="ic"></i><div class="tx"><b>PR triage</b><span class="ch2">Claude Sonnet 5</span><span class="mu">Tagging owners</span></div><i class="stp"></i><i class="chv"></i></div>
-<div class="ct2"><i class="ic"></i>2 tasks running</div></div></div></div></div>
+<div class="lapwrap" id="lap"><canvas class="limg" id="lapc" width="1600" height="900"></canvas><div class="lid" id="lid3"><div class="s3glass"></div><div class="scr">
+<div class="s3ui" id="p1"><div class="s3st" id="s3st" data-p="models"><div class="s3pool"></div><div class="s3pg" data-p="models"><h3 class="s3h">Your Mac. Your models<span class="gr">.</span></h3><div class="s3p" style="left:1080px;top:599px;width:343px"><i style="background:#cfe7c5"></i><b>Switch anytime</b><em>3 models</em></div><div class="s3p" style="left:1072px;top:340px;width:361px"><i style="background:#a9c4ed"></i><b>Stored on this Mac</b><em>2.8 GB</em></div><div class="s3p" style="left:23px;top:479px;width:315px"><i style="background:#cfe7c5"></i><b>Runs locally</b><em>on-device</em></div></div><div class="s3pg" data-p="chat"><h3 class="s3h">Ask privately<span class="gr">.</span></h3><div class="s3p" style="left:1080px;top:599px;width:385px"><i style="background:#cfe7c5"></i><b>Network tools off</b><em>you decide</em></div><div class="s3p" style="left:1069px;top:214px;width:381px"><i style="background:#a9c4ed"></i><b>Answered locally</b><em>Qwen3.5 4B</em></div><div class="s3p" style="left:23px;top:479px;width:369px"><i style="background:#cfe7c5"></i><b>Stays on this Mac</b><em>0 B sent</em></div></div><div class="s3pg" data-p="router"><h3 class="s3h">Cloud, when needed<span class="gr">.</span></h3><div class="s3p" style="left:1040px;top:779px;width:407px"><i style="background:#cfe7c5"></i><b>Hard tasks → cloud</b><em>you choose</em></div><div class="s3p" style="left:1069px;top:214px;width:434px"><i style="background:#a9c4ed"></i><b>Simple tasks stay local</b><em>on-device</em></div><div class="s3p" style="left:153px;top:529px;width:375px"><i style="background:#cfe7c5"></i><b>Turn off anytime</b><em>one switch</em></div></div><img class="s3w" data-p="models" src="s3_win_models.webp" alt="Tokkey app — Models"><img class="s3w" data-p="chat" src="s3_win_chat.webp" alt="Tokkey app — Chat"><img class="s3w" data-p="router" src="s3_win_router.webp" alt="Tokkey app — Router"><button class="s3t" data-p="models" style="top:311px" aria-label="Models"></button><button class="s3t" data-p="chat" style="top:350px" aria-label="Chat"></button><button class="s3t" data-p="router" style="top:388px" aria-label="Router"></button></div></div></div></div></div>
 </div></section>
 
 <section id="sr" class="pin"><div class="st">
@@ -830,6 +866,7 @@ an idea and getting started.”</p></div></div></div>
 <g class="nd" style="--i:0"><circle cx="880" cy="66" r="27" class="nc"/><svg x="867" y="53" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg></g><g class="nd" style="--i:1"><circle cx="880" cy="138" r="27" class="nc"/><svg x="867" y="125" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M18.316 5.684H24v12.632h-5.684V5.684zM5.684 24h12.632v-5.684H5.684V24zM18.316 5.684V0H1.895A1.894 1.894 0 0 0 0 1.895v16.421h5.684V5.684h12.632zm-7.207 6.25v-.065c.272-.144.5-.349.687-.617s.279-.595.279-.982c0-.379-.099-.72-.3-1.025a2.05 2.05 0 0 0-.832-.714 2.703 2.703 0 0 0-1.197-.257c-.6 0-1.094.156-1.481.467-.386.311-.65.671-.793 1.078l1.085.452c.086-.249.224-.461.413-.633.189-.172.445-.257.767-.257.33 0 .602.088.816.264a.86.86 0 0 1 .322.703c0 .33-.12.589-.36.778-.24.19-.535.284-.886.284h-.567v1.085h.633c.407 0 .748.109 1.02.327.272.218.407.499.407.843 0 .336-.129.614-.387.832s-.565.327-.924.327c-.351 0-.651-.103-.897-.311-.248-.208-.422-.502-.521-.881l-1.096.452c.178.616.505 1.082.977 1.401.472.319.984.478 1.538.477a2.84 2.84 0 0 0 1.293-.291c.382-.193.684-.458.902-.794.218-.336.327-.72.327-1.149 0-.429-.115-.797-.344-1.105a2.067 2.067 0 0 0-.881-.689zm2.093-1.931l.602.913L15 10.045v5.744h1.187V8.446h-.827l-2.158 1.557zM22.105 0h-3.289v5.184H24V1.895A1.894 1.894 0 0 0 22.105 0zm-3.289 23.5l4.684-4.684h-4.684V23.5zM0 22.105C0 23.152.848 24 1.895 24h3.289v-5.184H0v3.289z"/></svg></g><g class="nd" style="--i:2"><circle cx="880" cy="210" r="27" class="nc"/><svg x="867" y="197" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M11.318 12.545H7.91v-1.909h3.41v1.91zM14.728 0v6h6l-6-6zm1.363 10.636h-3.41v1.91h3.41v-1.91zm0 3.273h-3.41v1.91h3.41v-1.91zM20.727 6.5v15.864c0 .904-.732 1.636-1.636 1.636H4.909a1.636 1.636 0 0 1-1.636-1.636V1.636C3.273.732 4.005 0 4.909 0h9.318v6.5h6.5zm-3.273 2.773H6.545v7.909h10.91v-7.91zm-6.136 4.636H7.91v1.91h3.41v-1.91z"/></svg></g><g class="nd" style="--i:3"><circle cx="880" cy="282" r="27" class="nc"/><svg x="867" y="269" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg></g><g class="nd" style="--i:4"><circle cx="880" cy="354" r="27" class="nc"/><svg x="867" y="341" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574zm-4.76 1.73a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214zm2.259 12.653-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167h-7.249z"/></svg></g><g class="nd" style="--i:5"><circle cx="880" cy="426" r="27" class="nc"/><svg x="867" y="413" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg></g><g class="nd" style="--i:6"><circle cx="880" cy="498" r="27" class="nc"/><svg x="867" y="485" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></g><g class="nd" style="--i:7"><circle cx="992" cy="102" r="27" class="nc"/><svg x="979" y="89" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/></svg></g><g class="nd" style="--i:8"><circle cx="992" cy="174" r="27" class="nc"/><svg x="979" y="161" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M2.886 4.18A11.982 11.982 0 0 1 11.99 0C18.624 0 24 5.376 24 12.009c0 3.64-1.62 6.903-4.18 9.105L2.887 4.18ZM1.817 5.626l16.556 16.556c-.524.33-1.075.62-1.65.866L.951 7.277c.247-.575.537-1.126.866-1.65ZM.322 9.163l14.515 14.515c-.71.172-1.443.282-2.195.322L0 11.358a12 12 0 0 1 .322-2.195Zm-.17 4.862 9.823 9.824a12.02 12.02 0 0 1-9.824-9.824Z"/></svg></g><g class="nd" style="--i:9"><circle cx="992" cy="246" r="27" class="nc"/><svg x="979" y="233" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M19.355 18.538a68.967 68.959 0 0 0 1.858-2.954.81.81 0 0 0-.062-.9c-.516-.685-1.504-2.075-2.042-3.362-.553-1.321-.636-3.375-.64-4.377a1.707 1.707 0 0 0-.358-1.05l-3.198-4.064a3.744 3.744 0 0 1-.076.543c-.106.503-.307 1.004-.536 1.5-.134.29-.29.6-.446.914l-.31.626c-.516 1.068-.997 2.227-1.132 3.59-.124 1.26.046 2.73.815 4.481.128.011.257.025.386.044a6.363 6.363 0 0 1 3.326 1.505c.916.79 1.744 1.922 2.415 3.5zM8.199 22.569c.073.012.146.02.22.02.78.024 2.095.092 3.16.29.87.16 2.593.64 4.01 1.055 1.083.316 2.198-.548 2.355-1.664.114-.814.33-1.735.725-2.58l-.01.005c-.67-1.87-1.522-3.078-2.416-3.849a5.295 5.295 0 0 0-2.778-1.257c-1.54-.216-2.952.19-3.84.45.532 2.218.368 4.829-1.425 7.531zM5.533 9.938c-.023.1-.056.197-.098.29L2.82 16.059a1.602 1.602 0 0 0 .313 1.772l4.116 4.24c2.103-3.101 1.796-6.02.836-8.3-.728-1.73-1.832-3.081-2.55-3.831zM9.32 14.01c.615-.183 1.606-.465 2.745-.534-.683-1.725-.848-3.233-.716-4.577.154-1.552.7-2.847 1.235-3.95.113-.235.223-.454.328-.664.149-.297.288-.577.419-.86.217-.47.379-.885.46-1.27.08-.38.08-.72-.014-1.043-.095-.325-.297-.675-.68-1.06a1.6 1.6 0 0 0-1.475.36l-4.95 4.452a1.602 1.602 0 0 0-.513.952l-.427 2.83c.672.59 2.328 2.316 3.335 4.711.09.21.175.43.253.653z"/></svg></g><g class="nd" style="--i:10"><circle cx="992" cy="318" r="27" class="nc"/><svg x="979" y="305" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></g><g class="nd" style="--i:11"><circle cx="992" cy="390" r="27" class="nc"/><svg x="979" y="377" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M5.033 14.649H.743a.74.74 0 0 1-.686-.458.74.74 0 0 1 .16-.808L3.19 10.41H1.06A1.06 1.06 0 0 1 0 9.35h3.957c.301 0 .57.18.686.458a.74.74 0 0 1-.161.808L1.51 13.59h2.464c.585 0 1.06.475 1.06 1.06zM24 11.338c0-1.14-.927-2.066-2.066-2.066-.61 0-1.158.265-1.537.686a2.061 2.061 0 0 0-1.536-.686c-1.14 0-2.066.926-2.066 2.066v3.311a1.06 1.06 0 0 0 1.06-1.06v-2.251a1.004 1.004 0 0 1 2.013 0v2.251c0 .586.474 1.06 1.06 1.06v-3.311a1.004 1.004 0 0 1 2.012 0v2.251c0 .586.475 1.06 1.06 1.06zM16.265 12a2.728 2.728 0 1 1-5.457 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0zm-4.82 0a2.728 2.728 0 1 1-5.458 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0z"/></svg></g><g class="nd" style="--i:12"><circle cx="992" cy="462" r="27" class="nc"/><svg x="979" y="449" width="26" height="26" viewBox="0 0 24 24"><path fill="#fff" d="M6 1.807L0 5.629l6 3.822 6.001-3.822L6 1.807zM18 1.807l-6 3.822 6 3.822 6-3.822-6-3.822zM0 13.274l6 3.822 6.001-3.822L6 9.452l-6 3.822zM18 9.452l-6 3.822 6 3.822 6-3.822-6-3.822zM6 18.371l6.001 3.822 6-3.822-6-3.822L6 18.371z"/></svg></g><g class="nd" style="--i:13"><circle cx="992" cy="534" r="27" class="nc"/><g fill="#fff"><circle cx="982" cy="534" r="2.4"/><circle cx="992" cy="534" r="2.4"/><circle cx="1002" cy="534" r="2.4"/></g></g>
 </svg></div></section>
 
+<section id="s12"><div class="fz" id="fz12"><h2 class="c12 rvv"><span class="c12a">You've been renting intelligence<span class="gr">.</span></span><span class="c12b">What if you could own it?</span></h2></div></section>
 <section id="s9"><div class="fz" id="fz9"><img class="zpp rvv" src="s7_photo.webp" alt="Working on a Mac at a desk"><p class="pl7 rvv" style="--d:.05s">02 / Personal intelligence</p>
 <h2 class="pt7 rvv" style="--d:.1s"><span class="g">Personal intelligence.<br>Personal privacy</span><span class="gr">.</span></h2>
 <p class="pd7 rvv" style="--d:.15s">The better AI knows your projects, files and <br>preferences, the more personal its context <br>becomes. Keep that work close.</p>
@@ -840,25 +877,22 @@ an idea and getting started.”</p></div></div></div>
 <p class="pcap rvv" style="--d:.1s">Your projects. Your notes. Your next idea.</p></div></section>
 
 <section id="s11"><div class="fz" id="fz11">
-<p class="e3l rvv" style="left:128px;top:80px">03 / Local + cloud</p>
-<h2 class="e3t rvv" style="--d:.05s">Local power.<br>Cloud <span class="g">by choice</span><span class="gr">.</span></h2>
+<img class="f3art" src="s11_art.webp" alt="" aria-hidden="true">
+<h2 class="e3t rvv" style="--d:.05s">Local power.<br><span class="f3g">Cloud by choice</span><span class="gr">.</span></h2>
 <p class="e3v rvv" style="--d:.12s">Tokkey brings larger local models to your Mac. <br>When a task needs more, bring in the cloud— <br>with the context you choose to share.</p>
-<div class="e3d rvv" style="--d:.1s"><span class="e3l e3m">On your Mac</span><i class="dot"></i><span class="lb">Local</span><img src="s3_mac.svg" alt="MacBook with Tokkey, line illustration" style="left:8px;top:64px;width:552px;height:332px"><span class="tk">Tokkey</span>
-<div class="cap"><b>Larger models. Same Mac.</b><span>Your Mac does the processing. Tokkey makes more possible.</span></div>
-<div class="e3x" style="left:504px;top:120px"><b>Project notes</b><span>Available locally</span></div><div class="e3x" style="left:504px;top:224px"><b>Selected summary</b><span>Shared with permission</span></div></div>
-<img class="e3i rvv" src="s3_loc.svg" alt="" style="left:920px;top:572px;--d:.2s">
-<p class="e3l rvv" style="left:1008px;top:424px;--d:.2s">You decide</p>
-<div class="e3p rvv" style="--d:.25s"><p class="a">Your choice: allow once</p><h3>Approved.</h3><p class="c">Sent: selected summary<br>Original files remain local</p><div class="b1">Review</div><div class="b2">Local-only</div></div>
-<img class="e3i rvv" src="s3_out.svg" alt="" style="left:1296px;top:572px;--d:.3s">
-<p class="e3l rvv" style="left:1440px;top:424px;--d:.3s">Cloud capability</p>
-<img class="e3i rvv" src="s3_cloud.svg" alt="Layered cloud capability, line illustration" style="left:1440px;top:472px;width:320px;height:224px;--d:.35s">
-<div class="rvv" style="position:absolute;left:1424px;top:712px;width:352px;--d:.4s"><b style="display:block;font:500 24px/32px Inter;color:#f2f2f2">More capability, on demand.</b><span style="display:block;font:400 16px/24px Inter;color:#b0b0ac">Only the context you approve.</span></div>
-<img class="e3i rvv" src="s3_ret.svg" alt="" style="left:920px;top:704px;--d:.4s">
-<p class="e3r rvv" style="--d:.45s">Cloud result returns to your Mac</p>
-<p class="e3n rvv" style="left:128px;--d:.5s"><b>01 / Work locally</b><span>Run suitable tasks on the Mac you own.</span></p>
-<p class="e3n rvv" style="left:696px;--d:.55s"><b>02 / Review what leaves</b><span>Choose the context a cloud model may receive.</span></p>
-<p class="e3n rvv" style="left:1264px;--d:.6s"><b>03 / Add power when needed</b><span>Bring cloud capability into the same workflow.</span></p>
-</div></section>
+<div class="f3cap rvv" style="left:176px;top:392px"><b>Local models. On your same Mac.</b><span>Your Mac does the processing. Tokkey makes more possible.</span></div>
+<div class="e3x rvv" style="left:176px;top:464px"><b>Project notes</b><span>Available locally</span></div>
+<div class="e3x rvv" style="left:433px;top:464px"><b>Selected summary</b><span>Shared with permission</span></div>
+<p class="f3h rvv" style="left:928px"><span class="f3g">You Decide</span></p>
+<div class="e3p rvv"><h3>Cloud Approved.</h3><p class="c">Sent: selected summary<br>Original files remain local</p><div class="b1">Review</div><div class="b2">Local-only</div></div>
+<p class="f3h rvv" style="left:1424px"><span class="f3g">Cloud Capability</span></p>
+<div class="f3cap rvv" style="left:1424px;top:712px"><b>More capability, on demand.</b><span>Only the context you approve.</span></div>
+<p class="e3r rvv">Cloud result returns to your Mac</p>
+<p class="e3n rvv" style="left:128px"><b>01 / Work locally</b><span>Run suitable tasks on the Mac you own.</span></p>
+<p class="e3n rvv" style="left:776px"><b>02 / Review what leaves</b><span>Choose the context a cloud model may receive.</span></p>
+<p class="e3n rvv" style="left:1424px"><b>03 / Add power when needed</b><span>Bring cloud capability into the same workflow.</span></p>
+</div>
+</section>
 
 <section id="s10"><div class="mono" style="color:#6e6e73;margin-bottom:26px">Memory is no longer the gate</div><h2>Local intelligence is no longer just for big-memory, expensive computers<span style="color:#4ABE18">.</span></h2><div class="big2">Just plug in Tokkey<span style="color:#4ABE18">.</span></div>
 <div class="mc"><div class="mcv" id="mcv"><div class="row"><div class="l"><b>35B model · Mac alone</b><span>NEEDS 48 GB+</span></div><div class="tr"><i class="a" data-w="100"></i><div class="mk" style="left:33%"></div></div></div><div class="row"><div class="l"><b>35B model · with Tokkey</b><span>FITS IN 16 GB</span></div><div class="tr"><i class="b" data-w="30"></i><div class="mk" style="left:33%"></div></div></div><small>MARKER = 16 GB MAC · ILLUSTRATIVE FIGURES, TO BE CONFIRMED</small></div>
@@ -866,13 +900,13 @@ an idea and getting started.”</p></div></div></div>
 
 <section id="faq"><div class="mono" style="margin-bottom:20px">FAQ</div><h2>Questions<span class="gr">.</span></h2><div class="fqw"><details class="fq" open><summary>What is Tokkey?<i>+</i></summary><p>A USB-C Local AI Key with Tokkey Runtime and a local API. It works with your Mac. It is not a new computer.</p></details><details class="fq"><summary>Which Macs and models are supported?<i>+</i></summary><p>Apple silicon Macs. More memory lets you run larger models; the Software page has a table to check your Mac. Not every Mac or model is guaranteed.</p></details><details class="fq"><summary>Does it add a GPU, NPU, or RAM?<i>+</i></summary><p>No. Your Mac provides compute and working memory.</p></details><details class="fq"><summary>Does Tokkey include a chat interface?<i>+</i></summary><p>Yes, Private Chat. Compatible external tools can connect through the local API.</p></details><details class="fq"><summary>Is Agent Hub a new Tokkey agent?<i>+</i></summary><p>No. It is the entry point to connect and manage compatible agents.</p></details><details class="fq"><summary>What is shared Memory?<i>+</i></summary><p>Saved user context that you choose to share across tools. It is not RAM expansion.</p></details><details class="fq"><summary>Does Router keep every request local?<i>+</i></summary><p>No. Router lets you choose between local and cloud, and shows the model, shared excerpt and expected cost first.</p></details><details class="fq"><summary>Can a task continue with the lid closed?<i>+</i></summary><p>On supported configurations, yes. Photos are not proof.</p></details><details class="fq"><summary>Do I need the internet?<i>+</i></summary><p>Downloads, updates and cloud tasks need a connection. Installed local models work locally.</p></details><details class="fq"><summary>What do the performance numbers mean?<i>+</i></summary><p>Claims in the supplied artwork are not yet matched to reports. Treat them as placeholders until evidence is published.</p></details><details class="fq"><summary>How much will it cost?<i>+</i></summary><p>The planned one-time launch price is $129. Final pricing, availability and terms will be confirmed before orders open.</p></details></div></section>
 
-<section id="mobcta" class="k-ms"><h2 class="k-mg">Own your intelligence<b class="gr">.</b></h2><p class="k-mp">Reserve yours with a deposit. Secure checkout by Stripe.</p><a class="mcta" data-reserve href="#">Get early access</a></section>
+<section id="mobcta" class="k-ms"><h2 class="k-mg">Own your intelligence<b class="gr">.</b></h2><p class="k-mp">Reserve yours with a deposit. Secure checkout by Stripe.</p><a class="mcta" data-reserve href="#">Reserve your spot</a></section>
 
 <footer id="ft"><canvas id="ftc"></canvas>
 <div class="ftw"><div class="ftl"><a href="index.html" aria-label="Tokkey"><svg class="logo" viewBox="150 0 436 111" xmlns="http://www.w3.org/2000/svg"><path d="M510.351 16.0464H529.373L547.69 50.6405H548.475L566.792 16.0464H585.814L556.515 67.9768V96.3737H539.65V67.9768L510.351 16.0464Z" fill="currentColor"/><path d="M439.889 96.3737V16.0464H494.016V30.0488H456.872V49.1893H491.231V63.1916H456.872V82.3714H494.173V96.3737H439.889Z" fill="currentColor"/><path d="M303.783 55.016C303.783 63.7757 302.123 71.2279 298.802 77.3727C295.507 83.5176 291.01 88.2112 285.309 91.4536C279.635 94.6698 273.255 96.2779 266.169 96.2779C259.03 96.2779 252.624 94.6567 246.95 91.4143C241.276 88.172 236.791 83.4783 233.497 77.3335C230.202 71.1887 228.555 63.7495 228.555 55.016C228.555 46.2563 230.202 38.8041 233.497 32.6593C236.791 26.5144 241.276 21.8339 246.95 18.6177C252.624 15.3753 259.03 13.7541 266.169 13.7541C273.255 13.7541 279.635 15.3753 285.309 18.6177C291.01 21.8339 295.507 26.5144 298.802 32.6593C302.123 38.8041 303.783 46.2563 303.783 55.016ZM286.565 55.016C286.565 49.3418 285.715 44.5567 284.015 40.6606C282.342 36.7645 279.975 33.8098 276.916 31.7964C273.856 29.783 270.274 28.7763 266.169 28.7763C262.064 28.7763 258.481 29.783 255.422 31.7964C252.363 33.8098 249.983 36.7645 248.284 40.6606C246.61 44.5567 245.773 49.3418 245.773 55.016C245.773 60.6902 246.61 65.4753 248.284 69.3714C249.983 73.2675 252.363 76.2222 255.422 78.2356C258.481 80.249 262.064 81.2557 266.169 81.2557C270.274 81.2557 273.856 80.249 276.916 78.2356C279.975 76.2222 282.342 73.2675 284.015 69.3714C285.715 65.4753 286.565 60.6902 286.565 55.016Z" fill="currentColor"/><path d="M150.979 30.0488V16.0464H216.95V30.0488H192.358V96.3737H175.571V30.0488H150.979Z" fill="currentColor"/><rect x="371.673" y="96.8224" width="18.4848" height="18.4848" rx="9.24238" transform="rotate(-180 371.673 96.8224)" fill="currentColor"/><path d="M372.267 68.7234L377.867 77.7806L378.434 78.7826L390.302 95.0697C390.868 95.8475 391.773 96.3076 392.735 96.3076H405.618C408.077 96.3076 409.499 93.5194 408.055 91.5286L391.964 69.3382C391.157 68.2254 391.206 66.7074 392.083 65.649L416.313 36.4132C417.94 34.4504 416.544 31.4805 413.995 31.4805H401.474C400.57 31.4805 399.713 31.887 399.141 32.5877L372.495 65.2358C371.683 66.2307 371.591 67.6311 372.267 68.7234Z" fill="currentColor"/><path d="M325.068 16.0468V96.3741H342.051V75.0902L351.248 64.8074L362.564 52.0136L392.373 16.0468H372.017L343.11 51.4645H342.051V16.0468H325.068Z" fill="currentColor"/></svg></a><p>Intelligence, in your hands.</p></div>
 <div class="ftk"><b>Product</b><a href="software.html">Software</a><a href="models.html">Models</a><a href="pricing.html">Pricing</a><a href="devdoc.html">Dev Doc</a></div>
 <div class="ftk"><b>Company</b><a href="#">About</a><a class="hi" href="#">Careers</a><a class="hi" href="#">Contact</a><a href="#">Press</a></div>
-<div class="ftk"><b>Resources</b><a href="faq.html">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a><a data-reserve href="software.html#early">Get early access</a></div></div>
+<div class="ftk"><b>Resources</b><a href="faq.html">FAQ</a><a href="#">Privacy</a><a href="#">Terms</a><a data-reserve href="software.html#early">Reserve your spot</a></div></div>
 <div class="ftb"><span>© 2026 Tokkey · Concept renders</span><span>Own your intelligence.</span></div></footer>
 <script>if(!matchMedia('(max-width:767px)').matches){
 const $=id=>document.getElementById(id),clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),sm=t=>t*t*(3-2*t),lerp=(a,b,t)=>a+(b-a)*t,seg=(p,a,b)=>clamp((p-a)/(b-a)),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
@@ -980,9 +1014,10 @@ requestAnimationFrame(frame);Y+=(scrollY-Y)*.14;intro(now);if(window.ftdots)ftdo
  const o3=ease(seg(qo,0,.22));$('lid3').style.opacity=clamp(o3*3)*uo;
  ascii3(now,.6*seg(q,.06,.14)*(1-seg(q,1-3*Ht,1-2.3*Ht)));$('t3').style.opacity=seg(q,.05,.1)*(1-seg(q,.2,.28));
  {const e=ease(seg(qo,.16,.52))*(1-ease(seg(q,1-3*Ht,1-2.3*Ht)));$('lap').style.opacity=1-seg(enx,.55,.95);$('lap').style.transform=`translate(-50%,-50%) translate(${-LZ.dx*e}px,${(36-LZ.dy)*e}px) scale(${lerp(1,LZ.z,e)})`;$('lap').style.clipPath=e>.001?`inset(-200px -400px ${(LZ.hl-LZ.cut)*e}px -400px)`:'none'}
- [['p1',.54,.64],['p2',.6,.7],['p3',.66,.76],['f1',.72,.8],['f2',.75,.83],['f3',.78,.86],['tasks',.82,.94]].forEach(([id,a,b])=>{const e=ease(seg(qo,a,b))*uo;$(id).style.opacity=e;$(id).style.transform=`translateY(${lerp(26,0,e)}px)`});
- const tt=now/1000;$('cpu').textContent=Math.round(19+6*Math.sin(tt*1.3))+'%';$('mem').textContent=Math.round(81+2*Math.sin(tt*.7))+'%';$('gpu').textContent=Math.round(60+9*Math.sin(tt*1.7))+'%';
-  // SR
+ [['p1',.54,.66]].forEach(([id,a,b])=>{const e=ease(seg(qo,a,b))*uo;$(id).style.opacity=e;$(id).style.transform=`translateY(${lerp(26,0,e)}px)`});
+ window.__s3q=q;
+ const tt=now/1000;
+   // SR
   {const u=clamp((Y-SR.top)/SR.h),tn=now/1000;$('rcv').style.transform=`translateY(${-ROV*ease(seg(u,.3,.6))}px) scale(${RK})`;
    const en=clamp((Y-SR.top+H*.85)/(H*.85));ascii5(now,.55*Math.max(seg(u,0,.08),seg(en,.2,1))*(1-seg(u,.97,1)));
    const act=rhov>=0?rhov:Math.floor(tn/2.6)%4;
@@ -1124,6 +1159,19 @@ const tabs=[...document.querySelectorAll('#mtabs button')],pns=[...document.quer
 tabs.forEach(b=>b.onclick=()=>{const i=+b.dataset.i;tabs.forEach(x=>x.classList.toggle('on',x===b));pns.forEach((p,j)=>p.classList.toggle('on',j===i))});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.08});
 document.querySelectorAll('#mob .k-rv').forEach(n=>io.observe(n));
+})();
+</script>
+<script>
+/* Screen 3: scrolling switches Models -> Chat -> Router (one page per scroll segment); hover/click on the sidebar still switches manually */
+(function(){var st=document.getElementById('s3st'),host=document.getElementById('p1');if(!st||!host)return;
+var seq=['models','chat','router'],A=.45,B=.645,last=-1;
+function go(p){if(st.getAttribute('data-p')!==p)st.setAttribute('data-p',p)}
+st.querySelectorAll('.s3t').forEach(function(b){var p=b.getAttribute('data-p');
+ b.addEventListener('mouseenter',function(){go(p)});b.addEventListener('focus',function(){go(p)});b.addEventListener('click',function(){go(p)});
+ b.addEventListener('touchstart',function(){go(p)},{passive:true})});
+(function tick(){var q=window.__s3q;
+ if(typeof q==='number'){var i=Math.min(2,Math.max(0,Math.floor((q-A)/(B-A)*3)));if(i!==last){last=i;go(seq[i])}}
+ requestAnimationFrame(tick)})();
 })();
 </script>
 </body></html>
