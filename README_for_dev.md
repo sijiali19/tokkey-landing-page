@@ -15,3 +15,9 @@ Static site, no build step. Open `index.html` through any static server (ES modu
 - Pages linked from the nav but not in this folder (`software.html`, `technology.html`, `faq.html`, `pricing.html`, `devdoc.html`, `models.html`, `thanks.html`) already exist in the repo / are unchanged.
 - `config.js` holds a placeholder Stripe link; set `STRIPE_URL`.
 - Placeholder content to replace before launch: blog posts, dates, newsletter form, "Draft title" tags.
+
+## v64 additions (Nov 12)
+- `index.html` — "Made for your daily tasks" autoplay carousel (`#c5`, 5 slides, images `c5_*.webp`); "Personal intelligence" + "Local power" merged into one spine layout (`#s9`, 1920px design stage scaled by `--nk`, assets `z_a/z_b.webp`, `n9b_*`, `n11_*`); FAQ heading left-aligned.
+- Floating **Sign up for Kickstarter** button (`#kkw`, glass style) with sticker (`kk_sticker.png`, appears after 10 s for 30 s) and email form. Markup, CSS and JS are at the end of `index.html`.
+- **TODO for dev:** (1) the email form is front-end only: wire `#kkf` submit to your endpoint (e.g. Kickstarter "notify me" / email service); (2) add the Kickstarter campaign URL; (3) sticker is cropped from a 172px sprite, replace with an official high-res asset (https://www.kickstarter.com/help/brand_assets).
+- Design reference: Figma file VY7ZJBmhwLJcMCpQ6fQtrW (Scene 02, node 900:2932).
