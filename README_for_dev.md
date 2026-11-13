@@ -21,3 +21,12 @@ Static site, no build step. Open `index.html` through any static server (ES modu
 - Floating **Sign up for Kickstarter** button (`#kkw`, glass style) with sticker (`kk_sticker.png`, appears after 10 s for 30 s) and email form. Markup, CSS and JS are at the end of `index.html`.
 - **TODO for dev:** (1) the email form is front-end only: wire `#kkf` submit to your endpoint (e.g. Kickstarter "notify me" / email service); (2) add the Kickstarter campaign URL; (3) sticker is cropped from a 172px sprite, replace with an official high-res asset (https://www.kickstarter.com/help/brand_assets).
 - Design reference: Figma file VY7ZJBmhwLJcMCpQ6fQtrW (Scene 02, node 900:2932).
+
+## Software page (Nov 12)
+- `software.html` (new) — the page the nav's "Software" link and "Reserve your spot" (`software.html#early`) point to. Single static file, no build step.
+- Structure: fixed header (same as `index.html`; inverts to dark-on-light over the light sections) → hero "Own your AI." → five feature scenes laid out one after another (Agent Hub, Private Chat, No AI Credits, Your existing workflow, Router) → Early access form (`#early` / `#access`) → footer.
+- Feature scenes are HTML/CSS, not images. Every size inside `.fx-stage` is a Figma pixel multiplied by `--u` (= `min(100cqw,1920px)/1920`), so a scene scales with the viewport. At ≤1100 px the copy stacks above the UI.
+- Fonts follow `index.html`: titles Inter (Google Fonts link), body Geist and labels Geist Mono (`fonts/Geist-Variable.woff2`, `fonts/GeistMono-Variable.woff2`).
+- Background of the hero and the closing block is `hero.jpg`. The character-field pattern is drawn on three `<canvas>` elements by the last inline `<script>`; it is static under `prefers-reduced-motion`.
+- **TODO for dev:** the Early access form is front-end only (`onsubmit` just swaps the button label): wire it to your endpoint. Footer links "Pricing", "Dev Doc", "FAQ" are `#` placeholders. The "$20 Router credit" copy needs sign-off before launch.
+- Design reference: Figma file VY7ZJBmhwLJcMCpQ6fQtrW, page "11/12", frame "Features" (node 1094:790). The page uses a neutral grey glow behind the UI cards where Figma has pale blue.
