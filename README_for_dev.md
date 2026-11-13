@@ -36,3 +36,11 @@ Static site, no build step. Open `index.html` through any static server (ES modu
 - How it works: on wide screens the script moves each `.fx-stage` into `#fxvStage`; on narrow screens it moves them back into their section. The breakpoint lives in two places that must stay in sync: the media queries in the CSS and `matchMedia('(min-width:761px)')` in the script. Do not put `overflow:hidden/auto` on an ancestor of `.fxv` (it breaks sticky).
 - Preview micro-interactions (demo only, nothing is sent): agent picker (`.hub-opt`), model menu (`.comp .sel`, `#fxMenu`), and a `<dialog id="fxDialog">` opened by "Open … ↗", the send buttons, "Review & continue →" and the chat follow-up field. Replace those handlers if these should lead to real product entry points.
 - Motion and interactions are adapted from the "Tokkey Features" hand-off (`index.html` + `style.css` + `app.js`, Figma section 1066:1508). Fonts, colours and the grey glow are unchanged from the previous version of this page.
+
+## Private agent scene + responsive pass (Nov 13)
+- `index.html` — "A private agent on your Mac" (`#s3`): the screen video is replaced by an HTML scene (`#p0`): ribbon wallpaper (`s3_wall2.webp`), a dialog that loops through ask → think → answer, the Tokkey status panel, the slogan, and a steadily rotating gradient border. The Tokkey key stays visible under the screen. Styles and script live in `<style id="ag-motion">` and the script after it.
+- The same section now scales with window height (short laptop windows, tablets) and has a phone layout (a copy of the scene inside `.k-m3`).
+- Phones (≤767px): cards get 20px padding and 12px gaps (`<style id="mob-space">`); FAQ, the closing CTA and the footer are moved out of `#s9` (hidden on phones) so they show; the closing statement `#s12` is readable.
+- Phone hero uses the same character-field ripple as the desktop hero (`<style id="mob-ripple">` + script) instead of `m_ripple_hero.jpg`.
+- `s3_screen.mp4` / `s3_screen_poster.jpg` are no longer referenced by `index.html` (left in place).
+- To check before launch: the dialog is titled "Siri" with the line "Apple Intelligence · on-device via Tokkey". These are Apple trademarks; confirm the wording is cleared or swap in a neutral name.
