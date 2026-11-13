@@ -406,19 +406,20 @@ footer .flowbg{opacity:.55}
 
 /* ───────── Features (Figma · Tokkey landing 11/12) — five scenes, laid out flat ───────── */
 /* Inside this block every `Nu` is one Figma pixel on the 1920 frame; build.py turns it into calc(N*var(--u)). */
-.fx{--paper:#fafaf7;--fink:#282c29;--fmut:#747a77;--fline:#e6e9e4;--fbadge:#eff3ea;--facc:#536e50;--fbub:#f1f3f0;--fsub:#a0a6a1;
-  container-type:inline-size;background:transparent;color:var(--fink);z-index:1}
-.fx-in{--u:calc(min(100cqw,1920px)/1920);max-width:1920px;margin:0 auto;display:flex;align-items:center;gap:calc(80*var(--u));padding:0 calc(128*var(--u));min-height:calc(1080*var(--u))}
-.fx-copy{flex:0 0 calc(560*var(--u));min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,1.46cqw,28px)}
+#features,.fx{--paper:#fafaf7;--fink:#282c29;--fmut:#747a77;--fline:#e6e9e4;--fbadge:#eff3ea;--facc:#536e50;--fbub:#f1f3f0;--fsub:#a0a6a1;
+  background:transparent;color:var(--fink);z-index:1}
+.fx-story{--u:calc(min(100cqw,1920px)/1920);--fease:cubic-bezier(.22,1,.36,1);position:relative;z-index:1}
+.fx-in{width:100%}
+.fx-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,1.46cqw,28px)}
 .fx-label{font:500 14px/20px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--fmut)}
 .fx-h{font:500 clamp(36px,3.33cqw,64px)/1.05 var(--sans);letter-spacing:-.03em;color:rgba(40,44,41,.55)}
 .fx-h em{font-style:normal;color:var(--fink)}
 .fx-p{font:400 clamp(18px,1.2cqw,23px)/1.52 var(--sans);color:var(--fmut);max-width:calc(520*var(--u))}
 .fx-note{display:flex;align-items:center;gap:9px;padding-top:12px;font:400 14px/20px var(--sans);color:var(--fmut)}
 .fx-note svg{flex:none;width:15px;height:15px}
-.fx svg.ln{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#features svg.ln{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-.fx-stage{position:relative;flex:0 0 calc(1024*var(--u));height:calc(var(--h)*var(--u));font-family:var(--sans)}
+.fx-stage{position:relative;width:calc(1024*var(--u));height:calc(var(--h)*var(--u));font-family:var(--sans)}
 .fx-stage p{margin:0}
 .atm{position:absolute;border-radius:50%;background:#dfe0dc;filter:blur(calc(44*var(--u)));pointer-events:none}
 .ui{position:absolute;display:flex;flex-direction:column;background:#fff;border:1px solid var(--fline);box-shadow:0 calc(14*var(--u)) calc(44*var(--u)) rgba(40,44,41,.06)}
@@ -540,11 +541,12 @@ footer .flowbg{opacity:.55}
 .opt.c .do{background:#fff;border:1px solid var(--fline);color:var(--fink)}
 
 /* stacked layout — copy above, UI below, UI fills the width */
-@media (max-width:1100px){
-  .fx-in{--u:calc((100cqw - 2*var(--gutter))/1024);flex-direction:column;align-items:flex-start;gap:var(--s6);padding:var(--s12) var(--gutter);min-height:0}
-  .fx-copy{flex:none;width:100%;max-width:640px}
+@media (max-width:760px){
+  .fx-story{--u:calc((100cqw - 2*var(--gutter))/1024)}
+  .fx-in{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s6);padding:var(--s12) var(--gutter)}
+  .fx-copy{width:100%;max-width:640px}
   .fx-p{max-width:none}
-  .fx-stage{flex:none;width:100%}
+  .fxv,.fx-chap{display:none}
 }
 @media (max-width:560px){
   .fx-in{padding:var(--s8) var(--gutter);gap:var(--s4)}
@@ -556,8 +558,69 @@ footer .flowbg{opacity:.55}
 .hero::after{background:linear-gradient(to bottom,transparent,#fafaf7)}
 
 /* light sections · the same ambient character field, dark on paper, capped at 20% */
-#features{position:relative;background:#fafaf7}
+#features{position:relative;background:#fafaf7;container-type:inline-size}
 #fxAmb{position:sticky;top:0;display:block;width:100%;height:100vh;margin-bottom:-100vh;z-index:0;pointer-events:none}
+
+/* ───────── Scroll story (desktop): copy scrolls on the left, the UI stays pinned on the right and cross-fades per chapter ───────── */
+@media (min-width:761px){
+  .fx-story{display:grid;grid-template-columns:calc(560*var(--u)) calc(1024*var(--u));column-gap:calc(80*var(--u));justify-content:center;max-width:1920px;margin:0 auto}
+  /* pull the story up under the hero so the first UI card shows on first paint (folded into the canvas margin: sibling margins collapse) */
+  #fxAmb{margin-bottom:calc(-100vh - min(18vh,160px))}
+  .fx{height:100vh;height:100svh;min-height:620px;display:flex;align-items:center;overflow:visible}
+  .fx-copy{opacity:var(--co,1);transition:opacity 80ms linear;will-change:opacity}
+  .fxv{align-self:start;position:sticky;top:0;height:100vh;height:100svh;min-height:620px;display:flex;align-items:center}
+  .fxv-stage{position:relative;width:calc(1024*var(--u));height:calc(740*var(--u))}
+  .fxv-stage .fx-stage{position:absolute;left:0;top:50%;margin-top:calc(var(--h)*var(--u)/-2);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(25px) scale(.985);transition:opacity .65s var(--fease),transform .85s var(--fease),visibility .85s;will-change:transform,opacity}
+  .fxv-stage .fx-stage.on{opacity:1;visibility:visible;pointer-events:auto;transform:none;z-index:2}
+}
+/* chapter bar — pinned to the bottom of the viewport while the feature story is on screen */
+.fx-chap{position:sticky;bottom:0;z-index:5;height:80px;margin-top:-80px;padding:0 calc(128*min(100cqw,1920px)/1920);display:flex;align-items:center;gap:28px;font:400 12px/16px var(--sans);color:#747a77;background:linear-gradient(rgba(250,250,247,0),#fafaf7 60%)}
+.fx-chap{opacity:0;pointer-events:none;transition:opacity .35s}.fx-chap.show{opacity:1;pointer-events:auto}
+.fx-chap .cnt{display:flex;gap:10px;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.fx-chap .cnt b{font-weight:500;color:#282c29}.fx-chap .cnt i{font-style:normal;color:#c9cec5}
+.fx-chap .lk{display:flex;gap:24px}
+.fx-chap .lk a{display:flex;flex-direction:column;gap:10px;min-width:88px;transition:color .3s}
+.fx-chap .lk a.on{color:#282c29}
+.fx-chap .ln2{position:relative;height:1px;background:#d9ded6}
+.fx-chap .ln2::after{content:"";position:absolute;inset:0;background:#536e50;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.fx-chap .lk a.on .ln2::after{transform:scaleX(1)}
+.fx-chap .cue{margin-left:auto;display:flex;align-items:center;gap:12px;transition:opacity .3s}.fx-chap .cue i{font-style:normal;font-size:16px}
+.fx-chap.end .cue{opacity:0}
+
+/* micro-interactions inside the UI previews */
+:where(.fx-stage) button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:inherit}
+:where(.fx-stage) button:focus-visible,.fx-chap a:focus-visible,.fxd button:focus-visible{outline:2px solid #536e50;outline-offset:2px}
+.hub-opt{transition:background .25s,border-color .25s}
+.hub-opt:not(.on):hover{border-color:#c3c9bf}
+.hub-btn{transition:opacity .2s}.hub-btn:hover,.fsend:hover{opacity:.86}
+.chat-in input.ph{flex:1;min-width:0;border:0;outline:0;background:none;padding:0;font:400 calc(17*var(--u))/calc(23.8*var(--u)) var(--sans);color:var(--fink)}
+.chat-in input.ph::placeholder{color:var(--fsub)}
+.comp .sel svg{transition:transform .25s}.comp .sel[aria-expanded="false"] svg{transform:rotate(-90deg)}
+.s-flow .ui.menu[hidden]{display:none}
+.menu .opt{width:100%;text-align:left;transition:background .25s}
+.menu .opt svg{visibility:hidden}.menu .opt.on svg{visibility:visible}
+.menu .opt:not(.on):hover{background:#f6f7f4}
+.opt .do.review{width:100%;transition:background .2s}.opt .do.review:hover{background:#f6f7f4}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* preview dialog */
+.fxd{padding:40px;width:min(480px,calc(100% - 32px));border:1px solid #e6e9e4;border-radius:24px;background:#fafaf7;color:#282c29;box-shadow:0 24px 96px rgba(40,44,41,.12);font-family:var(--sans)}
+.fxd::backdrop{background:rgba(40,44,41,.19);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.fxd .fx-label{display:block;margin-bottom:16px;color:#747a77}
+.fxd h3{font:500 32px/1.15 'Inter',system-ui,sans-serif;letter-spacing:-.02em;margin:0 0 16px}
+.fxd p{font:400 14px/1.7 var(--sans);color:#747a77;margin:12px 0}
+.fxd p.sum{padding:16px;border-radius:8px;background:#eff3ea;color:#282c29}
+.fxd .done{margin-top:16px;height:44px;padding:0 22px;border:0;border-radius:999px;background:#282c29;color:#fff;font:600 16px/20px var(--sans);cursor:pointer}
+.fxd .x{position:absolute;right:16px;top:12px;width:32px;height:32px;border:0;background:none;font-size:24px;line-height:1;color:#747a77;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.fxv-stage .fx-stage,.fx-copy,.fx-chap .ln2::after{transition:none}.fxv-stage .fx-stage{transform:none}}
+@media (max-width:760px){.fxv,.fx-chap{display:none}}
+/* 761–1100px (e.g. a side panel): same pinned story, tighter columns */
+@media (min-width:761px) and (max-width:1100px){
+  .fx-story{--u:calc(100cqw*.56/1024);grid-template-columns:minmax(0,1fr) calc(1024*var(--u));column-gap:3cqw;padding:0 5cqw;justify-content:stretch}
+  .fx-h{font-size:clamp(28px,4cqw,44px)}
+  .fx-p{font-size:16px;line-height:1.5;max-width:none}
+  .fx-note{font-size:13px}
+  .fx-chap{padding:0 5cqw;gap:16px}.fx-chap .lk{gap:14px}.fx-chap .lk a{min-width:64px}.fx-chap .cue{display:none}
+}
 
 .hero::before{content:none}
 .hero .copy{text-align:center}.hero .sub{margin-left:auto;margin-right:auto}.hero .cta{justify-content:center}
@@ -571,7 +634,6 @@ footer .flowbg{opacity:.55}
 .hero.dark .sub{margin:0 auto 2.5cqw}
 .hero.dark::after{height:160px}
 }
-@media (min-width:1101px){.s-hub .fx-in{min-height:0;padding-top:calc(32*var(--u));padding-bottom:calc(120*var(--u))}}
 #endAmb{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 h1,h2,h3,.h3,.form h3,.what .one h3{font-weight:500}
 .display{letter-spacing:-.035em}
@@ -663,6 +725,8 @@ html.nav-light .hn{background:rgba(250,250,247,.82);border-bottom:1px solid rgba
 <!-- Features — five scenes from Figma, laid out flat (no carousel) -->
 <div id="features">
 <canvas id="fxAmb" aria-hidden="true"></canvas>
+<div class="fx-story">
+<div class="fx-track">
 
 <!-- 01 Agent Hub -->
 <section class="fx s-hub" id="agent-hub">
@@ -672,28 +736,28 @@ html.nav-light .hn{background:rgba(250,250,247,.82);border-bottom:1px solid rgba
       <h2 class="fx-h">Your agents.<br><em>Powered locally.</em></h2>
       <p class="fx-p">Connect compatible agents to Tokkey’s local models. Pick your tool, check its connection, and start working.</p>
     </div>
-    <div class="fx-stage" style="--h:720" role="img" aria-label="Agent Hub: Codex selected and connected to Tokkey, running the local model Qwen3.5 9B on this Mac">
+    <div class="fx-stage s-hub" style="--h:720" role="group" aria-label="Agent Hub: Codex selected and connected to Tokkey, running the local model Qwen3.5 9B on this Mac">
       <div class="atm"></div>
       <div class="ui">
         <div class="rw hub-hd"><b>Agent Hub</b><span>Choose an agent</span></div>
-        <div class="hub-opts">
-          <div class="hub-opt on">
+        <div class="hub-opts" role="tablist" aria-label="Choose an agent">
+          <button type="button" class="hub-opt on" role="tab" aria-selected="true" data-agent="Codex">
             <svg viewBox="0 0 40 40" fill="none" stroke="#282C29" stroke-width="2.31"><g transform="translate(3.91 4.59)"><path d="M16.0909 1.15714C20.2331 1.15714 23.5909 4.51501 23.5909 8.65714V22.1571C23.5909 26.2993 20.2331 29.6571 16.0909 29.6571C11.9488 29.6571 8.59093 26.2993 8.59093 22.1571V8.65714C8.59093 4.51501 11.9488 1.15714 16.0909 1.15714Z"/><path d="M28.4317 8.27811C30.5028 11.8653 29.2737 16.4522 25.6865 18.5233L13.9952 25.2733C10.408 27.3444 5.82107 26.1153 3.75 22.5281C1.67893 18.9409 2.908 14.354 6.49519 12.2829L18.1865 5.53292C21.7737 3.46186 26.3607 4.69092 28.4317 8.27811Z"/><path d="M28.4319 22.5305C26.3608 26.1177 21.7739 27.3467 18.1867 25.2756L6.49534 18.5256C2.90814 16.4546 1.67908 11.8677 3.75015 8.28046C5.82122 4.69326 10.4081 3.4642 13.9953 5.53527L25.6867 12.2853C29.2739 14.3563 30.5029 18.9433 28.4319 22.5305Z"/></g></svg>
             <b>Codex</b><span>Code &amp; build</span>
-          </div>
-          <div class="hub-opt">
+          </button>
+          <button type="button" class="hub-opt" role="tab" aria-selected="false" data-agent="Claude Code" tabindex="-1">
             <svg viewBox="0 0 40 40" fill="none" stroke="#282C29" stroke-width="2.57" stroke-linecap="round"><g transform="translate(3.71 3.71)"><path d="M16.2856 11.4857V1.28571"/><path d="M18.6856 12.1301L23.7856 3.29665"/><path d="M20.4426 13.881L29.276 8.78103"/><path d="M21.0857 16.2904H31.2857"/><path d="M20.4426 18.6881L29.276 23.7881"/><path d="M18.6856 20.4388L23.7856 29.2723"/><path d="M16.2856 21.0857V31.2857"/><path d="M13.8859 20.4388L8.78586 29.2723"/><path d="M12.1288 18.6881L3.29533 23.7881"/><path d="M11.4857 16.2904H1.28571"/><path d="M12.1288 13.881L3.29533 8.78103"/><path d="M13.8859 12.1301L8.78586 3.29665"/></g></svg>
             <b>Claude Code</b><span>Code &amp; debug</span>
-          </div>
-          <div class="hub-opt">
+          </button>
+          <button type="button" class="hub-opt" role="tab" aria-selected="false" data-agent="OpenClaw" tabindex="-1">
             <svg viewBox="0 0 40 40" fill="#282C29"><g transform="translate(4.85 8.6)"><path d="M18.1501 2.39766H12.1501C8.00794 2.39766 4.65007 5.75552 4.65007 9.89766V12.8977C4.65007 17.0398 8.00794 20.3977 12.1501 20.3977H18.1501C22.2922 20.3977 25.6501 17.0398 25.6501 12.8977V9.89766C25.6501 5.75552 22.2922 2.39766 18.1501 2.39766Z"/><circle cx="3.9" cy="3.9" r="3.9"/><circle cx="26.4" cy="3.9" r="3.9"/></g><g transform="translate(13.55 16.85)" fill="#fff"><circle cx="2.4" cy="2.4" r="2.4"/><circle cx="10.5" cy="2.4" r="2.4"/></g></svg>
             <b>OpenClaw</b><span>Automate tasks</span>
-          </div>
+          </button>
         </div>
         <div class="hr"></div>
         <div class="rw hub-sel">
-          <div><b>Codex</b><div class="st"><i></i>Connected to Tokkey</div></div>
-          <span class="hub-btn">Open Codex ↗</span>
+          <div><b class="agent-name">Codex</b><div class="st"><i></i>Connected to Tokkey</div></div>
+          <button type="button" class="hub-btn">Open Codex ↗</button>
         </div>
         <div class="hub-model">
           <div class="id"><small>LOCAL MODEL</small><b>Qwen3.5 9B</b></div>
@@ -714,7 +778,7 @@ html.nav-light .hn{background:rgba(250,250,247,.82);border-bottom:1px solid rgba
       <p class="fx-p">Think, write, and work with your files.<br>All on your Mac.</p>
       <p class="fx-note"><svg class="ln" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Processed on your Mac. Tool network access off.</p>
     </div>
-    <div class="fx-stage" style="--h:600" role="img" aria-label="Private Chat in local-only mode: a question about Client proposal.pdf answered on the Mac">
+    <div class="fx-stage s-chat" style="--h:600" role="group" aria-label="Private Chat in local-only mode: a question about Client proposal.pdf answered on the Mac">
       <div class="atm"></div>
       <div class="ui">
         <div class="rw"><span class="ttl">Private Chat</span><span class="fpill"><svg class="ln" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Local-only</span></div>
@@ -727,10 +791,10 @@ html.nav-light .hn{background:rgba(250,250,247,.82);border-bottom:1px solid rgba
           <p>A six-week project, two review rounds, and a final handoff.<br>The next step is to agree on the scope and deliverables.</p>
         </div>
         <div class="hr"></div>
-        <div class="rw chat-in">
-          <span class="ph">Ask a follow-up…</span>
-          <div class="r"><span class="lm"><i class="fdot"></i>Local model</span><span class="fsend"><svg class="ln" viewBox="0 0 18 18"><path d="M9 14.25V3.75M14.25 9L9 3.75L3.75 9"/></svg></span></div>
-        </div>
+        <form class="rw chat-in">
+          <input class="ph" aria-label="Ask a follow-up in the preview" placeholder="Ask a follow-up…" maxlength="200">
+          <div class="r"><span class="lm"><i class="fdot"></i>Local model</span><button class="fsend" aria-label="Send preview follow-up"><svg class="ln" viewBox="0 0 18 18"><path d="M9 14.25V3.75M14.25 9L9 3.75L3.75 9"/></svg></button></div>
+        </form>
       </div>
     </div>
   </div>
@@ -745,7 +809,7 @@ html.nav-light .hn{background:rgba(250,250,247,.82);border-bottom:1px solid rgba
       <p class="fx-p">Write, ask, and repeat with local AI.<br>No cloud credits needed for those tasks.</p>
       <p class="fx-note">Optional cloud use is billed separately.</p>
     </div>
-    <div class="fx-stage" style="--h:640" role="img" aria-label="Local activity on this Mac: 0 cloud credits used across three tasks completed locally">
+    <div class="fx-stage s-zero" style="--h:640" role="group" aria-label="Local activity on this Mac: 0 cloud credits used across three tasks completed locally">
       <div class="atm"></div>
       <div class="ui">
         <div class="rw"><span class="ttl">Local activity</span><span class="fpill"><i class="fdot"></i>On this Mac</span></div>
@@ -772,25 +836,25 @@ html.nav-light .hn{background:rgba(250,250,247,.82);border-bottom:1px solid rgba
       <p class="fx-p">Choose a Tokkey local model in your compatible AI tool. Keep working where you already are.</p>
       <p class="fx-note">Tokkey works quietly in the background.</p>
     </div>
-    <div class="fx-stage" style="--h:640" role="img" aria-label="Codex composer with the model menu open: Tokkey local model selected, connected through the Tokkey local API">
+    <div class="fx-stage s-flow" style="--h:640" role="group" aria-label="Codex composer with the model menu open: Tokkey local model selected, connected through the Tokkey local API">
       <div class="atm"></div>
       <div class="ui comp">
         <div class="hd"><b>Codex</b><span>/  your-project</span></div>
         <p class="msg">Review the changes in this project and suggest a fix.</p>
         <div class="rw">
-          <span class="sel">Tokkey · Local model<svg class="ln" viewBox="0 0 18 18"><path d="M4.5 6.75L9 11.25L13.5 6.75"/></svg></span>
-          <span class="fsend"><svg class="ln" viewBox="0 0 18 18"><path d="M9 14.25V3.75M14.25 9L9 3.75L3.75 9"/></svg></span>
+          <button type="button" class="sel" aria-expanded="true" aria-controls="fxMenu"><span>Tokkey · Local model</span><svg class="ln" viewBox="0 0 18 18"><path d="M4.5 6.75L9 11.25L13.5 6.75"/></svg></button>
+          <button type="button" class="fsend wf-send" aria-label="Send in the preview"><svg class="ln" viewBox="0 0 18 18"><path d="M9 14.25V3.75M14.25 9L9 3.75L3.75 9"/></svg></button>
         </div>
       </div>
-      <div class="ui menu">
+      <div class="ui menu" id="fxMenu">
         <span class="cap">Choose a model</span>
-        <div class="opt on"><div><b>Tokkey · Local model</b><span>On your Mac · via local API</span></div><svg class="ln" viewBox="0 0 20 20"><path d="M16.6667 5L7.5 14.1667L3.33333 10"/></svg></div>
-        <div class="opt"><div><b>Cloud model</b><span>Your configured provider</span></div></div>
+        <button type="button" class="opt on" data-model="local" aria-pressed="true"><div><b>Tokkey · Local model</b><span>On your Mac · via local API</span></div><svg class="ln" viewBox="0 0 20 20"><path d="M16.6667 5L7.5 14.1667L3.33333 10"/></svg></button>
+        <button type="button" class="opt" data-model="cloud" aria-pressed="false"><div><b>Cloud model</b><span>Your configured provider</span></div><svg class="ln" viewBox="0 0 20 20"><path d="M16.6667 5L7.5 14.1667L3.33333 10"/></svg></button>
       </div>
       <div class="bgapi">
-        <b><i class="fdot"></i>Tokkey local API</b>
-        <span>Connected in the background.</span>
-        <small>No per-token API fee for local runs.</small>
+        <b><i class="fdot"></i><span id="fxApiName">Tokkey local API</span></b>
+        <span id="fxApiDesc">Connected in the background.</span>
+        <small id="fxApiNote">No per-token API fee for local runs.</small>
       </div>
     </div>
   </div>
@@ -805,7 +869,7 @@ html.nav-light .hn{background:rgba(250,250,247,.82);border-bottom:1px solid rgba
       <p class="fx-p">Router matches each task to local or cloud AI. Keep private work on your Mac, and control what cloud models receive.</p>
       <p class="fx-note"><svg class="ln" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>See the route. Control what leaves.</p>
     </div>
-    <div class="fx-stage" style="--h:740" role="img" aria-label="A task enters Router and goes either to Local AI on your Mac or to Cloud AI after you review what is shared">
+    <div class="fx-stage s-route" style="--h:740" role="group" aria-label="A task enters Router and goes either to Local AI on your Mac or to Cloud AI after you review what is shared">
       <div class="atm"></div>
       <div class="stem"></div>
       <svg class="fork" viewBox="0 0 505.3 98" preserveAspectRatio="none" fill="none"><path d="M252.65 0V24M252.65 24C252.65 37.3333 245.983 44 232.65 44H20.65C7.31667 44 0.65 50.6667 0.65 64V98M252.65 24C252.65 37.3333 259.317 44 272.65 44H484.65C497.983 44 504.65 50.6667 504.65 64V98" stroke="#A0A6A1" stroke-width="1.3" vector-effect="non-scaling-stroke"/></svg>
@@ -826,11 +890,34 @@ html.nav-light .hn{background:rgba(250,250,247,.82);border-bottom:1px solid rgba
         <p class="for">For more demanding tasks.</p>
         <div class="box"><small>CONTEXT TO SHARE</small><b>Selected summary</b></div>
         <p class="nt">Review before anything is sent.</p>
-        <span class="do">Review &amp; continue →</span>
+        <button type="button" class="do review">Review &amp; continue →</button>
       </div>
     </div>
   </div>
 </section>
+
+</div>
+<div class="fxv"><div class="fxv-stage" id="fxvStage"></div></div>
+</div>
+<nav class="fx-chap" aria-label="Feature chapters">
+  <span class="cnt"><b id="fxCur">01</b><i>/</i>05</span>
+  <div class="lk">
+    <a href="#agent-hub" class="on"><span class="ln2"></span>Agent Hub</a>
+    <a href="#private-chat"><span class="ln2"></span>Private Chat</a>
+    <a href="#no-ai-credits"><span class="ln2"></span>No AI Credits</a>
+    <a href="#your-workflow"><span class="ln2"></span>Your workflow</a>
+    <a href="#router"><span class="ln2"></span>Router</a>
+  </div>
+  <span class="cue">Scroll <i>↓</i></span>
+</nav>
+<dialog class="fxd" id="fxDialog" aria-labelledby="fxDTitle">
+  <button class="x" type="button" aria-label="Close preview">×</button>
+  <span class="fx-label">Interactive preview</span>
+  <h3 id="fxDTitle"></h3>
+  <div id="fxDBody"></div>
+  <button class="done" type="button">Back to exploring</button>
+</dialog>
+<div id="fxLive" class="sr" role="status" aria-live="polite"></div>
 
 </div>
 
@@ -923,6 +1010,87 @@ html.nav-light .hn{background:rgba(250,250,247,.82);border-bottom:1px solid rgba
   if(!reduce) setInterval(function(){if(vis&&!document.hidden)add(W*(.15+.7*Math.random()),H*(.2+.6*Math.random()))},4200);
   var fr=0;(function loop(now){requestAnimationFrame(loop);if(!vis)return;if(reduce){if(dirty){draw(now);dirty=0}return}if(!(fr++%3)||dirty){draw(now);dirty=0}})(performance.now());
  });
+})();
+</script>
+<script>
+/* Feature scroll story + preview micro-interactions (adapted from the Tokkey Features hand-off: app.js) */
+(function(){
+  var root=document.getElementById('features'); if(!root) return;
+  var steps=[].slice.call(root.querySelectorAll('.fx')), stages=steps.map(function(s){return s.querySelector('.fx-stage')}),
+      host=document.getElementById('fxvStage'), chap=root.querySelector('.fx-chap'), links=[].slice.call(chap.querySelectorAll('.lk a')),
+      cur=document.getElementById('fxCur'), wide=matchMedia('(min-width:761px)'), reduce=matchMedia('(prefers-reduced-motion: reduce)'),
+      active=-1, sched=false;
+  function setActive(i){
+    if(active===i) return; active=i;
+    stages.forEach(function(st,k){var on=k===i; st.classList.toggle('on',on); st.inert=wide.matches&&!on; if(wide.matches&&!on) st.setAttribute('aria-hidden','true'); else st.removeAttribute('aria-hidden')});
+    links.forEach(function(a,k){a.classList.toggle('on',k===i); if(k===i) a.setAttribute('aria-current','step'); else a.removeAttribute('aria-current')});
+    cur.textContent=('0'+(i+1)).slice(-2); chap.classList.toggle('end',i===steps.length-1);
+  }
+  function update(){
+    sched=false; var c=innerHeight*.5, best=0, dist=Infinity;
+    steps.forEach(function(s,i){
+      var r=s.getBoundingClientRect(), d=Math.abs(r.top+r.height/2-c); if(d<dist){dist=d;best=i}
+      var copy=s.querySelector('.fx-copy'), o=1;
+      if(wide.matches&&!reduce.matches){var cr=copy.getBoundingClientRect(); o=Math.max(.08,1-Math.max(0,Math.abs(cr.top+cr.height/2-c)/innerHeight-.16)*2.1)}
+      copy.style.setProperty('--co',o.toFixed(3));
+    });
+    setActive(best);
+    var fr=root.getBoundingClientRect(); chap.classList.toggle('show',fr.top<innerHeight*.45&&fr.bottom>innerHeight*.9);
+  }
+  function req(){ if(!sched){sched=true; requestAnimationFrame(update)} }
+  function layout(){
+    stages.forEach(function(st,i){ if(wide.matches) host.appendChild(st); else steps[i].querySelector('.fx-in').appendChild(st) });
+    active=-1; req();
+  }
+  wide.addEventListener('change',layout);
+  addEventListener('scroll',req,{passive:true}); addEventListener('resize',req);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(req);
+  layout();
+  links.forEach(function(a,i){a.addEventListener('click',function(e){e.preventDefault(); steps[i].scrollIntoView({behavior:reduce.matches?'auto':'smooth',block:'center'})})});
+
+  /* Agent Hub: choose an agent */
+  var tabs=[].slice.call(root.querySelectorAll('.hub-opt')), nameEl=root.querySelector('.agent-name'), openBtn=root.querySelector('.hub-btn');
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){var s=x===t; x.classList.toggle('on',s); x.setAttribute('aria-selected',s); x.tabIndex=s?0:-1});
+      nameEl.textContent=t.dataset.agent; openBtn.textContent='Open '+t.dataset.agent+' ↗';
+    });
+    t.addEventListener('keydown',function(e){var n; if(e.key==='ArrowRight') n=(i+1)%tabs.length; if(e.key==='ArrowLeft') n=(i+tabs.length-1)%tabs.length; if(e.key==='Home') n=0; if(e.key==='End') n=tabs.length-1;
+      if(n!==undefined){e.preventDefault(); tabs[n].click(); tabs[n].focus()}});
+  });
+
+  /* preview dialog */
+  var dlg=document.getElementById('fxDialog'), dT=document.getElementById('fxDTitle'), dB=document.getElementById('fxDBody');
+  function show(title,paras){
+    dT.textContent=title; while(dB.firstChild) dB.removeChild(dB.firstChild);
+    paras.forEach(function(p){var el=document.createElement('p'); el.textContent=p[0]; if(p[1]) el.className=p[1]; dB.appendChild(el)});
+    if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+  }
+  function close(){ if(dlg.close) dlg.close(); else dlg.removeAttribute('open') }
+  dlg.querySelector('.done').addEventListener('click',close); dlg.querySelector('.x').addEventListener('click',close);
+  dlg.addEventListener('click',function(e){ if(e.target===dlg){var r=dlg.getBoundingClientRect(); if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) close()} });
+  openBtn.addEventListener('click',function(){show(nameEl.textContent+', powered locally.',[['This preview shows how your selected agent connects to Qwen3.5 9B through Tokkey.'],['In the Tokkey app, this action opens the selected agent on your computer.']])});
+  root.querySelector('.chat-in').addEventListener('submit',function(e){
+    e.preventDefault(); var inp=e.currentTarget.querySelector('input'); if(!inp.value.trim()){inp.focus(); return}
+    show('Your conversation stays yours.',[['This is an illustrative chat preview. To chat with your own files and a local model, use the Tokkey app.'],['Your typed message is not sent to a model or external service.']]); inp.value='';
+  });
+
+  /* Your workflow: model menu */
+  var trig=root.querySelector('.comp .sel'), menu=document.getElementById('fxMenu'), opts=[].slice.call(menu.querySelectorAll('.opt')), live=document.getElementById('fxLive');
+  trig.addEventListener('click',function(){menu.hidden=!menu.hidden; trig.setAttribute('aria-expanded',String(!menu.hidden))});
+  opts.forEach(function(o){o.addEventListener('click',function(){
+    var local=o.dataset.model==='local';
+    opts.forEach(function(x){var s=x===o; x.classList.toggle('on',s); x.setAttribute('aria-pressed',String(s))});
+    trig.querySelector('span').textContent=local?'Tokkey · Local model':'Cloud model';
+    document.getElementById('fxApiName').textContent=local?'Tokkey local API':'Your cloud provider';
+    document.getElementById('fxApiDesc').textContent=local?'Connected in the background.':'Uses your configured cloud connection.';
+    document.getElementById('fxApiNote').textContent=local?'No per-token API fee for local runs.':'Your provider’s charges apply.';
+    live.textContent=local?'Tokkey local model selected.':'Cloud model selected.';
+  })});
+  root.querySelector('.wf-send').addEventListener('click',function(){show('Keep working where you are.',[['This preview illustrates selecting Tokkey as the model provider inside a compatible tool. Connect the Tokkey local API in your tool to run real tasks.']])});
+
+  /* Router: review before sharing */
+  root.querySelector('.do.review').addEventListener('click',function(){show('Review what leaves your Mac.',[['Selected summary: a launch plan to refine.','sum'],['Only the context you choose would be shared with a cloud model. Your original files stay outside this selected summary.'],['This is a visual preview. Nothing is sent to a cloud service.']])});
 })();
 </script>
 <script>(function(){var h=document.documentElement,on=false;var lt=false,dk=[].slice.call(document.querySelectorAll('.hero,.endwrap'));function f(){var v=(window.scrollY||h.scrollTop)>40;if(v!==on){on=v;h.classList.toggle('lg-s',v)}var y=36,d=false;for(var i=0;i<dk.length;i++){var r=dk[i].getBoundingClientRect(),b=r.bottom-(dk[i].classList.contains('hero')?96:0);if(r.top<=y&&b>y){d=true;break}}if(lt===d){lt=!d;h.classList.toggle('nav-light',lt)}}addEventListener('resize',f);addEventListener('scroll',f,{passive:true});f()})();</script>
