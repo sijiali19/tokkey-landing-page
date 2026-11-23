@@ -37,7 +37,7 @@ flow.webp hero.jpg lid.png tokkey.png   shared backgrounds / renders
 
 1. **Hero** (`#sx.hv`): plays once on load (~9.6 s), no scroll pin. MacBook lid opens → camera pushes in and centres the key → MacBook dissolves into the Mac mini → title lands on "Own your *intelligence*". Phrases: Bigger AI models / Private AI agents / A full AI stack / Unlimited AI tokens, with the second line "for your device, in one key". "intelligence" flickers through ten typefaces and settles on Ancizar Serif italic. The whole hero is a 1920×1080 stage scaled to the viewport (`--hvz`). Partner logos sit in one line under the hero (`.hv-pband`).
 2. **Bigger models on the same Mac** (`.s2-sec`): pinned on desktop; first half of the scroll shows 16GB, second half 48GB. Model cards rotate to the front in order every second.
-3. **Pay once** cost compare (`.s3-sec`), **Features** (`.ft-sec`), **Meet Tokkey** film (`.fm-sec`): the film plays muted inline (YouTube `7RuqfsluFnU` on the live domain, `assets/film/tokkey_film.mp4` where YouTube is blocked); click opens the in-page player with sound.
+3. **Pay once** cost compare (`.s3-sec`), with the "$0 per token. On Mac mini and iPhone too." band underneath (`.s3-sch`, `.s3-sc`, images in `assets/sc/`), **Features** (`.ft-sec`), **Meet Tokkey** film (`.fm-sec`): the film plays muted inline (YouTube `7RuqfsluFnU` on the live domain, `assets/film/tokkey_film.mp4` where YouTube is blocked); click opens the in-page player with sound.
 4. **Run bigger AI models on the memory you already have** (`.c6-sec`), **Be first to try Tokkey** band (`.eb-sec`), **Everyday AI tasks** gallery (`.gl-sec`), footer with subscribe card (`.fs-sec`).
 
 ## 4. Notes for developers
