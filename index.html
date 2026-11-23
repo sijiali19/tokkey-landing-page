@@ -1920,16 +1920,15 @@ addEventListener('resize',fit);fit();if(document.fonts)document.fonts.ready.then
 /* one orchestrated moment: when the section comes into view, step from 16GB to 48GB once */
 /* autoplay until the visitor takes over: each card takes the front slot in turn, then the memory toggles 16GB <-> 48GB and the new set does the same */
 let auto=!matchMedia('(prefers-reduced-motion: reduce)').matches,vis2=false,paused=false,step=0,tk=null;
-function tick(){clearTimeout(tk);if(!auto||!vis2||paused)return;rot[cur]++;open=false;hov=null;place();tk=setTimeout(tick,1000)}
+function tick(){clearTimeout(tk);if(!auto||!vis2)return;if(hov!==null){tk=setTimeout(tick,600);return}rot[cur]++;open=false;place();tk=setTimeout(tick,1000)}
 /* desktop: the section pins while you scroll; the first half shows 16GB, the second half 48GB (scrolling back up returns to 16GB) */
 let sMem=-1;function onScr(){if(matchMedia('(max-width:1023px)').matches)return;const r=sec.getBoundingClientRect(),run=r.height-innerHeight;if(run<=0)return;
  const want=(-r.top/run)>.5?1:0;if(want===sMem)return;sMem=want;auto=!matchMedia('(prefers-reduced-motion: reduce)').matches;
- if(want!==cur){rot[want]=0;open=false;hov=null;set(want)}const hn=document.getElementById('s2hint');if(hn)hn.textContent=want?'Scroll up for 16GB':'Scroll to see 48GB';if(auto&&vis2&&!paused){clearTimeout(tk);tk=setTimeout(tick,1200)}}
+ if(want!==cur){rot[want]=0;open=false;hov=null;set(want)}const hn=document.getElementById('s2hint');if(hn)hn.textContent=want?'Scroll up for 16GB':'Scroll to see 48GB';if(auto&&vis2){clearTimeout(tk);tk=setTimeout(tick,1200)}}
 addEventListener('scroll',onScr,{passive:true});setTimeout(onScr,0);
 function stopAuto(){auto=false;clearTimeout(tk)}
 new IntersectionObserver(es=>es.forEach(e=>{vis2=e.isIntersecting;if(vis2)tk=setTimeout(tick,800);else{clearTimeout(tk);if(auto){hov=null;place()}}}),{threshold:.45}).observe(sec);
-deck.addEventListener('mouseenter',()=>{paused=true;clearTimeout(tk)});
-deck.addEventListener('mouseleave',()=>{paused=false;if(auto)tk=setTimeout(tick,600)});
+/* rotation keeps going while the pointer is over the deck; it only waits while a card itself is hovered */
 })();
 </script>
 <script>
