@@ -1282,11 +1282,12 @@ body{background:transparent!important}
 #hvCut{width:1465px;max-width:none;left:733px;top:70px;opacity:0;transform-origin:15.5% 63.4%}
 .hv-shade{position:absolute;left:0;top:0;width:1920px;height:640px;background:linear-gradient(#000 0,rgba(0,0,0,.85) 30%,rgba(0,0,0,0) 100%);pointer-events:none}
 .hv-shade.b{top:auto;bottom:0;height:420px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.7) 60%,rgba(0,0,0,.85));opacity:0}
-.hv-h1{position:absolute;left:0;top:210px;width:1920px;margin:0;text-align:center;font-family:'Geist','HV Inter',sans-serif;font-weight:300;font-size:112px;line-height:156px;letter-spacing:-.03em;color:#808080}
+.hv-h1{position:absolute;left:0;top:210px;width:1920px;margin:0;text-align:center;font-family:'HV Inter',Inter,sans-serif;font-weight:300;font-size:112px;line-height:156px;letter-spacing:-.03em;color:#808080}
 .hv-ph{display:inline-grid;justify-items:center;white-space:nowrap}
-.hv-ph>b{grid-area:1/1;display:inline-flex;align-items:center;gap:0 .23em;font-weight:300;opacity:0;transform:translateY(.14em);filter:blur(8px);transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.2,1),filter .45s ease}
+.hv-ph>b{grid-area:1/1;display:inline-flex;align-items:center;gap:0 .23em;font-weight:600;color:#fff;opacity:0;transform:translateY(.14em);filter:blur(8px);transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.2,1),filter .45s ease}
 .hv-ph>b.on{opacity:1;transform:none;filter:none}
 .hv-ph em,.hv-l2 em{font-style:normal;font-weight:600;color:#fff}
+.hv-ph>b>span{font-weight:600;color:#fff}
 .hv-ph .hv-intl{color:#fff}
 /* inline pill + chips, scaled up from the 16GB section (x1.79) */
 .hv-pill{display:inline-flex;align-items:center;justify-content:center;height:71px;border:1.8px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);border-radius:200px;box-sizing:border-box;flex:none;letter-spacing:0}
@@ -1320,13 +1321,20 @@ body{background:transparent!important}
  .hv-view{height:auto;overflow:visible}
  .hv-stage{display:none}
  .hv-mob{display:block;padding:112px 20px 8px;text-align:center;font-family:'HV Inter',Inter,sans-serif;color:#fff}
- .hv-mob .hv-m-l{font-family:'Geist','HV Inter',sans-serif;font-weight:300;color:#808080}
+ .hv-mob .hv-m-l{font-weight:600;color:#fff}
  .hv-mob h1{margin:0;font-weight:600;font-size:clamp(36px,10vw,64px);line-height:1.08;letter-spacing:-.03em}
  .hv-mob{overflow:hidden}
  .hv-mob .im{display:block;width:160vw;max-width:none;margin:24px 0 0 calc(25.2vw - 20px);height:auto;-webkit-mask-image:linear-gradient(#000 70%,transparent);mask-image:linear-gradient(#000 70%,transparent)}
  .hv-mob .a{margin:8px 0 0;font-weight:700;font-size:20px;line-height:1.3;letter-spacing:-.02em}
  .hv-mob .b{margin:4px 0 0;font-weight:300;font-size:16px;line-height:1.4;color:rgba(255,255,255,.55)}
  .hv-pband{padding:40px 16px 24px;gap:20px}
+}
+
+/* memory diagram: a bit larger, laptop centred on the page (desktop only) */
+@media (min-width:1024px){
+ .c6-sec{height:calc(1156px * var(--z))!important}
+ .c6-c{height:1102px!important}
+ .c6-st{transform-origin:0 0;transform:translateX(-2px) scale(1.09)}
 }
 </style>
 </head><body>
