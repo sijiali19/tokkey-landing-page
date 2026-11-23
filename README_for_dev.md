@@ -1,3 +1,15 @@
+# Tokkey landing page — homepage v3 (Nov 22 2026)
+
+The repo root is now homepage v3 (the version on the Claude preview link). The previous root moved to `v2/` unchanged; see README.md for the full section list.
+
+- New hero: one-screen autoplay (MacBook → key → Mac mini), rotating titles in the 16GB-section style (light grey + bold white, inline key toggle and green-dot chips), "Own your *intelligence*" ending with a typeface flicker. Partner logos in one line under the hero.
+- 16GB / 48GB section switches with scroll; model cards rotate in order.
+- Film plays inline after the cover (YouTube on the live domain, mp4 fallback in `assets/film/`).
+- `software.html` and `blog.html` replaced with the versions linked from the v3 nav.
+- **TODO for dev:** wire the subscribe / early-access forms; replace placeholder nav links; get sign-off on the claims listed in README §4.
+
+---
+
 # Tokkey landing page — homepage update (Nov 2026)
 
 Static site, no build step. Open `index.html` through any static server (ES modules + fetch need http, not file://).

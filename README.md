@@ -1,10 +1,10 @@
 # Tokkey — Homepage (static build)
 
-Scroll-driven marketing homepage for **Tokkey**, a USB-C local-AI key for Mac (0 tokens, runs on-device).
+Marketing homepage for **Tokkey**, a USB-C local-AI key (0 tokens, runs on-device).
 Design: Heather · for amis / cpilot.net. This repo is the hand-off for development.
-**The root of this repo is the latest version. `v1/` is the old version — do not build from it.**
+**The root of this repo is the latest version (homepage v3, Nov 22 2026).** `v2/` is the Nov 13 version and `v1/` is older; both are kept for reference only, do not build from them.
 
-> 中文简述：这是 Tokkey 官网首页的静态成品（纯 HTML/CSS/JS，无构建步骤）。`index.html` 是页面本体，`f/` 是滚动动画的帧序列，`fonts/` 是 Commit Mono。品牌规范见下方 **Brand design spec**（完整中文原版在 `docs/`）。
+> 中文简述：仓库根目录是最新的官网首页 v3（纯 HTML/CSS/JS，无构建步骤）。`index.html` 是首页，`software.html`、`blog.html` 是导航里的两个页面。旧版本在 `v2/`（11 月 13 日）和 `v1/`，只作参考。
 
 ---
 
@@ -19,7 +19,44 @@ python3 -m http.server 8765      # then open http://localhost:8765
 
 Deploy: upload the folder as-is to any static host (Vercel / Netlify / Cloudflare Pages / S3). Keep the folder structure unchanged.
 
-## 2. What's in the folder
+## 2. What's in the folder (v3)
+
+```
+index.html            homepage: HTML + CSS + inline scripts, no build step
+software.html         "Software" page (nav)          blog.html   "Blog" page (nav, placeholder posts)
+vf/                   hero lid-open frames (f00–f34.webp + hi.webp)
+assets/hero/          mini_cut.webp: Mac mini with Tokkey (hero end frame, cut out from the Figma storyboard)
+assets/hvfonts/       hero fonts (woff2, OFL, licences in licenses/)
+assets/film/          tokkey_film.mp4: preview cut used when YouTube can't be embedded
+assets/…              section art, icons and model logos (s2, s3, ft, mt, cl6, nav, logos)
+fonts/                Commit Mono (OFL)
+flow.webp hero.jpg lid.png tokkey.png   shared backgrounds / renders
+```
+
+## 3. Homepage sections (top → bottom)
+
+1. **Hero** (`#sx.hv`): plays once on load (~9.6 s), no scroll pin. MacBook lid opens → camera pushes in and centres the key → MacBook dissolves into the Mac mini → title lands on "Own your *intelligence*". Phrases: Bigger AI models / Private AI agents / A full AI stack / Unlimited AI tokens, with the second line "for your device, in one key". "intelligence" flickers through ten typefaces and settles on Ancizar Serif italic. The whole hero is a 1920×1080 stage scaled to the viewport (`--hvz`). Partner logos sit in one line under the hero (`.hv-pband`).
+2. **Bigger models on the same Mac** (`.s2-sec`): pinned on desktop; first half of the scroll shows 16GB, second half 48GB. Model cards rotate to the front in order every second.
+3. **Pay once** cost compare (`.s3-sec`), with the "$0 per token. On Mac mini and iPhone too." band underneath (`.s3-sch`, `.s3-sc`, images in `assets/sc/`), **Features** (`.ft-sec`), **Meet Tokkey** film (`.fm-sec`): the film plays muted inline (YouTube `7RuqfsluFnU` on the live domain, `assets/film/tokkey_film.mp4` where YouTube is blocked); click opens the in-page player with sound.
+4. **Run bigger AI models on the memory you already have** (`.c6-sec`), **Be first to try Tokkey** band (`.eb-sec`), **Everyday AI tasks** gallery (`.gl-sec`), footer with subscribe card (`.fs-sec`).
+
+## 4. Notes for developers
+
+- Serve over HTTP (frames and fonts load by relative URL). Desktop design is a 1920 canvas per section, scaled with `--z`; below 1024 px each section switches to a stacked layout. On phones the hero shows its final frame only (no animation, the lid frames are still requested but small).
+- **Fonts**: Geist / Geist Mono (Google Fonts) for the page, Inter for some titles, Commit Mono for data labels. The hero additionally self-hosts Inter, Ancizar Serif and the nine typefaces of the "intelligence" flicker (`assets/hvfonts/`). This goes beyond the "Inter + Commit Mono only" rule in `AGENTS.md`; it is the designer's call for this version.
+- Forms (subscribe, early access) are front-end only: wire them to your email service. Nav links Pricing / Dev Doc / FAQ / Models are placeholders.
+- Copy that needs sign-off before launch: "Unlimited AI tokens", "$0 per token", model sizes per memory tier, pricing placeholders in the cost compare, "Works with your PC, Mac mini and iPhone".
+- Apple / Mac mini imagery and model logos are trademarks of their owners: confirm usage before launch.
+- Design reference: Figma file `VY7ZJBmhwLJcMCpQ6fQtrW`, page "11/20 homepage combination" (`1607:6625`); hero storyboard section `1719:899`.
+
+
+---
+
+## Previous version (`v2/`, Nov 13): notes kept for reference
+
+Paths below are relative to `v2/`.
+
+### What's in the folder
 
 ```
 index.html          the whole page: HTML + CSS + one <script> (≈190 KB)
@@ -39,7 +76,7 @@ How the frames work: `index.html` builds URLs as `f/<seq>/<NNN>.webp` (`String(i
 Page structure (top → bottom, tall `.pin` wrappers with a `position:sticky` child drive each scroll scene):
 `#sx` hero + "idea" scene · `#s3` laptop UI scene · `#s4` feature list + showcase card · `#sr` "Release the True Power" tabs scene · `#s6` compare scene · `#s7` quote wall · `#s8` rent-vs-own · `#s9`/`#s10` privacy, waitlist, memory compare · `#faq` · `#end` CTA + footer.
 
-## 3. Notes for developers
+### Notes for developers
 
 - Desktop-first design at **1440 px** wide. On phones (**≤ 767 px**) the site is a **separate, static, simplified layout** that matches the Figma section "Mobile · 390×844":
   - Markup: `<main id="mob">` (hero → Turn your Mac → private agent → local models/router → large models tabs → comments), then FAQ, a CTA block (`#mobcta`) and the footer. CSS: the block headed `MOBILE (<=767px)` at the end of `<style>`; all mobile class names are prefixed `k-` to avoid clashing with desktop classes.
@@ -52,14 +89,14 @@ Page structure (top → bottom, tall `.pin` wrappers with a `position:sticky` ch
 - Several scenes are pure CSS "renders" (laptop, glass cards). Real product photography is **not** generated — product images come from the design team (see Photography rule below).
 - Copy is placeholder where marked (performance numbers, testimonials). Do not ship claims without the test report.
 
-## 3b. Deposit flow (Stripe)
+### Deposit flow (Stripe)
 
 1. Every CTA marked `data-reserve` ("Get early access", "Get in line") goes to the Stripe **Payment Link** set in `config.js` → `STRIPE_URL`. Until that is replaced, the buttons open `thanks.html?demo=1` so the whole flow can be previewed.
 2. In Stripe Dashboard → Payment Links → your link → *After payment* → *Don't show confirmation page* → redirect to `https://YOUR-DOMAIN/thanks.html?session_id={CHECKOUT_SESSION_ID}` (Stripe docs: [Customize redirect behavior](https://docs.stripe.com/payments/checkout/custom-success-page)).
 3. `thanks.html` plays a confetti burst ("Congrats on unlocking local AI power."), holds, then sends the user to `index.html?reserved=1`, where a small toast says "Deposit received. You're in line." Timings are in `config.js` (`CONFETTI_MS` 1600, `HOLD_MS` 1000). Respects `prefers-reduced-motion` (no confetti, redirect after 1.5 s).
 4. `thanks.html` is static and does **not** verify payment — anyone can open it. It only celebrates; the source of truth is the Stripe Dashboard. Do not unlock anything real behind it.
 
-## 4. Repo hygiene (replacing the old upload)
+### Repo hygiene (replacing the old upload)
 
 You don't need to delete the repo. Replace the contents in one commit so history stays intact:
 
@@ -70,6 +107,8 @@ git add -A && git commit -m "Replace with Tokkey homepage v2" && git push
 ```
 
 Large files: each file is well under GitHub's 100 MB limit; total ≈ 38 MB is fine.
+
+---
 
 ---
 
