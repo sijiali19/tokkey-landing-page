@@ -437,3 +437,33 @@ body.no-tk .spi.lt{display:inline-flex}
 /* Hero title = Docs hero title size (.h1: clamp(40px,4.6vw,80px)/1.04; 40/48 on mobile) */
 .hero h1{font-size:clamp(40px,4.6vw,80px)!important;line-height:1.04!important;letter-spacing:-.03em!important}
 @media (max-width:767px){.hero h1{font-size:40px!important;line-height:48px!important}}
+/* ===== Mobile Advanced: every control inline (Simple keeps the Filters sheet) ===== */
+@media (max-width:860px){
+  body.v-advanced .panel{display:block!important;position:static!important;inset:auto;max-height:none;overflow:visible;z-index:auto;
+    background:none;border-radius:0;padding:0;margin:16px 0 8px}
+  body.v-advanced .panel .grab,body.v-advanced .panel .apply{display:none!important}
+  body.v-advanced #openF,body.v-advanced .cbar{display:none!important}
+  body.v-advanced .panel .hw{padding:20px;border-radius:20px}
+  body.v-advanced .panel .fld{padding:20px 0;border-bottom:1px solid var(--hair)}
+  body.v-advanced .panel .fld:last-of-type{border-bottom:0;padding-bottom:8px}
+  body.v-advanced .panel .fld h4{margin:0 0 12px}
+  body.v-advanced .panel #ptasks{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px;padding:0 16px;scrollbar-width:none}
+  body.v-advanced .panel #ptasks button{flex:none}
+  body.v-advanced .panel .sizes button{height:36px;padding:0 14px;font-size:13px;border-radius:18px}
+  body.v-advanced .panel #fits{display:flex;flex-wrap:wrap;gap:4px 20px}
+  body.v-advanced .panel .set{font-size:14px;padding:10px 0;margin:0;border-bottom:1px solid rgba(17,17,16,.06)}
+  body.v-advanced .panel .set:last-child{border-bottom:0}
+  body.v-advanced .panel .set select{font-size:15px;text-align:right}
+  body.v-advanced #cats{display:none}
+}
+@media (max-width:860px){
+  body.v-advanced .panel .fld{padding:16px 0!important;margin:0!important}
+  body.v-advanced .panel .hw+.fld{margin-top:8px!important}
+  body.v-advanced .panel .fld:has(#ptasks){display:none}
+  body.v-advanced .panel .fld h4{margin:0 0 10px!important;font-size:14px}
+  body.v-advanced .panel #fits{display:flex!important;flex-wrap:wrap;gap:0 16px}
+  body.v-advanced .panel .fitr{padding:4px 0}
+  body.v-advanced .panel .hint{margin-top:8px}
+  body.v-advanced .panel .hw-r{padding:8px 0}
+  body.v-advanced .panel .hw-r select{height:40px}
+}

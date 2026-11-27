@@ -9,10 +9,10 @@
   nav.innerHTML='<a class="nv-brand" href="index.html" aria-label="Tokkey home"><img class="nv-full wh" src="assets/nav/logo.svg" alt="Tokkey"><img class="nv-full ink" src="assets/nav/logo-ink.svg" alt=""><img class="nv-mark" src="assets/nav/mark.svg" alt=""></a><ul>'+li+'</ul><a class="btn" href="software.html#access">Reserve your spot</a><button class="menu" aria-label="Open menu" aria-expanded="false"><span></span></button>';
   document.body.prepend(nav);
   var sh=document.createElement('div');sh.className='sheet';sh.setAttribute('role','dialog');sh.setAttribute('aria-label','Menu');
-  sh.innerHTML='<div class="row"><a class="brand" href="index.html" style="color:#111110;height:24px;display:block">'+LOGO.replace('<svg','<svg style="height:24px;width:auto"')+'</a><button class="x" aria-label="Close menu">✕</button></div>'+links.map(function(l){return '<a class="big" href="'+l[0]+'">'+l[1]+'</a>'}).join('')+'<a class="btn" style="margin-top:24px" href="software.html#access">Reserve your spot</a>';
+  sh.innerHTML='<div class="row"><a class="sh-brand" href="index.html" aria-label="Tokkey home"><img src="assets/nav/logo.svg" alt="Tokkey"></a><button class="x" aria-label="Close menu"></button></div>'+links.map(function(l){return '<a class="big'+(page===l[2]?' on':'')+'" href="'+l[0]+'">'+l[1]+'</a>'}).join('')+'<a class="btn" href="software.html#access">Reserve your spot</a>';
   document.body.appendChild(sh);
   var mb=nav.querySelector('.menu');mb.onclick=function(){sh.classList.add('open');mb.setAttribute('aria-expanded','true')};
-  sh.querySelector('.x').onclick=function(){sh.classList.remove('open');mb.setAttribute('aria-expanded','false')};
+  sh.querySelector('.x').onclick=function(){sh.classList.remove('open');mb.setAttribute('aria-expanded','false')};sh.addEventListener('click',function(e){if(e.target.closest('a'))sh.classList.remove('open')});
   (function(){var end=document.querySelector('[data-dark-end]');
     var f=function(){var b=end?end.getBoundingClientRect().bottom:innerHeight-scrollY;nav.classList.toggle('nv-s',b<120);
       var y=nav.getBoundingClientRect().top+nav.offsetHeight/2,dk=false;document.querySelectorAll('[data-dark-end],.fs-sec').forEach(function(z){var r=z.getBoundingClientRect();if(r.top<=y&&r.bottom>y)dk=true});
