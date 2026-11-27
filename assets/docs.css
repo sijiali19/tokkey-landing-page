@@ -199,3 +199,16 @@ body.docpage,body.docpage html{background:#fff}
 .pimg img{height:100%}
 @media (max-width:1100px){.feat{grid-template-columns:1fr}.feat .fimg{aspect-ratio:auto}}
 @media (max-width:860px){.feat .fimg{aspect-ratio:auto}.feat .ftxt{padding:16px}}
+
+/* Back button on article and doc pages (back to the Docs home) */
+.backb{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 16px 0 10px;border-radius:18px;border:1px solid var(--hair);background:#fff;
+  font:500 14px/1 var(--sans);color:var(--ink);text-decoration:none;margin:0 0 24px;transition:background .2s,border-color .2s}
+.backb:hover{background:#F0F0ED;border-color:#D6D6D2}
+.backb svg{flex:none}
+.backb:focus-visible{outline:2px solid #4ABE18;outline-offset:2px}
+.docpage .doc>.backb{margin-bottom:16px}
+@media (max-width:860px){
+  .wrap>.backb{margin:0 0 16px}
+  .wrap>.crumb{display:none}
+  .docpage .doc>.backb{margin:8px 0 8px}
+}
