@@ -143,3 +143,44 @@ h1,h2,h3{letter-spacing:-.03em}
   .tn.solid{top:0;left:0;right:0;height:64px;padding:0 8px 0 16px}
   .tn.solid .brand{width:calc(28px*110/111)}.tn.solid .brand svg{height:28px}
 }
+
+/* ===== Unified top nav = homepage bar (Figma 1639:11204) =====
+   Same size and dark glass on every page; full wordmark on the first screen, icon only after it. */
+.tn,.tn.dark,.tn.solid{position:fixed;top:16px;left:16px;right:16px;height:76px;padding:0 36px;border-radius:10px;color:#fff;
+  background:linear-gradient(180deg,rgba(38,38,38,.42),rgba(22,22,22,.3));border:1px solid rgba(255,255,255,.08);border-bottom-color:rgba(255,255,255,.08);
+  -webkit-backdrop-filter:blur(24px) saturate(1.4);backdrop-filter:blur(24px) saturate(1.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.tn .nv-brand{position:relative;display:block;height:32px;width:171px;flex:none}
+.tn .nv-brand img{position:absolute;left:0;top:0;height:32px;transition:opacity .35s ease,transform .35s ease}
+.tn .nv-full{width:171px}
+.tn .nv-mark{width:32px;opacity:0;transform:scale(.9)}
+.tn.nv-s .nv-full{opacity:0;transform:translateX(-6px)}
+.tn.nv-s .nv-mark{opacity:1;transform:none}
+.tn ul,.tn.solid ul{gap:37px;margin-right:37px;font:400 16px/1 'Geist','Inter',sans-serif}
+.tn ul a{opacity:1;color:rgba(255,255,255,.72);font-weight:400;transition:color .2s}
+.tn ul a:hover,.tn ul a.on{color:#fff}
+.tn .btn,.tn.dark .btn,.tn.solid .btn{height:44px;padding:0 22px;border-radius:23px;font:600 16px/1 'Geist','Inter',sans-serif;background:#fff;color:#000;border-color:#fff}
+@media (max-width:900px){
+  .tn,.tn.dark,.tn.solid{top:8px;left:8px;right:8px;height:60px;padding:0 8px 0 16px}
+  .tn .nv-brand{width:140px}.tn .nv-full{width:140px;height:26px!important}.tn .nv-mark{width:26px;height:26px!important}
+  .tn ul{display:none}
+  .tn>.btn,.tn.solid>.btn{display:inline-flex;height:40px;padding:0 16px;font-size:14px;margin-left:auto}
+  .tn .menu{margin-left:4px;color:#fff}
+}
+/* (superseded) */
+.tn.zz-unused{background:linear-gradient(180deg,rgba(34,34,34,.9),rgba(17,17,16,.84))!important;border-color:rgba(255,255,255,.1)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 32px rgba(0,0,0,.14)!important}
+@media (max-width:900px){.tn>.btn,.tn.solid>.btn{padding:0 14px}.tn .menu{width:32px;margin-left:4px;margin-right:-4px}}
+
+/* ===== Light-content state: white transparent gradient glass (Software / Models / Docs) ===== */
+.tn.nv-l{color:#111110!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.64),rgba(250,250,247,.4))!important;
+  border:1px solid rgba(255,255,255,.75)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 1px 0 rgba(17,17,16,.04),0 10px 30px rgba(17,17,16,.07)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(1.8)!important;backdrop-filter:blur(24px) saturate(1.8)!important}
+.tn.nv-l ul a{color:rgba(17,17,16,.62)}
+.tn.nv-l ul a:hover,.tn.nv-l ul a.on{color:#111110}
+.tn.nv-l .btn{background:#111110!important;color:#fff!important;border-color:#111110!important}
+.tn.nv-l .menu{color:#111110}
+.tn .nv-full.ink{opacity:0}
+.tn.nv-l .nv-full.wh{opacity:0}
+.tn.nv-l .nv-full.ink{opacity:1}
+.tn.nv-s .nv-full.ink{opacity:0}
