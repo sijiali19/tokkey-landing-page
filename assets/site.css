@@ -166,6 +166,21 @@ h1,h2,h3{letter-spacing:-.03em}
   .tn>.btn,.tn.solid>.btn{display:inline-flex;height:40px;padding:0 16px;font-size:14px;margin-left:auto}
   .tn .menu{margin-left:4px;color:#fff}
 }
-/* over light content the same dark glass, denser so it does not turn muddy grey */
-.tn.nv-s,body[data-page="docs"] .tn{background:linear-gradient(180deg,rgba(34,34,34,.9),rgba(17,17,16,.84))!important;border-color:rgba(255,255,255,.1)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 32px rgba(0,0,0,.14)!important}
+/* (superseded) */
+.tn.zz-unused{background:linear-gradient(180deg,rgba(34,34,34,.9),rgba(17,17,16,.84))!important;border-color:rgba(255,255,255,.1)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 32px rgba(0,0,0,.14)!important}
 @media (max-width:900px){.tn>.btn,.tn.solid>.btn{padding:0 14px}.tn .menu{width:32px;margin-left:4px;margin-right:-4px}}
+
+/* ===== Light-content state: white transparent gradient glass (Software / Models / Docs) ===== */
+.tn.nv-l{color:#111110!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(250,250,247,.62))!important;
+  border:1px solid rgba(255,255,255,.75)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 1px 0 rgba(17,17,16,.04),0 10px 30px rgba(17,17,16,.07)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(1.8)!important;backdrop-filter:blur(24px) saturate(1.8)!important}
+.tn.nv-l ul a{color:rgba(17,17,16,.62)}
+.tn.nv-l ul a:hover,.tn.nv-l ul a.on{color:#111110}
+.tn.nv-l .btn{background:#111110!important;color:#fff!important;border-color:#111110!important}
+.tn.nv-l .menu{color:#111110}
+.tn .nv-full.ink{opacity:0}
+.tn.nv-l .nv-full.wh{opacity:0}
+.tn.nv-l .nv-full.ink{opacity:1}
+.tn.nv-s .nv-full.ink{opacity:0}
