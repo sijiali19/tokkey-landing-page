@@ -1,0 +1,104 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Models · Tokkey</title><meta name="description" content="Find the right model for your Mac. See what runs today, and what runs with Tokkey.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400&family=Geist+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/models.css">
+</head>
+<body data-page="models" data-dark-top>
+<!-- 第一屏 · hero (same background as the Software page) -->
+<section class="hero" data-dark-end>
+  <canvas id="heroAmb" aria-hidden="true"></canvas>
+  <div class="copy">
+    <h1>Find the right model <br>for your Mac<span class="dot">.</span></h1>
+    <p class="sub">See what your Mac runs today, and what it runs with Tokkey.</p>
+    <div class="cta"><a class="btn cream" href="#all" id="check">Check my Mac</a><a class="btn glass" href="#all">Browse all models</a></div>
+  </div>
+</section>
+
+<!-- 第二屏 · models list: Simple / Advanced / Memory map -->
+<section class="list wrap" id="all" aria-labelledby="allH">
+  <div class="cbar mob"><span id="cbarT">M4 · 16 GB · Tokkey attached</span><button id="cbarB">Change</button></div>
+  <div class="lh">
+    <div>
+      <h2 id="allH"><span class="dsk">Models for your Mac<span class="dot">.</span></span><span class="mob">All models for your Mac</span></h2>
+      <div class="cfgline" id="cfgS"><i></i><span id="cfgT">Apple M4 · 16 GB unified memory · Tokkey attached</span><button id="chg">Change</button></div>
+      <div class="cfgline adv-only" id="cfgA"></div>
+    </div>
+    <div class="seg" role="group" aria-label="View"><button data-v="simple" aria-pressed="true">Simple</button><button data-v="advanced" aria-pressed="false">Advanced</button><button data-v="map" aria-pressed="false" class="dsk-f">Memory map</button></div>
+  </div>
+
+  <div class="layout" id="layout">
+    <aside class="panel" id="panel" aria-label="Filters">
+      <span class="grab"></span>
+      <div class="hw">
+        <div class="hw-h"><b>Your hardware</b><button id="reset">Reset</button></div>
+        <label class="hw-r"><span class="label">Chip</span><select id="chip2"></select></label>
+        <label class="hw-r"><span class="label">Memory</span><select id="mem2"></select></label>
+        <label class="hw-r"><span class="label">GPU</span><select id="gpu"><option>10-core</option><option>16-core</option><option>20-core</option><option>40-core</option></select></label>
+        <div class="hw-t"><button class="tg" id="tk" role="switch" aria-checked="true" aria-label="Tokkey attached"></button>Tokkey attached</div>
+      </div>
+      <div class="fld"><h4>Task</h4><div class="chips wrapc" id="ptasks"></div></div>
+      <div class="fld"><h4>Model size</h4><div class="sizes" id="sizes"></div><p class="hint" id="capNote"></p></div>
+      <div class="fld"><h4>Fit</h4><div id="fits"></div></div>
+      <div class="fld"><h4>Settings</h4><label class="set"><span>Quantization</span><select id="quant"><option value="4">4-bit</option><option value="8">8-bit</option></select></label><label class="set"><span>Context length</span><select id="ctxSel"><option>8K</option><option>32K</option><option>128K</option></select></label></div>
+      <div class="apply"><button class="btn" id="apply">Show models</button></div>
+    </aside>
+
+    <div class="main">
+      <div class="ctl">
+        <button class="btn sm fbtn mob" id="openF">Filters</button>
+        <input class="search" id="q" type="search" placeholder="Search models" aria-label="Search models">
+        <div class="chips" id="cats"></div>
+        <div class="legend in-adv"><span><i class="st s0"></i>Runs on your Mac</span><span><i class="st s1"></i>Opens up with Tokkey</span><span><i class="st s2"></i>Too big for now</span></div>
+        <p class="mapnote">Everything left of the line runs on your Mac. Tokkey moves the line.</p>
+        <select class="sort" id="sort" aria-label="Sort"><option value="fast">Sort: Fastest</option><option value="fit">Sort: Best fit</option><option value="small">Sort: Smallest</option></select>
+      </div>
+      <div class="legend in-simple"><span><i class="st s0"></i>Runs on your Mac</span><span><i class="st s1"></i>Opens up with Tokkey</span><span><i class="st s2"></i>Too big for now</span><span class="hint"><span class="spi lgnd" aria-hidden="true"><i></i><i></i><i></i><b></b></span><span class="dsk">Hover a speed to watch it type</span><span class="mob">Tap the icon to watch it type</span></span></div>
+      <div id="listView">
+        <div class="tblwrap" id="tblwrap"><div class="tkcol" id="tkcol"></div><div class="spop" id="spop" role="dialog" aria-label="Speed preview"></div><table class="tbl"><thead><tr><th>MODEL</th><th>TASK</th><th>YOUR MAC ALONE</th><th class="tk">WITH TOKKEY</th><th>SIZE</th><th>MEMORY</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+        <div class="foot"><p class="ph">PLACEHOLDER DATA · Want more control? Switch to Advanced to change hardware, size and fit filters.</p><button class="btn ghost" id="moreBtn">Show all models</button></div>
+      </div>
+      <div id="mapView" hidden>
+        <div class="map" id="map"></div>
+      </div>
+    </div>
+  </div>
+  <div class="scrim" id="scrim"></div>
+</section>
+
+<main class="wrap">
+  <!-- 第三屏 · 功能 based model -->
+  <section class="sec" id="pick" aria-labelledby="pickH">
+    <h2 class="big" id="pickH">What do you <br class="mb">want to do<span class="dot">?</span></h2>
+    <p class="lead">Pick a task. We show the three best models for your Mac.</p>
+    <div class="tasks" role="group" aria-label="Tasks" id="tasks"></div>
+    <div class="ph2"><h3 id="bestH">Best for coding on your Mac</h3><span class="cfgpill"><i></i><span id="pillT">Apple M4 · 16 GB · Tokkey attached</span><a href="#all">Edit</a></span></div>
+    <div class="picks" id="picks"></div>
+    <p class="ph" style="margin-top:24px">PLACEHOLDER DATA · <a href="#all" id="seeAll" style="text-decoration:underline">See all coding models</a></p>
+  </section>
+
+  <!-- 第四屏 · Tokkey 原理 -->
+  <section class="sec" id="technology" aria-labelledby="howH">
+    <h2 class="big" id="howH">How Tokkey <br class="mb">makes room<span class="dot">.</span></h2>
+    <p class="lead">A model is split into parts. Tokkey holds all of them. Your Mac only holds the part it's using right now.</p>
+    <div class="how">
+      <div class="gc"><h4><i></i>Tokkey</h4><p class="dsk">Holds the full model</p><div class="mono mob">QWEN 3 32B · 18 GB</div><div class="tiles" id="tA"></div><div class="mono dsk">QWEN 3 32B · 18 GB</div></div>
+      <div class="flow" aria-hidden="true"><span>next parts →</span><span>← finished parts</span></div>
+      <div class="gc mac"><h4>Your Mac · 16 GB memory</h4><p>Only the active parts load</p><div class="tiles" id="tB"></div><div class="membar"><i></i><i></i></div><div class="ml"><span>Model parts in use</span><span>macOS and your apps</span></div>
+        <div class="legend2"><span><i style="background:linear-gradient(160deg,#fff,#bbb)"></i>Model parts in use</span><span><i style="background:#2A2A2A"></i>macOS and your apps</span><span><i style="border:1px solid #3A3A38"></i>Free memory</span></div></div>
+      <div class="flow2" aria-hidden="true"></div>
+      <div class="gc gpu"><div><h4>M4 GPU</h4><p>Runs the parts in memory, then asks for the next ones.</p></div><div class="chip"><div>GPU</div></div></div>
+    </div>
+    <div class="steps"><div><b>1</b><p>Tokkey stores the whole model.</p></div><div><b>2</b><p>Your Mac loads only the parts it needs now.</p></div><div><b>3</b><p>It runs them and swaps in the next parts, so answers keep flowing.</p></div></div>
+    <p class="ph" style="margin-top:24px">Simplified. Speed depends on the model and your Mac. Concept, pending engineering review.</p>
+  </section>
+</main>
+
+<!-- Model page (Figma: Models list / C Model page) -->
+<dialog class="mp" id="md" aria-labelledby="mdName"><div class="wrap mp-in" id="mdIn"></div></dialog>
+
+<script src="assets/site.js"></script>
+<script src="assets/hero-amb.js"></script>
+<script src="assets/models.js"></script>
+</body></html>

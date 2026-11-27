@@ -1,0 +1,50 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Run a 35B model on a 16GB Mac · Tokkey Blog</title><meta name="description" content="A step-by-step guide, from picking the model to your first answer, with the speeds we measured.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css"><link rel="stylesheet" href="assets/docs.css">
+</head>
+<body data-page="docs">
+<main class="wrap" style="padding-top:120px">
+  <nav class="crumb" aria-label="Breadcrumb"><a class="home" href="index.html">Home</a><i></i><a href="blog.html"><em class="ar">← </em>Blog</a><i></i><b>Run a 35B model on a 16GB Mac</b></nav>
+  <header class="art-h">
+    <div class="label" style="color:var(--ink)">Guides <span style="color:var(--mu);margin-left:16px">Date · 6 min read</span></div>
+    <h1 class="h1">Run a 35B model<br>on a 16GB Mac</h1>
+    <p class="dek">A step-by-step guide, from picking the model to your first answer, with the speeds we measured.</p>
+    <div class="author"><i></i>Tokkey team</div>
+  </header>
+  <div class="art-img"><img src="assets/blog/featured.jpg" alt="Plug in. Get to work. Tokkey ready to run, connected locally to a Mac." width="1616" height="916"></div>
+
+  <article class="prose">
+    <details class="toc"><summary>On this page</summary><ol><li><a href="#need">What you need</a></li><li><a href="#pick">Pick the model</a></li><li><a href="#measured">What we measured</a></li></ol></details>
+    <p>A 16 GB Mac can run small and mid-size models well. Bigger ones, like the 35B class, usually don’t fit in memory. This guide shows how to run one with Tokkey attached, and what to expect.</p>
+    <h2 id="need">What you need</h2>
+    <ul><li>A Mac with Apple silicon and 16 GB of memory</li><li>Tokkey, plugged in and connected</li><li>The Tokkey app</li></ul>
+    <h2 id="pick">Pick the model</h2>
+    <p>Open the <a href="models.html" style="text-decoration:underline">Models page</a>. With Tokkey attached, Qwen 3.6 35B-A3B shows as “Opens up with Tokkey”. Download the recommended size.</p>
+    <div class="code"><div class="bar">Terminal<button>Copy</button></div><pre>$ tokkey run qwen3.6:35b-a3b</pre></div>
+    <h2 id="measured">What we measured</h2>
+    <table class="mtbl"><thead><tr><th>MODEL</th><th>YOUR MAC</th><th>WITH TOKKEY</th></tr></thead><tbody>
+      <tr><td>Qwen 3 8B</td><td data-l="YOUR MAC">~22 tok/s</td><td data-l="WITH TOKKEY">~58 tok/s</td></tr>
+      <tr><td>GPT-OSS 20B</td><td data-l="YOUR MAC">~12 tok/s</td><td data-l="WITH TOKKEY">~47 tok/s</td></tr>
+      <tr><td>Qwen 3.6 35B-A3B</td><td class="no" data-l="YOUR MAC">Won’t fit</td><td data-l="WITH TOKKEY">~30 tok/s</td></tr></tbody></table>
+    <div class="ph" style="margin-top:8px">PLACEHOLDER NUMBERS UNTIL MEASURED</div>
+    <div class="call"><i></i><span>Tip: close other heavy apps before loading a big model. It leaves more memory for the parts in use.</span></div>
+    <div class="rel"><div class="label" style="color:var(--d-mu)">Related docs</div><div class="chips"><a href="devdoc.html">Quickstart →</a><a href="models.html">Pick a model →</a><a href="devdoc.html#help">Troubleshooting →</a></div></div>
+    <div class="share">Share <a href="#">X</a><a href="#">LinkedIn</a><a href="#" onclick="navigator.clipboard&&navigator.clipboard.writeText(location.href);this.textContent='Copied';return false">Copy link</a></div>
+  </article>
+
+  <section style="max-width:1200px;margin:96px auto 0" aria-labelledby="krH">
+    <h2 class="h3" id="krH">Keep reading</h2>
+    <div class="posts">
+      <a class="post" href="post.html"><div class="pimg"><img src="assets/blog/bench.jpg" alt="" loading="lazy"></div><div class="meta"><span class="label">Date</span><span class="tag">Benchmarks</span></div><h3>Tokens per second on M-series Macs, measured</h3></a>
+      <a class="post" href="post.html"><div class="pimg"><img src="assets/blog/eng.jpg" alt="" loading="lazy"></div><div class="meta"><span class="label">Date</span><span class="tag">Engineering</span></div><h3>How Tokkey loads only the part of a model each step needs</h3></a>
+    </div>
+    <div class="nl" style="margin-top:64px"><div><h3>Get new posts and release notes by email.</h3><p>About twice a month. Unsubscribe anytime.</p></div>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed'"><input type="email" placeholder="you@example.com" aria-label="Email" required><button class="btn white">Subscribe</button></form></div>
+  </section>
+</main>
+<script src="assets/site.js"></script><script src="assets/hero-amb.js"></script>
+
+<script src="assets/docs.js"></script>
+</body></html>
