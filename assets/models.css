@@ -434,3 +434,6 @@ body.no-tk .spi.lt{display:inline-flex}
   .hero .cta .btn{height:44px;border-radius:999px}
 }
 .hero h1{text-wrap:balance}
+/* Hero title = Home hero title size (112px on the 1920 frame, scales with the viewport; 39px on mobile) */
+.hero h1{font-size:min(5.8333vw,112px)!important;line-height:1.05!important}
+@media (max-width:767px){.hero h1{font-size:39px!important;line-height:42px!important}}
