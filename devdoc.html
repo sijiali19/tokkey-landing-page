@@ -1,0 +1,50 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Quickstart · Tokkey Docs</title><meta name="description" content="Plug in Tokkey, pick a model and run it on your Mac. About five minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css"><link rel="stylesheet" href="assets/docs.css">
+<style>html{background:#fff}</style>
+</head>
+<body data-page="docs" class="docpage">
+<div class="wrap">
+  <div class="d-body three">
+    <aside class="side" data-side="quickstart"></aside>
+    <main class="doc">
+      <button class="docbar" data-open-docs><span>Get started&nbsp;&nbsp;/&nbsp;&nbsp;Quickstart</span><span aria-hidden="true">▾</span></button>
+      <nav class="crumb" aria-label="Breadcrumb"><a href="blog.html">Docs</a><i></i><span>Get started</span><i></i><b>Quickstart</b></nav>
+      <span class="dtag">DOCS</span>
+      <h1>Quickstart</h1>
+      <p class="sub">Plug in Tokkey, pick a model and run it on your Mac. About five minutes.</p>
+      <div class="dmeta"><span class="m">5 min</span><span class="m">macOS</span><button class="m" id="cpMd">Copy page as Markdown</button></div>
+      <details class="toc otp-m"><summary>On this page</summary><ol><li><a href="#install">Install the Tokkey app</a></li><li><a href="#plug">Plug in Tokkey</a></li><li><a href="#run">Run your first model</a></li><li><a href="#tools">Connect your tools</a></li></ol></details>
+
+      <section class="stp" data-n="1" id="install"><h2>Install the Tokkey app</h2><p>Download the app for macOS and drag it to Applications. It lives in your menu bar.</p><a class="btn" href="#">Download for macOS</a></section>
+      <section class="stp" data-n="2" id="plug"><h2>Plug in Tokkey</h2><p>Connect Tokkey to a USB-C port. The menu bar icon turns green when it is ready.</p><div class="call"><i></i><span>You should see: “Tokkey connected” in the menu bar.</span></div></section>
+      <section class="stp" data-n="3" id="run"><h2>Run your first model</h2><p>Pick a model that fits your Mac on the <a href="models.html" style="text-decoration:underline;color:var(--ink)">Models page</a>, or run our suggestion from the terminal.</p><div class="code"><div class="bar">Terminal<button>Copy</button></div><pre>$ tokkey run qwen3:8b
+&gt; Loaded on Tokkey · ready</pre></div></section>
+      <section class="stp" data-n="4" id="tools"><h2>Connect your tools</h2><p>Use Tokkey as the model in Cursor, VS Code and other apps.</p><div class="chips"><a class="pill" href="#">Cursor →</a><a class="pill" href="#">VS Code →</a><a class="pill" href="#">Continue →</a><a class="pill" href="#">Open WebUI →</a></div></section>
+
+      <div class="pn"><a href="blog.html"><small>Previous</small><b>What is Tokkey</b></a><a href="models.html"><small>Next</small><b>Pick a model for your Mac</b></a></div>
+      <div class="help">Was this page helpful? <button onclick="this.parentElement.textContent='Thanks for the feedback.'">Yes</button><button onclick="this.parentElement.textContent='Thanks. Tell us what was missing on the Community page.'">No</button></div>
+      <p class="ph" style="margin-top:16px">Example only · commands and app behavior not final</p>
+
+      <section id="technology" style="margin-top:64px;padding-top:32px;border-top:1px solid var(--hair)"><h2 class="h3">How Tokkey makes room</h2><p class="muted" style="margin-top:8px">A model is split into parts. Tokkey holds all of them. Your Mac only holds the part it is using right now, runs it, then swaps in the next parts. <a href="models.html#technology" style="text-decoration:underline;color:var(--ink)">See the diagram →</a></p></section>
+      <section id="help" style="margin-top:48px"><h2 class="h3">If something doesn’t work</h2>
+        <details class="toc" style="margin-top:16px"><summary>The menu bar icon stays grey</summary><p class="muted" style="padding-bottom:16px">Try another USB-C port and make sure the cable carries data. Then quit and reopen the app.</p></details>
+        <details class="toc" style="margin-top:0;border-top:0"><summary>A model says “Too big”</summary><p class="muted" style="padding-bottom:16px">Pick the 4-bit size, or a smaller model. The Models page shows what fits your Mac with Tokkey attached.</p></details>
+      </section>
+    </main>
+    <aside class="otp" aria-label="On this page">
+      <div><h5>ON THIS PAGE</h5>
+      <a href="#install" class="on">Install the Tokkey app</a><a href="#plug">Plug in Tokkey</a><a href="#run">Run your first model</a><a href="#tools">Connect your tools</a></div>
+      <div class="rel2"><small>Related on the blog</small><a href="post.html">Run a 35B model on a 16GB Mac</a><a href="blog.html#guides">Use Tokkey in Cursor and VS Code</a><a class="gh" href="#">Edit this page on GitHub</a></div>
+    </aside>
+  </div>
+</div>
+<script src="assets/site.js"></script><script src="assets/hero-amb.js"></script>
+<script src="assets/docs.js"></script>
+<script>
+(function(){document.getElementById('cpMd').onclick=function(){navigator.clipboard&&navigator.clipboard.writeText(document.querySelector('main').innerText);this.textContent='Copied'};
+const ls=[...document.querySelectorAll('.otp a[href^="#"]')].filter(a=>a.getAttribute('href').length>1);const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){ls.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-20% 0px -70% 0px'});['install','plug','run','tools'].forEach(id=>io.observe(document.getElementById(id)));})();
+</script>
+</body></html>
