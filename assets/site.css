@@ -143,3 +143,29 @@ h1,h2,h3{letter-spacing:-.03em}
   .tn.solid{top:0;left:0;right:0;height:64px;padding:0 8px 0 16px}
   .tn.solid .brand{width:calc(28px*110/111)}.tn.solid .brand svg{height:28px}
 }
+
+/* ===== Unified top nav = homepage bar (Figma 1639:11204) =====
+   Same size and dark glass on every page; full wordmark on the first screen, icon only after it. */
+.tn,.tn.dark,.tn.solid{position:fixed;top:16px;left:16px;right:16px;height:76px;padding:0 36px;border-radius:10px;color:#fff;
+  background:linear-gradient(180deg,rgba(38,38,38,.62),rgba(22,22,22,.5));border:1px solid rgba(255,255,255,.08);border-bottom-color:rgba(255,255,255,.08);
+  -webkit-backdrop-filter:blur(24px) saturate(1.4);backdrop-filter:blur(24px) saturate(1.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.tn .nv-brand{position:relative;display:block;height:32px;width:171px;flex:none}
+.tn .nv-brand img{position:absolute;left:0;top:0;height:32px;transition:opacity .35s ease,transform .35s ease}
+.tn .nv-full{width:171px}
+.tn .nv-mark{width:32px;opacity:0;transform:scale(.9)}
+.tn.nv-s .nv-full{opacity:0;transform:translateX(-6px)}
+.tn.nv-s .nv-mark{opacity:1;transform:none}
+.tn ul,.tn.solid ul{gap:37px;margin-right:37px;font:400 16px/1 'Geist','Inter',sans-serif}
+.tn ul a{opacity:1;color:rgba(255,255,255,.72);font-weight:400;transition:color .2s}
+.tn ul a:hover,.tn ul a.on{color:#fff}
+.tn .btn,.tn.dark .btn,.tn.solid .btn{height:44px;padding:0 22px;border-radius:23px;font:600 16px/1 'Geist','Inter',sans-serif;background:#fff;color:#000;border-color:#fff}
+@media (max-width:900px){
+  .tn,.tn.dark,.tn.solid{top:8px;left:8px;right:8px;height:60px;padding:0 8px 0 16px}
+  .tn .nv-brand{width:140px}.tn .nv-full{width:140px;height:26px!important}.tn .nv-mark{width:26px;height:26px!important}
+  .tn ul{display:none}
+  .tn>.btn,.tn.solid>.btn{display:inline-flex;height:40px;padding:0 16px;font-size:14px;margin-left:auto}
+  .tn .menu{margin-left:4px;color:#fff}
+}
+/* over light content the same dark glass, denser so it does not turn muddy grey */
+.tn.nv-s,body[data-page="docs"] .tn{background:linear-gradient(180deg,rgba(34,34,34,.9),rgba(17,17,16,.84))!important;border-color:rgba(255,255,255,.1)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 12px 32px rgba(0,0,0,.14)!important}
+@media (max-width:900px){.tn>.btn,.tn.solid>.btn{padding:0 14px}.tn .menu{width:32px;margin-left:4px;margin-right:-4px}}
