@@ -1157,9 +1157,9 @@ html.nav-light .hn ul a:hover,html.nav-light .hn ul a.on{color:#111110}
 html.nav-light .hn .hbtn{background:#111110!important;color:#fff!important}
 </style>
 <style id="hero-title-size">
-/* Hero title = Home hero title size (112px on the 1920 frame, scales with the viewport; 39px on mobile) */
-.hero h1.display{font-size:min(5.8333vw,112px)!important;line-height:1.05!important}
-@media (max-width:767px){.hero h1.display{font-size:39px!important;line-height:42px!important}}
+/* Hero title = Docs hero title size (.h1: clamp(40px,4.6vw,80px)/1.04; 40/48 on mobile) */
+.hero h1.display{font-size:clamp(40px,4.6vw,80px)!important;line-height:1.04!important;letter-spacing:-.03em!important}
+@media (max-width:767px){.hero h1.display{font-size:40px!important;line-height:48px!important}}
 </style>
 </body>
 </html>
